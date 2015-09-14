@@ -1,0 +1,19 @@
+{
+    "debugMode": true,
+    "handlers": {
+        "^/": "$./handlers/mvc"
+    },
+    "mvc": {
+        "paths": {
+            "controller": "./controllers",
+            "view": "./views"
+        },
+        "routes": [{
+            "pattern": "/home",
+            "target": "./home.js"
+        }, {
+            "pattern": "/",
+            "target": "./home.js"
+        }]
+    }
+}
