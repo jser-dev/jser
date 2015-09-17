@@ -1,3 +1,5 @@
+"use strict";
+
 var Topic = require('../models/topic');
 
 /**

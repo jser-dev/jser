@@ -1,3 +1,5 @@
+"use strict";
+
 var User = require('../models/user');
 
 var ProfileController = module.exports = function () { };

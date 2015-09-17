@@ -1,5 +1,8 @@
+"use strict";
+
 var db = require("../common/db");
 
+//定义用户模型
 var User = module.exports = db.model('user', {
     account: String,
     email: String,
@@ -8,6 +11,7 @@ var User = module.exports = db.model('user', {
     avatar: String
 });
 
+//加载所有用户
 User.load = function (callback) {
     var self = User;
     self.find({}, function (err, list) {
