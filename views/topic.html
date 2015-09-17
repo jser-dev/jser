@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>topic</title>
-</head>
-<body>
-	test
-</body>
-</html>
+<% $.master("./layout/master.html") %> 
+    
+<% $.placeBegin("head") %>
+    <title>主题</title>
+<% $.placeEnd() >
+
+<% $.placeBegin("content") %>
+
+主题
+
+<% $.placeEnd() %>

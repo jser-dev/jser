@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes" />
-    <title>JSER</title>
     <link rel="stylesheet" href="/style/common.css">
+    <% $.placeHolder('head') %>
 </head>
 
 <body>
     <div class='header'>JSER</div>
     <div class='content'>
-       <% $.placeHolder("content") %>
+        <% $.placeHolder("content") %>
     </div>
     <div class='footer'>
-        JSER.CC , <% $.include("./date.html") %>
+        JSER.CC ,
+        <% $.include("./date.html") %>
     </div>
 </body>
 

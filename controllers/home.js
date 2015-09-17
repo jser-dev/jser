@@ -1,12 +1,24 @@
 var Topic = require('../models/topic');
+var User = require('../models/user');
 
-var Home = module.exports = function() {};
+/**
+ * 主页控制器
+ **/
+var HomeController = module.exports = function () { };
 
-Home.prototype.index = function() {
+/**
+ * 默认 action
+ **/
+HomeController.prototype.index = function () {
     var self = this;
-    Topic.testAdd(function() {
-        Topic.load(function() {
-            self.render("home.html", Topic);
+
+    Topic.load(function (err, list) {
+        if (err) {
+            return self.context.error(err);
+        }
+        self.render("home.html", {
+            list: list
         });
     });
+
 };

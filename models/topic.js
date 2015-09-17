@@ -5,18 +5,7 @@ var Topic = module.exports = db.model('topic', {
     content: String
 });
 
-Topic.load = function(callback) {
+Topic.load = function (callback) {
     var self = Topic;
-    self.find({}, function(err, list) {
-        self.list = list;
-        if (callback) callback(err, list);
-    });
-};
-
-var testIndex = 0;
-Topic.testAdd = function(callback) {
-    var topic = new Topic();
-    topic.title = "test" + (++testIndex);
-    topic.content = topic.title + '...';
-    topic.save(callback);
+    self.find({}, callback);
 };

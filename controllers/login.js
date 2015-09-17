@@ -1,6 +1,8 @@
-var Login = module.exports = function() {};
+var User = require('../models/user');
 
-Login.prototype.index = function() {
+var LoginController = module.exports = function () { };
+
+LoginController.prototype.index = function () {
     var self = this;
-    self.render("login.html", {});
+    self.render("login.html", User);
 };

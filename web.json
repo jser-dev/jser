@@ -9,15 +9,27 @@
             "controller": "./controllers",
             "view": "./views"
         },
-        "routes": [{
-            "pattern": "/home",
-            "target": "./home.js"
-        }, {
-            "pattern": "/",
-            "target": "./home.js"
-        }, {
-            "pattern": "/login",
-            "target": "./login.js"
-        }]
+        "routes": [
+            {
+                "pattern": "/home",
+                "target": "./home.js"
+            },
+            {
+                "pattern": "/",
+                "target": "./home.js"
+            },
+            {
+                "pattern": "/topic/{id}",
+                "target": "./topic.js"
+            },
+            {
+                "pattern": "/login",
+                "target": "./login.js"
+            },
+            {
+                "pattern": "/profile",
+                "target": "./profile.js"
+            }
+        ]
     }
 }
