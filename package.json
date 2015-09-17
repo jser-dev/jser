@@ -13,6 +13,7 @@
   "homepage": "http://nokit.org",
   "license": "MIT",
   "dependencies": {
+    "mongoose": "^4.1.7",
     "nokit-runtime": "^1.11.0"
   }
 }

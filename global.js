@@ -1,4 +1,4 @@
-var Global = module.exports = function(){};
+var Global = module.exports = function() {};
 
 Global.prototype.onStart = function(server, done) {
     done();

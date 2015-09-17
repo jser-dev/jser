@@ -1,8 +1,12 @@
+var Topic = require('../models/topic');
+
 var Home = module.exports = function() {};
 
 Home.prototype.index = function() {
     var self = this;
-    self.render("home.html", {
-        "name": "JSER.CC"
+    Topic.testAdd(function() {
+        Topic.load(function() {
+            self.render("home.html", Topic);
+        });
     });
 };

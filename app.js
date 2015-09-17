@@ -25,8 +25,8 @@ options.root = __dirname;
 /**
  * 可以这里指定应用端口。
  * 当不在此指定时，将使用 web.json 中配置，web.json 没有配置时使用默认端口
- * options.port = 8000;
  **/
+ options.port = 9001;
 
 /**
  * 启动 server

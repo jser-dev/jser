@@ -1,5 +1,6 @@
 {
     "debugMode": true,
+    "db": "mongodb://127.0.0.1/jser",
     "handlers": {
         "^/": "$./handlers/mvc"
     },
@@ -14,6 +15,9 @@
         }, {
             "pattern": "/",
             "target": "./home.js"
+        }, {
+            "pattern": "/login",
+            "target": "./login.js"
         }]
     }
 }

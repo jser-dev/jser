@@ -1,5 +1,11 @@
-<% $.master("./master.html") %> 
+<% $.master("./layout/master.html") %> 
 
 <% $.placeBegin("content") %>
-Welcome to <%= this.name %>
+
+<ul>
+<% $.each(this.list,function(index,item){ %>
+    <li><%= item.title %></li>
+<% }); %>
+</ul>
+
 <% $.placeEnd() %>
