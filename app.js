@@ -15,7 +15,7 @@
 var nokit = require("nokit-runtime");
 var console = nokit.console;
 
-var options = {};
+var options =    {};
  
 /**
  * 设定应程序的根目录
