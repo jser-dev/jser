@@ -15,7 +15,7 @@
 var nokit = require("nokit-runtime");
 var console = nokit.console;
 
-var options =    {};
+var options = {};
  
 /**
  * 设定应程序的根目录
@@ -26,13 +26,13 @@ options.root = __dirname;
  * 可以这里指定应用端口。
  * 当不在此指定时，将使用 web.json 中配置，web.json 没有配置时使用默认端口
  **/
- options.port = 9001;
+options.port = 9001;
 
 /**
  * 启动 server
  **/
 var server = new nokit.Server(options);
-server.start(function(err, msg) {
+server.start(function (err, msg) {
     if (err) {
         console.log(err);
     } else {
