@@ -12,10 +12,8 @@ var HomeController = module.exports = function () { };
 HomeController.prototype.index = function () {
     var self = this;
 
+    //加载话题数据，并呈现页面
     Topic.load(function (err, list) {
-        if (err) {
-            return self.context.error(err);
-        }
         self.render("home.html", {
             list: list
         });

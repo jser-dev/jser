@@ -1,0 +1,21 @@
+<% $.master("./layout/master.html") %> 
+    
+<% $.placeBegin("head") %>
+    <title>注册</title>
+<% $.placeEnd() >
+
+<% $.placeBegin("content") %>
+
+<% if(this.status){ %>
+    <p><%= this.message %></p>
+<% }else{ %>
+    <p><%= this.message %></p>
+    <form action="/signup/submit" method="post">
+        <p>账号: <input name="account" type="text" value="<%= this.data.account %>"/></p>
+        <p>邮件: <input name="email" type="text" value="<%= this.data.email %>"/></p>
+        <p>密码: <input name="password" type="password" value="<%= this.data.password %>"/></p>
+        <input type="submit" value="提交"/>
+    </form>
+<% } %>
+
+<% $.placeEnd() %>

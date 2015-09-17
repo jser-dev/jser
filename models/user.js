@@ -1,8 +1,11 @@
 var db = require("../common/db");
 
 var User = module.exports = db.model('user', {
-    title: String,
-    content: String
+    account: String,
+    email: String,
+    password: String,
+    name: String,
+    avatar: String
 });
 
 User.load = function (callback) {

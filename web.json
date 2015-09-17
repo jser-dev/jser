@@ -23,8 +23,12 @@
                 "target": "./topic.js"
             },
             {
-                "pattern": "/login",
-                "target": "./login.js"
+                "pattern": "/signup",
+                "target": "./signup.js"
+            },
+            {
+                "pattern": "/signin",
+                "target": "./signin.js"
             },
             {
                 "pattern": "/profile",
