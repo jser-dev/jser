@@ -10,6 +10,7 @@
     <p><%= this.message %></p>
 <% }else{ %>
     <p><%= this.message %></p>
+    <% this.data=this.data||{} %>
     <form action="/signup/submit" method="post">
         <p>账号: <input name="account" type="text" value="<%= this.data.account %>"/></p>
         <p>邮件: <input name="email" type="text" value="<%= this.data.email %>"/></p>
