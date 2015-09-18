@@ -1,6 +1,6 @@
 {
     "debugMode": true,
-    "db": "mongodb://127.0.0.1/jser",
+    "conn": "mongodb://127.0.0.1/jser",
     "handlers": {
         "^/": "$./handlers/mvc"
     },
