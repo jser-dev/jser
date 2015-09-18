@@ -1,6 +1,6 @@
 {
     "debugMode": true,
-    "conn": "mongodb://127.0.0.1/jser",
+    "connectionString": "mongodb://127.0.0.1/jser",
     "handlers": {
         "^/": "$./handlers/mvc"
     },
@@ -11,16 +11,32 @@
         },
         "routes": [
             {
-                "pattern": "/home",
-                "target": "./home.js"
+                "pattern": "/",
+                "target": "./topic.js"
             },
             {
-                "pattern": "/",
-                "target": "./home.js"
+                "pattern": "/topic",
+                "target": "./topic.js"
+            },
+            {
+                "pattern": "/topic/page/{index}",
+                "target": "./topic.js"
             },
             {
                 "pattern": "/topic/{id}",
                 "target": "./topic.js"
+            },
+            {
+                "pattern": "/activity",
+                "target": "./activity.js"
+            },
+            {
+                "pattern": "/activity/page/{index}",
+                "target": "./activity.js"
+            },
+            {
+                "pattern": "/activity/{id}",
+                "target": "./activity.js"
             },
             {
                 "pattern": "/signup",
@@ -33,6 +49,10 @@
             {
                 "pattern": "/profile",
                 "target": "./profile.js"
+            },
+            {
+                "pattern": "/about",
+                "target": "./about.js"
             }
         ]
     }

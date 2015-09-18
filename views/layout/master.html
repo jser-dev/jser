@@ -4,19 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes" />
-    <link rel="stylesheet" href="/style/common.css">
+    <meta name="description" content="JSER 社区">
+    <meta name="author" content="jser team">
+    <!-- Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+    <!-- 自定义 common.css 文件 -->
+    <link rel="stylesheet" href="/styles/common.css" />
     <% $.placeHolder('head') %>
 </head>
 
 <body>
-    <div class='header'>JSER</div>
-    <div class='content'>
-        <% $.placeHolder("content") %>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
+                <a class="navbar-brand" href="/">JSER</a>
+            </div>
+            <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
+            <div id="navbar">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" style="width:240px;" class="form-control" placeholder="搜索话题、人员...">
+                    </div>
+                </form>
+                <ul class="nav navbar-nav">
+                    <li><a href="/">话题</a></li>
+                    <li><a href="/activity">活动</a></li>
+                    <li><a href="/about">关于</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/signup">注册</a></li>
+                    <li><a href="/signin">登录</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    
+    <!-- container -->
+    <div class="container">
+    <% $.placeHolder("content") %>
     </div>
-    <div class='footer'>
-        JSER.CC ,
-        <% $.include("./date.html") %>
-    </div>
+    
+    <!-- footer -->
+    <footer>
+        footer
+    </footer>
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 
 </html>
