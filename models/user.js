@@ -25,28 +25,28 @@ User.load = function (callback) {
     });
 };
 
-User.signIn = function (user,callback) {
+User.signIn = function (user, callback) {
     var self = User;
-    self.findOne({"account":user.account,"password":user.password}, function (err, foundUser) {
-        if(err){
+    self.findOne({ "account": user.account, "password": user.password }, function (err, foundUser) {
+        if (err) {
             return callback({
                 status: false,
                 message: '发生了异常:' + err,
                 data: user
-            });     
-        }else{
-            if(foundUser){
-                 return callback({
+            });
+        } else {
+            if (foundUser) {
+                return callback({
                     status: true,
                     message: '登陆成功',
                     data: user
-                }); 
+                });
             }
             return callback({
                 status: false,
                 message: '用户或者密码错误',
                 data: user
-            });  
+            });
         }
     });
 };
