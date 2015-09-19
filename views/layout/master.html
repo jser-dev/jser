@@ -26,9 +26,9 @@
             </div>
             <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
             <div id="navbar">
-                <form class="navbar-form navbar-left" role="search">
+                <form action="/search" method="get" class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input type="text" style="width:240px;" class="form-control" placeholder="搜索话题、人员...">
+                        <input name="keyword" type="text" style="width:240px;" class="form-control" placeholder="搜索话题、人员...">
                     </div>
                 </form>
                 <ul class="nav navbar-nav">
@@ -44,12 +44,12 @@
             <!--/.nav-collapse -->
         </div>
     </nav>
-    
+
     <!-- container -->
     <div class="container">
-    <% $.placeHolder("content") %>
+        <% $.placeHolder("content") %>
     </div>
-    
+
     <!-- footer -->
     <footer>
         footer

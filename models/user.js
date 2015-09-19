@@ -9,7 +9,7 @@ var User = module.exports = db.model('user', {
     password: String,
     name: String,
     avatar: String
-});
+}); 
 
 //创建一个新用户
 User.create = function () {
