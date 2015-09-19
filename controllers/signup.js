@@ -11,7 +11,7 @@ SignUpController.prototype.index = function () {
     self.render("signup.html");
 };
 
-//提交注册信息
+//提交注册信息   
 SignUpController.prototype.submit = function () {
     var self = this;
     var user = self._newUser();
