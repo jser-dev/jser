@@ -46,13 +46,22 @@
     </nav>
 
     <!-- container -->
-    <div class="container">
-        <% $.placeHolder("content") %>
+    <div class="container container-main">
+        <div class="row">
+            <div class="col-md-8">
+                <% $.placeHolder("content") %>
+            </div>
+            <div class="col-md-4">
+                right
+            </div>
+        </div>
     </div>
 
     <!-- footer -->
-    <footer>
-        footer
+    <footer class="footbar">
+        <div class="container">
+            Copyright © 2011-2015 JSER.CC 当前版本 1.0.0
+        </div>
     </footer>
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
