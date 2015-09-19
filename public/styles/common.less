@@ -28,8 +28,6 @@ body,
   color: #eee;
 }
 
-.navbar-default .navbar-brand:focus, 
-.navbar-default .navbar-brand:hover,
 .navbar-default .navbar-nav>li>a:focus,
 .navbar-default .navbar-nav>li>a:hover{
    color: #fff;
@@ -42,6 +40,17 @@ body,
   background-color: #6e4e9e;
   background-image: none;
   color: #fff;
+}
+
+.navbar-default .navbar-brand:focus, 
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand{
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  background-image: url('/images/logo.png');
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 /* Don't let the lead text change font-size. */
