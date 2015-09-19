@@ -1,17 +1,21 @@
 {
-  "name": "mvc-app",
+  "name": "jser",
   "version": "1.0.0",
-  "description": "this is an example app",
+  "description": "一个纯粹而简的社区软件",
   "main": "./app.js",
   "keywords": [
-    "mvc"
+    "jser"
   ],
   "author": {
-    "name": "author",
-    "email": "author@domain.com"
+    "name": "jser",
+    "email": "master@jser.cc"
   },
-  "homepage": "http://nokit.org",
+  "homepage": "http://jser.cc",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jser-dev/jser.git"
+  },
   "dependencies": {
     "mongoose": "^4.1.7",
     "nokit-runtime": "^1.11.3",
