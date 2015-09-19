@@ -6,9 +6,11 @@
 
 <% $.placeBegin("content") %>
 
-<form method="post">
-    <p>账号: <input/></p>
-    <p>密码: <input/></p>
+<p><%= this.message %></p>
+<% this.data=this.data||{} %>
+<form action="/signin/submit" method="post">
+    <p>账号: <input name="account" value="<%= this.data.account %>"/></p>
+    <p>密码: <input name="password"  value="<%= this.data.password %>"/></p>
     <input type="submit" value="提交"/>
 </form>
 
