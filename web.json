@@ -19,24 +19,20 @@
                 "target": "./topic.js"
             },
             {
-                "pattern": "/topic/page/{index}",
+                "pattern": "/topic/{type}/page/{index}",
                 "target": "./topic.js"
+            },
+            {
+                "pattern": "/topic/edit",
+                "target": "./topic-edit.js"
+            },
+            {
+                "pattern": "/topic/edit/{id}",
+                "target": "./topic-edit.js"
             },
             {
                 "pattern": "/topic/{id}",
                 "target": "./topic.js"
-            },
-            {
-                "pattern": "/activity",
-                "target": "./activity.js"
-            },
-            {
-                "pattern": "/activity/page/{index}",
-                "target": "./activity.js"
-            },
-            {
-                "pattern": "/activity/{id}",
-                "target": "./activity.js"
             },
             {
                 "pattern": "/signup",
