@@ -25,7 +25,7 @@ SignInController.prototype._newUser = function () {
     var self = this;
     var user = User.create();
     var req = self.context.request;
-    user.account = req.body.account;
+    user.email = req.body.email;
     user.password = req.body.password;
     return user;
 };

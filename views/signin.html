@@ -13,9 +13,18 @@
         <p><%= this.message %></p>
         <% this.data=this.data||{} %>
         <form action="/signin/submit" method="post">
-            <p>账号: <input name="account" value="<%= this.data.account %>"/></p>
-            <p>密码: <input name="password"  value="<%= this.data.password %>"/></p>
-            <input type="submit" value="提交"/>
+            <p class="form-row">
+                <label>邮箱:</label>
+                <input name="email" type="text" value="<%= this.data.email %>"/>
+            </p>
+            <p class="form-row">
+                <label>密码:</label>
+                <input name="password" type="text" value="<%= this.data.password %>"/>
+            </p>
+            <p class="form-row">
+                <label></label>
+                <input type="submit" value="提交"/>
+            </p>
         </form>
 
     </div>

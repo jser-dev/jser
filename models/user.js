@@ -4,7 +4,6 @@ var db = require("../common/db");
 
 //定义用户模型
 var User = module.exports = db.model('user', {
-    account: String,
     email: String,
     password: String,
     name: String,
@@ -27,7 +26,7 @@ User.load = function (callback) {
 
 User.signIn = function (user, callback) {
     var self = User;
-    self.findOne({ "account": user.account, "password": user.password }, function (err, foundUser) {
+    self.findOne({ "email": user.email, "password": user.password }, function (err, foundUser) {
         if (err) {
             return callback({
                 status: false,
@@ -54,7 +53,7 @@ User.signIn = function (user, callback) {
 //检查注册用户
 User._checkSignUp = function (user) {
     var self = this;
-    return user.account && user.email && user.password;
+    return user.email && user.password;
 };
 
 //注册一个用户
