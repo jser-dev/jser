@@ -49,7 +49,20 @@
             {
                 "pattern": "/about",
                 "target": "./about.js"
+            },
+            {
+                "pattern": "/oauth/github",
+                "target": "./oauth/github.js"
             }
         ]
+    },
+    "oauth": {
+        "github": {
+            "auth_url": "https://github.com/login/oauth/authorize",
+            "client_id": "ceb6ca9d4988885dca39",
+            "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9",
+            "scope": "user",
+            "redirect_uri": "http://localhost:9001/oauth/github/callback"
+        }
     }
 }

@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "mongoose": "^4.1.7",
-    "nokit-runtime": "^1.11.3",
+    "nokit-runtime": "^1.11.6",
     "timeago": "^1.4.2"
   }
 }
+ 
