@@ -12,9 +12,12 @@
         <% if(this.status){ %>
             <p><%= this.message %></p>
         <% }else{ %>
-            <p><%= this.message %></p>
             <% this.data=this.data||{} %>
             <form action="/signup/submit" method="post">
+                <p class="form-row alert-text">
+                    <label></label>
+                    <%= this.message %>
+                </p>
                 <p class="form-row">
                     <label>邮件</label>
                     <input name="email" type="email" value="<%= this.data.email %>"/>
@@ -30,6 +33,9 @@
                 <p class="form-row">
                     <label></label>
                     <input type="submit" value="现在注册"/>
+                </p>
+                <p class="form-row">
+                    <label></label>
                 </p>
             </form>
         <% } %>

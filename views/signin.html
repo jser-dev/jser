@@ -9,10 +9,13 @@
 <div class="card">
     <h5 class="card-title">登录</h5>
     <div class="card-panel">
-        
-        <p><%= this.message %></p>
+   
         <% this.data=this.data||{} %>
         <form action="/signin/submit" method="post">
+            <p class="form-row alert-text">
+                <label></label>
+                <%= this.message %>
+            </p>
             <p class="form-row">
                 <label>邮箱</label>
                 <input name="email" type="text" value="<%= this.data.email %>"/>
@@ -24,6 +27,9 @@
             <p class="form-row">
                 <label></label>
                 <input type="submit" value="立即登录"/>
+            </p>
+            <p class="form-row">
+                <label></label>
             </p>
         </form>
 
