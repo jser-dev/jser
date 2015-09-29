@@ -27,7 +27,8 @@
             },
             {
                 "pattern": "/topic/edit/{id}",
-                "target": "./topic-edit.js"
+                "target": "./topic-edit.js",
+                "admin": true
             },
             {
                 "pattern": "/topic/{id}",
@@ -43,7 +44,8 @@
             },
             {
                 "pattern": "/profile",
-                "target": "./profile.js"
+                "target": "./profile.js",
+                "admin": true
             },
             {
                 "pattern": "/about",
@@ -63,13 +65,10 @@
         "github": {
             "auth_url": "https://github.com/login/oauth/authorize",
             "token_url": "https://github.com/login/oauth/access_token",
+            "redirect_uri": "http://localhost:8000/oauth/github/callback",
             "user_url": "https://api.github.com/user",
             "client_id": "ceb6ca9d4988885dca39",
-            "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9",
-            "redirect_uri": {
-                "code": "http://localhost:9001/oauth/github/code",
-                "token": "http://localhost:9001/oauth/github/token"
-            }
+            "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9"
         }
     }
 }

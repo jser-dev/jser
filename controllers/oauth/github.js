@@ -1,6 +1,7 @@
 "use strict";
 
 var request = require('request');
+var User = require('../../models/user');
 
 /* global nokit */
 
@@ -24,14 +25,14 @@ GitHubController.prototype.index = function () {
     self.context.session.add(OAUTH_STATE_SESSION_KEY, state, function () {
         query_args.push("client_id=" + self.configs.client_id);
         query_args.push("scope=" + self.configs.scope);
-        query_args.push("redirect_uri=" + self.configs.redirect_uri.code);
+        query_args.push("redirect_uri=" + self.configs.redirect_uri);
         query_args.push("state=" + state);
         self.context.redirect(self.configs.auth_url + '?' + query_args.join('&'));
     });
 };
 
 //github 回调
-GitHubController.prototype.code = function () {
+GitHubController.prototype.callback = function () {
     var self = this;
     var code = self.context.data('code');
     var state = self.context.data('state');
@@ -48,8 +49,9 @@ GitHubController.prototype.code = function () {
                 "client_id": self.configs.client_id,
                 "client_secret": self.configs.client_secret,
                 "code": code,
-                "state": state,
-                "redirect_uri": self.configs.redirect_uri.token
+                "state": state
+                // ,
+                // "redirect_uri": self.configs.redirect_uri
             }
         }, function (err, httpResponse, body) {
             if (err) {
@@ -66,7 +68,19 @@ GitHubController.prototype.code = function () {
                 if (err) {
                     return self.context.error(err);
                 }
-                self.context.content(body, "text/html");
+                var userInfo = JSON.parse(body);
+                var user = new User();
+                user.email = userInfo.email;
+                user.name = userInfo.login || userInfo.email;
+                User.oAuth(user, function (result) {
+                    if (result && result.status) {
+                        self.context.session.add('user', result.data, function () {
+                            self.context.redirect("/");
+                        });
+                    } else {
+                        self.context.error('oauth 认证失败');
+                    }
+                });
             });
         });
     });
