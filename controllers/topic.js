@@ -13,6 +13,14 @@ var TopicController = module.exports = function () { };
 TopicController.prototype.index = function () {
     var self = this;
 
-    self.render("topic.html", Topic);
+    var topicType = self.context.data('type') || 'all';
+    var pageIndex = self.context.data('pageIndex') || 1;
+
+    Topic.loadTypes(function (types) {
+        self.render("topic.html", {
+            types: types,
+            currentType: topicType
+        });
+    });
 
 };

@@ -2,6 +2,7 @@
     
 <% $.placeBegin("head") %>
     <title>编辑话题 | JSER</title>
+    <link rel="stylesheet" href="/mditor/css/mditor.min.css">
 <% $.placeEnd() >
 
 <% $.placeBegin("content") %>
@@ -10,25 +11,35 @@
     <h5 class="card-title">
         编辑话题
     </h5>
-    <div class="card-panel">
+    <form class="card-panel" action="/topic/edit/submit" method="post">
         <p class="form-row">
-            <h5>标题</h5>
-            <input type="text">
+            <input name="title" type="text" class="input-block" placeholder="标题...">
         </p>
         <p class="form-row">
-            <h5>内容</h5>
-            <textarea name="" id="" cols="30" rows="10">
+            <textarea name="content" id="editor" placeholder="内容...">
             </textarea>
         </p>
         <p class="form-row">
-            <h5>类别</h5>
-            <ul>
-                <li><input type="checkbox" name="" id="">分享</li>
-                <li><input type="checkbox" name="" id="">问答</li>
-                <li><input type="checkbox" name="" id="">活动</li>
+            <ul class="checkbox-list">
+                <% $.each(this.types,function(i,item){ %>
+                    <% if(item.admin)return; %>
+                    <li>
+                        <input type="checkbox" name="type" id="<%= item.name %>" value="<%= item.name %>">
+                        <label for="<%= item.name %>"><%= item.text %></label>
+                    </li>
+                <% }.bind(this)) %>
             </ul>
         </p>
-    </div>
+        <p class="form-row align-right">
+            <input type="submit" value="发布">
+        </p>
+    </form>
 </div>
 
-<% $.placeEnd() %>
+<script src="/mditor/js/mditor.min.js"></script>
+<script>
+    var mditor = new Mditor("#editor",{
+        height:240,
+        fixedHeight:true
+    });
+</script>

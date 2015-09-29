@@ -17,9 +17,10 @@
     "url": "git://github.com/jser-dev/jser.git"
   },
   "dependencies": {
-    "mongoose": "^4.1.7",
-    "nokit-runtime": "^1.11.6",
-    "request": "^2.62.0",
+    "mditor": "^0.0.9",
+    "mongoose": "^4.1.9",
+    "nokit-runtime": "^1.11.8",
+    "request": "^2.64.0",
     "timeago": "^1.4.2"
   }
 }

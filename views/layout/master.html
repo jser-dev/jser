@@ -8,11 +8,9 @@
     <meta name="description" content="JSER 社区">
     <meta name="author" content="jser team">
     <!-- Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
     <!-- 自定义 common.css 文件 -->
-    <link rel="stylesheet" href="/styles/common.css" />
+    <link rel="stylesheet" href="/css/common.css" />
     <% $.placeHolder('head') %>
 </head>
 
@@ -29,7 +27,7 @@
             <div id="navbar">
                 <form action="/search" method="get" class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input name="keyword" type="text" style="width:240px;" class="form-control" placeholder="搜索话题、人...">
+                        <input name="keyword" type="text" style="width:240px;" class="form-control" placeholder="搜索话题、人..." value="<%= this.keyword||'' %>">
                     </div>
                 </form>
                 <ul class="nav navbar-nav">
@@ -37,8 +35,13 @@
                     <li><a href="/about">关于</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <% var user = $.controller.context.user  %>
+                    <% if(user){ %>
+                    <li><a href="/profile"><%= user.name||user.email %></a></li>
+                    <% }else{ %>
                     <li><a href="/signup">注册</a></li>
                     <li><a href="/signin">登录</a></li>
+                    <% } %>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -53,7 +56,7 @@
             </div>
             <div class="col-xs-3 col-slide">
                 <div class="card">
-                    <form action="/topic/edit" method="post" class="card-panel">
+                    <form action="/topic/edit/new" method="post" class="card-panel">
                         <button class="new-topic">发布话题</button>
                     </form>
                 </div>
@@ -78,9 +81,9 @@
     </footer>
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <!-- Bootstrap 核心 JavaScript 文件 -->
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

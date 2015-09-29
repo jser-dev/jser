@@ -12,5 +12,18 @@ var TopicEditController = module.exports = function () { };
  **/
 TopicEditController.prototype.index = function () {
     var self = this;
-    self.render("topic-edit.html", Topic);
+    Topic.loadTypes(function (types) {
+        self.render("topic-edit.html", {
+            types: types
+        });
+    });
+};
+
+TopicEditController.prototype.submit = function () {
+    var self = this;
+    Topic.loadTypes(function (types) {
+        self.render("topic-edit.html", {
+            types: types
+        });
+    });
 };

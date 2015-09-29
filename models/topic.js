@@ -13,3 +13,26 @@ Topic.load = function (callback) {
     var self = Topic;
     self.find({}, callback);
 };
+
+Topic.loadTypes = function (callback) {
+    var self = Topic;
+    callback([
+        {
+            text: "精华",
+            name: "jh",
+            admin: true,
+        },
+        {
+            text: "分享",
+            name: "share"
+        },
+        {
+            text: "问答",
+            name: "qa"
+        },
+        {
+            text: "活动",
+            name: "active"
+        }
+    ]);
+};

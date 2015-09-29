@@ -10,7 +10,9 @@ var SearchController = module.exports = function () { };
  **/
 SearchController.prototype.index = function () {
     var self = this;
-
-    self.render("search.html");
+    var keyword = self.context.data('keyword');
+    self.render("search.html", {
+        keyword: keyword
+    });
 
 };

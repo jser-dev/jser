@@ -14,7 +14,9 @@ SignInController.prototype.submit = function () {
     var user = self._newUser();
     User.signIn(user, function (result) {
         if (result.status) {
-            self.context.redirect("/");
+            self.context.session.add('user', result.data, function () {
+                self.context.redirect("/");
+            });
         }
         self.render("signin.html", result);
     });

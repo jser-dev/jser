@@ -4,6 +4,9 @@
     "handlers": {
         "^/": "$./handlers/mvc"
     },
+    "filters": {
+        "^/": "./filters/user-state"
+    },
     "mvc": {
         "paths": {
             "controller": "./controllers",
@@ -23,16 +26,12 @@
                 "target": "./topic.js"
             },
             {
-                "pattern": "/topic/edit",
-                "target": "./topic-edit.js"
-            },
-            {
                 "pattern": "/topic/edit/{id}",
                 "target": "./topic-edit.js"
             },
             {
                 "pattern": "/topic/{id}",
-                "target": "./topic.js"
+                "target": "./topic-view.js"
             },
             {
                 "pattern": "/signup",
@@ -53,6 +52,10 @@
             {
                 "pattern": "/oauth/github",
                 "target": "./oauth/github.js"
+            },
+            {
+                "pattern": "/search",
+                "target": "./search.js"
             }
         ]
     },

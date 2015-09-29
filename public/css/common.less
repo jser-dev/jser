@@ -4,6 +4,12 @@ body {
   padding: 0px;
   background-color: #e1e1e1;
   font-family: "Helvetica Neue","Microsoft Yahei";
+  /* font-weight: 100;"STHeitiTC-Light","STHeiti",*/
+  -webkit-font-smoothing: antialiased;
+}
+
+*{
+  -webkit-font-smoothing: antialiased;
 }
 
 /* 页头 */
@@ -106,16 +112,15 @@ body {
 }
 
 .card-title .tab{
-  margin-right: 10px;
   cursor: pointer;
   color: #0767c8;
+  padding:4px 12px;
+  border-radius: 3px;
 }
 
 .card-title .tab.active{
   background-color: #0767c8;
   color: #fff;
-  padding:4px 12px;
-  border-radius: 3px;
 }
 
 .card-panel li a{
@@ -133,7 +138,7 @@ body {
 
 /*form*/
 input{
-  padding: 5px;
+    padding: 8px 10px;
 }
 input[type="button"],
 input[type="submit"],
@@ -144,6 +149,7 @@ button{
   color: #eee;
   padding: 8px 24px;
   outline: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 input[type="button"]:hover,
@@ -158,13 +164,39 @@ button:hover{
   font-weight: normal;
   text-align: right;
   padding: 0px 8px;
+  -webkit-font-smoothing: antialiased;
 }
 .form-row input[type="text"],
 .form-row input[type="password"],
 .form-row input[type="email"]{
   width: 300px;
 }
+.align-right{
+  text-align: right;
+}
 
 .alert-text{
   color: brown;
+}
+
+.checkbox-list{
+  margin: 0px;
+  padding: 0px;
+}
+.checkbox-list li{
+  list-style-type: none;
+  display: inline-block;
+  font-weight: normal;
+  margin-right: 10px;
+}
+.checkbox-list li input,
+.checkbox-list li label{
+  font-weight: normal;
+  vertical-align: middle;
+  margin:2px 0px;
+}
+
+.input-block{
+  display: block;
+  width: 100% !important;
 }

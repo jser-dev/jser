@@ -26,6 +26,13 @@ User.load = function (callback) {
 
 User.signIn = function (user, callback) {
     var self = User;
+    if (user.email == '' || user.password == '') {
+        return callback({
+            status: false,
+            message: '用户或者密码错误',
+            data: user
+        });
+    }
     self.findOne({ "email": user.email, "password": user.password }, function (err, foundUser) {
         if (err) {
             return callback({

@@ -8,14 +8,15 @@
 
 <div class="card">
     <h5 class="card-title">
-        <span class="tab active">所有</span>
-        <span class="tab">精华</span>
-        <span class="tab">分享</span>
-        <span class="tab">问答</span>
-        <span class="tab">活动</span>
+        <a class="tab <%= this.currentType=='all'?'active':'' %>" href="/topic">所有</a>
+        <% $.each(this.types,function(i,item){ %>
+        <a class="tab <%= this.currentType==item.name?'active':'' %>" href="/topic/<%= item.name %>/page/1">
+            <%= item.text %>
+        </a>
+        <% }.bind(this)) %>
     </h5>
     <div class="card-panel">
-        test...
+        <%= this.currentType %>
     </div>
 </div>
 
