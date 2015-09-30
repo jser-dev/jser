@@ -7,23 +7,27 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes" />
     <meta name="description" content="JSER 社区">
     <meta name="author" content="jser team">
-    <!-- Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
-    <!-- 自定义 common.css 文件 -->
     <link rel="stylesheet" href="/css/common.css" />
     <% $.placeHolder('head') %>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ad51a52cdcb35d3349b188790ed6d4fd";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 
 <body>
-    <!-- Fixed navbar -->
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
                 <a class="navbar-brand" href="/">
                 </a>
             </div>
-            <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
             <div id="navbar">
                 <form action="/search" method="get" class="navbar-form navbar-left" role="search">
                     <div class="form-group">
@@ -44,11 +48,8 @@
                     <% } %>
                 </ul>
             </div>
-            <!--/.nav-collapse -->
         </div>
     </nav>
-
-    <!-- container -->
     <div class="container container-main">
         <div class="row">
             <div class="col-xs-9 col-main">
@@ -72,17 +73,12 @@
             </div>
         </div>
     </div>
-
-    <!-- footer -->
     <footer class="footbar">
         <div class="container">
             Copyright © 2011-2015 JSER.CC 当前版本 1.0.0
         </div>
     </footer>
-
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="/js/jquery.min.js"></script>
-    <!-- Bootstrap 核心 JavaScript 文件 -->
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
