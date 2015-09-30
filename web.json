@@ -22,8 +22,12 @@
                 "target": "./topic.js"
             },
             {
-                "pattern": "/topic/{type}/page/{index}",
-                "target": "./topic.js"
+                "pattern": "/topic/edit/new",
+                "action": "new",
+                "target": "./topic-edit.js",
+                "required": [
+                    "signed"
+                ]
             },
             {
                 "pattern": "/topic/edit/{id}",
@@ -31,6 +35,10 @@
                 "required": [
                     "signed"
                 ]
+            },
+            {
+                "pattern": "/topic/{type}/page/{index}",
+                "target": "./topic.js"
             },
             {
                 "pattern": "/topic/{id}",

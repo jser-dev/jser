@@ -6,13 +6,18 @@ mg.connect(configs.connectionString);
 
 var self = module.exports;
 
+self.mg = mg;
+self.types = mg.Schema.Types;
+
 //定义一个模型
 self.model = function (name, schemaObject) {
 	if (!schemaObject) {
 		return mg.model(name);
 	} else {
 		var schema = new mg.Schema(schemaObject);
+		schema.name = name;
 		var Model = mg.model(name, schema);
+		Model.schema = schema;
 		return Model;
 	}
 };

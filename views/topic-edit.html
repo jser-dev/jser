@@ -2,7 +2,7 @@
     
 <% $.placeBegin("head") %>
     <title>编辑话题 | JSER</title>
-    <link rel="stylesheet" href="/mditor/css/mditor.min.css">
+    <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
 <% $.placeEnd() >
 
 <% $.placeBegin("content") %>
@@ -11,13 +11,12 @@
     <h5 class="card-title">
         编辑话题
     </h5>
-    <form class="card-panel" action="/topic/edit/submit" method="post">
+    <form class="card-panel" action="/topic/edit/<%= this.id %>/submit" method="post">
         <p class="form-row">
-            <input name="title" type="text" class="input-block" placeholder="标题...">
+            <input name="title" type="text" class="input-block" placeholder="标题..." value="<%= this.topic.title %>">
         </p>
         <p class="form-row">
-            <textarea name="content" id="editor" placeholder="内容...">
-            </textarea>
+            <textarea name="content" id="editor" placeholder="内容..."><%= this.topic.content %></textarea>
         </p>
         <p class="form-row">
             <ul class="checkbox-list">
@@ -36,7 +35,7 @@
     </form>
 </div>
 
-<script src="/mditor/js/mditor.min.js"></script>
+<script src="/mditor/build/js/mditor.min.js"></script>
 <script>
     var mditor = new Mditor("#editor",{
         height:240,

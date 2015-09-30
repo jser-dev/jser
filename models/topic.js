@@ -1,19 +1,22 @@
 "use strict";
 
 var db = require("../common/db");
+var User = require("./user");
+var Comment = require('./comment');
 
 //定义话题模型
 var Topic = module.exports = db.model('topic', {
     title: String, //标题
     content: String, //内容
-    type: Array, //类型
-    author: Object, //作者
+    type: [String], //类型
+    author: { type: db.types.ObjectId, ref: User.schema.name }, //作者
     datetime: Date, //时间
-    comments: Array, //评论
+    comments: [{ type: db.types.ObjectId, ref: Comment.schema.name }], //评论
     like: Number, //“赞” 的数量 
     dislike: Number, //"踩" 的数量
     status: Number,// 状态,
-    tags: Array //标签
+    tags: [String], //标签,
+    top: Number, //置顶
 });
 
 //话题状态
@@ -23,19 +26,54 @@ Topic.status = {
 };
 
 
-//加载所有话题
-Topic.load = function (callback) {
+Topic.new = function (author, callback) {
     var self = Topic;
-    self.find({}, callback);
+    self.findOne({ status: self.status.DRAFT }, function (err, foundTopic) {
+        if (err) {
+            return callback(err);
+        }
+        if (foundTopic) {
+            return callback(null, foundTopic);
+        }
+        var topic = new Topic();
+        topic.author = author;
+        topic.status = self.status.DRAFT;
+        datetime: new Date();
+        topic.save(callback);
+    });
+};
+
+Topic.get = function (id, callback) {
+    var self = Topic;
+    self.findById(id, callback);
+}
+
+Topic.PAGE_SITE = 20;
+
+//加载所有话题
+Topic.getList = function (options, callback) {
+    var self = Topic;
+    var where = (!options.type || options.type == 'all') ?
+        {
+            status: self.status.PUBLISH
+        } : {
+            status: self.status.PUBLISH,
+            type: options.type
+        };
+    self.find(where)
+        .sort({ 'top': -1, '_id': -1 })
+        .skip(options.pageSize * (options.pageIndex - 1))
+        .limit(options.pageSize)
+        .exec(callback);
 };
 
 //加载所有话题类型
 Topic.loadTypes = function (callback) {
     var self = Topic;
-    callback([
+    callback(null, [
         {
             text: "精华",
-            name: "jh",
+            name: "essence",
             admin: true,
         },
         {

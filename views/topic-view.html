@@ -2,33 +2,33 @@
     
 <% $.placeBegin("head") %>
     <title>话题 | JSER</title>
-    <link rel="stylesheet" href="/mditor/css/mditor.min.css">
+    <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
 <% $.placeEnd() >
 
 <% $.placeBegin("content") %>
 
 <div class="card">
     <h5 class="card-title">
-        话题
+        <%= this.topic.title %>
     </h5>
     <div class="card-panel">
         <p>
-            话题
+            <%= this.topic.content %>
         </p>
-        <form action="/topic/{id}/comment" method="post">
+        <br/><br/>
+        <form action="/topic/<%= this.id %>/comment" method="post">
             <p class="form-row">
                 <textarea name="content" id="editor" placeholder="内容..."></textarea>
             </p>
-            <p class="form-row align-right">
+            <p class="form-row align-right" style="margin-bottom:0px;">
                  <input type="submit" value="提交评论">
             </p>
         </form>
     </div>
 </div>
 
-<script src="/mditor/js/mditor.min.js"></script>
+<script src="/mditor/build/js/mditor.min.js"></script>
 <script>
     var mditor = new Mditor("#editor");
 </script>
 
-<% $.placeEnd() %>

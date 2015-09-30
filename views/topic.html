@@ -16,7 +16,11 @@
         <% }.bind(this)) %>
     </h5>
     <div class="card-panel">
-        <%= this.currentType %>
+       <ul class="list">
+           <% $.each(this.list,function(i,item){ %>
+           <li><a href="/topic/<%= item.id %>"><%= item.title %></a></li>
+           <% }.bind(this)); %>
+       </ul>
     </div>
 </div>
 
