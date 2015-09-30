@@ -5,7 +5,7 @@
         "^/": "$./handlers/mvc"
     },
     "filters": {
-        "^/": "./filters/user-state"
+        "^/": "./filters/required"
     },
     "mvc": {
         "paths": {
@@ -28,7 +28,9 @@
             {
                 "pattern": "/topic/edit/{id}",
                 "target": "./topic-edit.js",
-                "admin": true
+                "required": [
+                    "signed"
+                ]
             },
             {
                 "pattern": "/topic/{id}",
@@ -45,7 +47,9 @@
             {
                 "pattern": "/profile",
                 "target": "./profile.js",
-                "admin": true
+                "required": [
+                    "signed"
+                ]
             },
             {
                 "pattern": "/about",
