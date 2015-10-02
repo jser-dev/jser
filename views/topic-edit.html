@@ -13,10 +13,10 @@
     </div>
     <form class="panel-body" action="/topic/edit/<%= this.id %>/submit" method="post" autocomplete="off">
         <p class="form-row mwf">
-            <input name="title" type="text" class="input-block" placeholder="标题..." value="<%= this.topic.title %>">
+            <input name="title" type="text" class="input-block" placeholder="标题(10字以上)..." mamaxlength="144" value="<%= this.topic.title %>">
         </p>
         <p class="form-row">
-            <textarea name="content" id="editor" placeholder="内容..."><%= this.topic.content %></textarea>
+            <textarea name="content" id="editor" placeholder="内容(20字以上)..."><%= this.topic.content %></textarea>
         </p>
         <p class="form-row">
             <ul class="checkbox-list">

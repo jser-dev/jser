@@ -20,7 +20,7 @@
             <% $.each(this.list,function(i,item){ %>
             <li class="media">
                 <a class="media-left" href="javascript:;">
-                    <img class="media-object" src="..." alt="...">
+                    <img class="media-object" src="<%= item.author.avatar||'/images/logo.png' %>" alt="<%= item.author.name %>">
                 </a>
                 <a class="media-body" href="/topic/<%= item.id %>">
                     <h4 class="media-heading"><%= item.title %></h4>
