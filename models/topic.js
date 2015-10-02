@@ -38,7 +38,7 @@ Topic.new = function (author, callback) {
         var topic = new Topic();
         topic.author = author;
         topic.status = self.status.DRAFT;
-        datetime: new Date();
+        topic.datetime = new Date();
         topic.save(callback);
     });
 };
@@ -64,6 +64,7 @@ Topic.getList = function (options, callback) {
         .sort({ 'top': -1, '_id': -1 })
         .skip(options.pageSize * (options.pageIndex - 1))
         .limit(options.pageSize)
+        .populate('author')
         .exec(callback);
 };
 

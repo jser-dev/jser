@@ -1,11 +1,11 @@
-jser.cc source
+jser.cc open source
 
-#工具链
+# 工具链
 1. 运行环境 Node.js
 2. 数据库 MongoDB
 3. 编辑器 VSCode
 
-#基本步骤
+# 基本步骤
 1. 注册 GitHub 
 2. 安装 Node.js 
 3. 安装 MongoDB

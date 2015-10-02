@@ -16,16 +16,20 @@
         <% }.bind(this)) %>
     </div>
     <div class="panel-body">
-        <ul class="media-list list">
+        <ul class="media-list topic-list">
             <% $.each(this.list,function(i,item){ %>
             <li class="media">
                 <a class="media-left" href="javascript:;">
-                    <img class="media-object" src="<%= item.author.avatar||'/images/logo.png' %>" alt="<%= item.author.name %>">
+                    <img class="media-object avatar" src="<%= item.author.avatar %>" alt="<%= item.author.name %>">
                 </a>
-                <a class="media-body" href="/topic/<%= item.id %>">
-                    <h4 class="media-heading"><%= item.title %></h4>
-                    <%= item.summary %>
-                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a href="/topic/<%= item.id %>"><%= item.title %></a>
+                    </h4>
+                    <span class="topic-info">
+                        <%= item.author.name %> 发布于 <%= $.formatDate(item.datetime,"yyyy-MM-dd hh:mm") %>
+                    </span>
+                </div>
             </li>
             <% }.bind(this)); %>
         </ul>

@@ -72,6 +72,7 @@ GitHubController.prototype.callback = function () {
                 var user = new User();
                 user.email = userInfo.email;
                 user.name = userInfo.login || userInfo.email;
+                user.avatar = userInfo.avatar_url;
                 User.oAuth(user, function (result) {
                     if (result && result.status) {
                         self.context.session.add('user', result.data, function () {

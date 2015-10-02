@@ -1,6 +1,7 @@
 "use strict";
 
 var db = require("../common/db");
+var utils = require("../common/utils");
 
 //定义用户模型
 var User = module.exports = db.model('user', {
@@ -46,7 +47,7 @@ User.signIn = function (user, callback) {
             return callback({
                 status: true,
                 message: '登陆成功',
-                data: user
+                data: foundUser
             });
         } else {
             return callback({
@@ -83,6 +84,7 @@ User.oAuth = function (user, callback) {
                 data: foundUser
             });
         } else {
+            user.avatar = user.avatar || self.getAvatar();
             user.save(function (err) {
                 if (err) {
                     return callback({
@@ -110,6 +112,7 @@ User._checkSignUp = function (user) {
 //注册一个用户
 User.signUp = function (user, callback) {
     var self = this;
+    user.avatar = user.avatar || self.getAvatar();
     if (!self._checkSignUp(user)) {
         return callback({
             status: false,
@@ -132,3 +135,8 @@ User.signUp = function (user, callback) {
         });
     });
 };
+
+User.getAvatar = function () {
+    var index = utils.random(1, 12);
+    return "/images/avatar/" + index + ".png";
+}

@@ -81,6 +81,11 @@ body {
   min-width: 160px;
   cursor: pointer;
 }
+
+.user-menu-btn{
+  text-align: center;
+}
+
 @media (max-width: 767px){
   .navbar-default .navbar-nav .open .dropdown-menu>li>a {
       color: #fff;
@@ -130,9 +135,35 @@ body {
   color: #fff;
 }
 
-.panel-body .list:li a{
-  display: block;
-  padding: 3px 0px;
+.topic-list{
+  margin: 0px;
+  padding: 0px;
+}
+
+.topic-list li .avatar{
+  width: 45px;
+  height: 45px;
+  border-radius: 3px;
+}
+
+.topic-list li .topic-info{
+  font-size: 14px;
+  color:#666;
+}
+
+.topic-list li{
+  margin: 0px;
+  padding: 10px 0px;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.topic-list li:last-child{
+  padding-bottom: 0px;
+  border-bottom: none;
+}
+
+.topic-list li:first-child{
+  padding-top: 0px;
 }
 
 .pagination{

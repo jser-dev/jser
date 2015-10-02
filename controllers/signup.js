@@ -28,6 +28,5 @@ SignUpController.prototype._newUser = function () {
     user.email = req.body.email;
     user.password = req.body.password;
     user.name = req.body.name;
-    user.avatar = req.body.avatar;
     return user;
 };
