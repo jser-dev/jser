@@ -31,7 +31,7 @@
             <div id="navbar">
                 <form action="/search" method="get" class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input name="keyword" type="text" style="width:240px;" class="form-control" placeholder="搜索话题、人..." value="<%= this.keyword||'' %>">
+                        <input name="keyword" type="text" style="min-width:240px;" class="form-control" placeholder="搜索话题、人..." value="<%= this.keyword||'' %>">
                     </div>
                 </form>
                 <ul class="nav navbar-nav">
@@ -41,7 +41,15 @@
                 <ul class="nav navbar-nav navbar-right">
                     <% var user = $.controller.context.user  %>
                     <% if(user){ %>
-                    <li><a href="/profile"><%= user.name||user.email %></a></li>
+                    <li>
+                        <a class="dropdown-toggle user-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= user.name||user.email %>
+                        </a>
+                        <ul class="dropdown-menu user-menu-ul">
+                            <li><a href="/profile">个人中心</a></li>
+                            <li><a href="/profile/signout">退出</a></li>
+                        </ul>
+                    </li>
                     <% }else{ %>
                     <li><a href="/signup">注册</a></li>
                     <li><a href="/signin">登录</a></li>
@@ -75,7 +83,7 @@
     </div>
     <footer class="footbar">
         <div class="container">
-            Copyright © 2011-2015 JSER.CC 当前版本 1.0.0
+            Copyright © 2011-2015 JSER.CC
         </div>
     </footer>
     <script src="/js/jquery.min.js"></script>

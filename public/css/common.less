@@ -71,6 +71,23 @@ body {
   -webkit-appearance: none;
 }
 
+.navbar-default .navbar-nav>.open>a:focus, 
+.navbar-default .navbar-nav>.open>a:hover{
+  color: #fff;
+  background-color: rgb(7, 103, 200);
+}
+
+.user-menu-btn,
+.user-menu-ul{
+  min-width: 160px;
+  cursor: pointer;
+}
+@media (max-width: 767px){
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+      color: #fff;
+  }
+}
+
 /*主容器*/
 .container{
   max-width: 1044px;
