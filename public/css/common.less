@@ -90,6 +90,9 @@ body {
   .navbar-default .navbar-nav .open .dropdown-menu>li>a {
       color: #fff;
   }
+  .user-menu-btn{
+    text-align: left;
+  }
 }
 
 /*主容器*/
@@ -146,9 +149,10 @@ body {
   border-radius: 3px;
 }
 
-.topic-list li .topic-info{
+.topic-list li .topic-info,
+.topic-list li .topic-info a{
   font-size: 14px;
-  color:#666;
+  color:#888;
 }
 
 .topic-list li{
@@ -168,6 +172,24 @@ body {
 
 .pagination{
   margin:0px;
+}
+
+.integral-list{
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.integral-list li{
+  padding: 5px 0px;
+  border-bottom: 1px solid #F0F0F0;
+}
+.integral-list li:last-child{
+  padding-bottom: 0px;
+  border-bottom: none;
+}
+.integral-list li:first-child{
+  padding-top: 0px;
 }
 
 /*页脚*/

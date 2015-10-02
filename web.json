@@ -53,11 +53,31 @@
                 "target": "./signin.js"
             },
             {
+                "pattern": "/forget-password",
+                "target": "./forget-password.js"
+            },
+            {
                 "pattern": "/profile",
                 "target": "./profile.js",
                 "required": [
                     "signed"
                 ]
+            },
+            {
+                "pattern": "/control-panel",
+                "target": "./control-panel.js",
+                "required": [
+                    "signed",
+                    "admin"
+                ]
+            },
+            {
+                "pattern": "/user/{id}",
+                "target": "./user-info.js"
+            },
+            {
+                "pattern": "/integral-list",
+                "target": "./integral-list.js"
             },
             {
                 "pattern": "/about",

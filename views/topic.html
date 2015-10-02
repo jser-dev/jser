@@ -19,7 +19,7 @@
         <ul class="media-list topic-list">
             <% $.each(this.list,function(i,item){ %>
             <li class="media">
-                <a class="media-left" href="javascript:;">
+                <a class="media-left" href="/user/<%= item.author.id %>">
                     <img class="media-object avatar" src="<%= item.author.avatar %>" alt="<%= item.author.name %>">
                 </a>
                 <div class="media-body">
@@ -27,7 +27,8 @@
                         <a href="/topic/<%= item.id %>"><%= item.title %></a>
                     </h4>
                     <span class="topic-info">
-                        <%= item.author.name %> 发布于 <%= $.formatDate(item.datetime,"yyyy-MM-dd hh:mm") %>
+                        <a href="/user/<%= item.author.id %>"><%= item.author.name %></a> 
+                        发布于 <%= $.formatDate(item.datetime,"yyyy-MM-dd hh:mm") %>
                     </span>
                 </div>
             </li>

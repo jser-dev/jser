@@ -8,7 +8,8 @@ var User = module.exports = db.model('user', {
     email: String,
     password: String,
     name: String,
-    avatar: String
+    avatar: String,
+    integral: Number
 }); 
 
 //创建一个新用户
@@ -17,12 +18,12 @@ User.create = function () {
 };
 
 //加载所有用户
-User.load = function (callback) {
+User.getList = function (top, callback) {
     var self = User;
-    self.find({}, function (err, list) {
-        self.list = list;
-        if (callback) callback(err, list);
-    });
+    self.find({})
+        .sort({ 'integral': -1, '_id': 1 })
+        .limit(top)
+        .exec(callback);
 };
 
 //登录一个用户

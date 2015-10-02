@@ -47,7 +47,7 @@
                         </a>
                         <ul class="dropdown-menu user-menu-ul">
                             <li><a href="/profile">个人中心</a></li>
-                            <li><a href="/mgr">系统管理</a></li>
+                            <li><a href="/control-panel">控制面板</a></li>
                             <li><a href="/profile/signout">退出</a></li>
                         </ul>
                     </li>
@@ -64,19 +64,22 @@
             <div class="col-sm-9 col-main">
                 <% $.placeHolder("content") %>
             </div>
-            <div class="col-sm-3 col-slide hidden-phone">
+            <div class="col-sm-3 col-slide">
                 <div class="panel panel-default">
                     <form action="/topic/edit/new" method="post" class="panel-body">
                         <button class="new-topic">发布话题</button>
                     </form>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">积分榜</div>
+                    <div class="panel-heading">
+                        积分榜
+                        <a class="pull-right" href="/integral-list">更多...</a>
+                    </div>
                     <div class="panel-body">
-                        <ol class="list-unstyled">
-                            <li><a href="#">张三</a></li>
-                            <li><a href="#">李四</a></li>
-                        </ol>
+                        <ul class="integral-list">
+                            <li>张三<span class="pull-right">1000</span></li>
+                            <li>李四<span class="pull-right">900</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
