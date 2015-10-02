@@ -16,11 +16,19 @@
         <% }.bind(this)) %>
     </div>
     <div class="panel-body">
-       <ul class="list">
-           <% $.each(this.list,function(i,item){ %>
-           <li><a href="/topic/<%= item.id %>"><%= item.title %></a></li>
-           <% }.bind(this)); %>
-       </ul>
+        <ul class="media-list list">
+            <% $.each(this.list,function(i,item){ %>
+            <li class="media">
+                <a class="media-left" href="javascript:;">
+                    <img class="media-object" src="..." alt="...">
+                </a>
+                <a class="media-body" href="/topic/<%= item.id %>">
+                    <h4 class="media-heading"><%= item.title %></h4>
+                    <%= item.summary %>
+                </a>
+            </li>
+            <% }.bind(this)); %>
+        </ul>
     </div>
     <div class="panel-footer">
         <ul class="pagination">
