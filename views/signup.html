@@ -13,7 +13,7 @@
             <p><%= this.message %></p>
         <% }else{ %>
             <% this.data=this.data||{} %>
-            <form action="/signup/submit" method="post">
+            <form action="/signup/submit" method="post" autocomplete="off">
                 <p class="form-row alert-text">
                     <label></label>
                     <%= this.message %>
