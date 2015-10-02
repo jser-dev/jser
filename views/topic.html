@@ -38,17 +38,17 @@
     <div class="panel-footer">
         <ul class="pagination">
             <li>
-            <a href="#" aria-label="Previous">
+            <a href="/topic/<%= this.currentType %>/page/1" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
             </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
+            <% for(var i=this.pageBegin;i<=this.pageEnd;i++){ %>
+            <li class="<%= this.pageIndex==i?'active':'' %>">
+                <a href="/topic/<%= this.currentType %>/page/<%= i %>"><%= i %></a>
+            </li>
+            <% } %>
             <li>
-            <a href="#" aria-label="Next">
+            <a href="/topic/<%= this.currentType %>/page/<%= this.pageCount||1 %>" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
             </li>

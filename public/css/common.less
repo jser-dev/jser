@@ -121,7 +121,13 @@ body {
 
 .panel-body{
   padding: 15px;
+  font-size: 16px !important;
   margin: 0px;
+}
+
+.panel-body .media-heading{
+  font-size: 16px !important;
+  margin-top: 2px;
 }
 
 .panel-heading .tab{
@@ -172,6 +178,21 @@ body {
 
 .pagination{
   margin:0px;
+}
+.pagination .active a,
+.pagination .active a:hover
+.pagination .active a:active{
+  background-color: transparent !important;
+  color:rgb(7, 103, 200) !important;
+  border: 1px solid #ddd !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+}
+.pagination>li>a:focus, 
+.pagination>li>a:hover, 
+.pagination>li>span:focus, 
+.pagination>li>span:hover{
+  z-index: 0;  
 }
 
 .integral-list{

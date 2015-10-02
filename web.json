@@ -37,7 +37,7 @@
                 ]
             },
             {
-                "pattern": "/topic/{type}/page/{index}",
+                "pattern": "/topic/{type}/page/{pageIndex}",
                 "target": "./topic.js"
             },
             {

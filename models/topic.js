@@ -50,22 +50,34 @@ Topic.get = function (id, callback) {
 
 Topic.PAGE_SITE = 20;
 
-//加载所有话题
-Topic.getList = function (options, callback) {
+Topic._options2Where = function (options) {
     var self = Topic;
     var where = (!options.type || options.type == 'all') ?
         {
-            status: self.status.PUBLISH
+            status: options.status || self.status.PUBLISH
         } : {
-            status: self.status.PUBLISH,
+            status: options.status || self.status.PUBLISH,
             type: options.type
         };
+    return where;
+}
+
+//加载所有话题
+Topic.getList = function (options, callback) {
+    var self = Topic;
+    var where = self._options2Where(options);
     self.find(where)
         .sort({ 'top': -1, '_id': -1 })
         .skip(options.pageSize * (options.pageIndex - 1))
         .limit(options.pageSize)
         .populate('author')
         .exec(callback);
+};
+
+Topic.getCount = function (options, callback) {
+    var self = Topic;
+    var where = self._options2Where(options);
+    self.count(where, callback);
 };
 
 //加载所有话题类型
