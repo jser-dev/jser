@@ -7,11 +7,11 @@
 
 <% $.placeBegin("content") %>
 
-<div class="card">
-    <h5 class="card-title">
+<div class="panel panel-default">
+    <div class="panel-heading">
         编辑话题
-    </h5>
-    <form class="card-panel" action="/topic/edit/<%= this.id %>/submit" method="post" autocomplete="off">
+    </div>
+    <form class="panel-body" action="/topic/edit/<%= this.id %>/submit" method="post" autocomplete="off">
         <p class="form-row mwf">
             <input name="title" type="text" class="input-block" placeholder="标题..." value="<%= this.topic.title %>">
         </p>

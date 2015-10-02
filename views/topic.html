@@ -6,21 +6,23 @@
 
 <% $.placeBegin("content") %>
 
-<div class="card">
-    <h5 class="card-title">
+<div class="panel panel-default">
+    <div class="panel-heading">
         <a class="tab <%= this.currentType=='all'?'active':'' %>" href="/topic">所有</a>
         <% $.each(this.types,function(i,item){ %>
         <a class="tab <%= this.currentType==item.name?'active':'' %>" href="/topic/<%= item.name %>/page/1">
             <%= item.text %>
         </a>
         <% }.bind(this)) %>
-    </h5>
-    <div class="card-panel">
+    </div>
+    <div class="panel-body">
        <ul class="list">
            <% $.each(this.list,function(i,item){ %>
            <li><a href="/topic/<%= item.id %>"><%= item.title %></a></li>
            <% }.bind(this)); %>
        </ul>
+    </div>
+    <div class="panel-footer">
         <ul class="pagination">
             <li>
             <a href="#" aria-label="Previous">

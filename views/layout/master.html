@@ -42,7 +42,7 @@
                     <% var user = $.controller.context.user  %>
                     <% if(user){ %>
                     <li>
-                        <a class="dropdown-toggle user-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="javascript:;" class="dropdown-toggle user-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%= user.name||user.email %>
                         </a>
                         <ul class="dropdown-menu user-menu-ul">
@@ -64,14 +64,14 @@
                 <% $.placeHolder("content") %>
             </div>
             <div class="col-sm-3 col-slide hidden-phone">
-                <div class="card">
-                    <form action="/topic/edit/new" method="post" class="card-panel">
+                <div class="panel panel-default">
+                    <form action="/topic/edit/new" method="post" class="panel-body">
                         <button class="new-topic">发布话题</button>
                     </form>
                 </div>
-                <div class="card">
-                    <h5 class="card-title">积分榜</h5>
-                    <div class="card-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading">积分榜</div>
+                    <div class="panel-body">
                         <ol class="list-unstyled">
                             <li><a href="#">张三</a></li>
                             <li><a href="#">李四</a></li>

@@ -3,8 +3,7 @@ body {
   margin: 0px;
   padding: 0px;
   background-color: #e1e1e1;
-  font-family: "Helvetica Neue","Microsoft Yahei";
-  /* font-weight: 100;"STHeitiTC-Light","STHeiti",*/
+  font-family: "STHeitiTC-Light","STHeiti", "Helvetica Neue","Microsoft Yahei";
   -webkit-font-smoothing: antialiased;
 }
 
@@ -102,49 +101,42 @@ body {
   min-height:300px;
 }
 
-.card{
-  background-color: #fff;
-  border-radius: 3px;
-  padding: 0px;
-  margin-bottom: 10px;
+.panel{
+  font-size: 16px; 
 }
 
-.card-title{
-  background-color: #f6f6f6;
-  padding: 15px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+.panel-heading,
+.panel-footer{
+  padding: 10px 15px;
   margin: 0px;
-  font-size: 16px;
 }
 
-.card-panel{
+.panel-body{
   padding: 15px;
   margin: 0px;
-  font-size: 16px;
 }
 
-.card-title .tab{
+.panel-heading .tab{
   cursor: pointer;
   color: #0767c8;
-  padding:4px 12px;
+  padding:3px 9px;
   border-radius: 3px;
   display: inline-block;
   font-size: 16px;
 }
 
-.card-title .tab.active{
+.panel-heading .tab.active{
   background-color: #0767c8;
   color: #fff;
 }
 
-.card-panel .list:li a{
+.panel-body .list:li a{
   display: block;
   padding: 3px 0px;
 }
 
 .pagination{
-  margin-bottom: 0px;
+  margin:0px;
 }
 
 /*页脚*/

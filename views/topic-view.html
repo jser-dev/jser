@@ -7,24 +7,21 @@
 
 <% $.placeBegin("content") %>
 
-<div class="card">
-    <h5 class="card-title">
+<div class="panel panel-default">
+    <div class="panel-heading">
         <%= this.topic.title %>
-    </h5>
-    <div class="card-panel">
-        <p>
-            <%= this.topic.content %>
-        </p>
-        <br/><br/>
-        <form action="/topic/<%= this.id %>/comment" method="post">
+    </div>
+    <div class="panel-body markdown-body">
+        <%= this.topic.content %>
+    </div>
+    <form class="panel-footer" action="/topic/<%= this.id %>/comment" method="post">
             <p class="form-row">
                 <textarea name="content" id="editor" placeholder="内容..."></textarea>
             </p>
             <p class="form-row align-right" style="margin-bottom:0px;">
                  <input type="submit" value="提交评论">
             </p>
-        </form>
-    </div>
+    </form>
 </div>
 
 <script src="/mditor/build/js/mditor.min.js"></script>
