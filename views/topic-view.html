@@ -1,6 +1,8 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
+    <meta name="description" content="<%= this.topic.title %>">
+    <meta name="author" content="<%= this.topic.author.name %>">
     <title>话题 | JSER</title>
     <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
 <% $.placeEnd() >
