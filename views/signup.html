@@ -12,7 +12,7 @@
         <% if(this.status){ %>
             <p><%= this.message %></p>
         <% }else{ %>
-            <% this.data=this.data||{} %>
+            <% this.user=this.user||{} %>
             <form action="/signup/submit" method="post" autocomplete="off">
                 <p class="form-row alert-text">
                     <label></label>
@@ -20,19 +20,19 @@
                 </p>
                 <p class="form-row">
                     <label>邮件</label>
-                    <input name="email" type="email" value="<%= this.data.email %>"/>
+                    <input name="email" type="email" value="<%= this.user.email %>"/>
                 </p>
                 <p class="form-row">
                     <label>名字</label>
-                    <input name="name" type="text" value="<%= this.data.name %>"/>
+                    <input name="name" type="text" value="<%= this.user.name %>"/>
                 </p>
                 <p class="form-row">
                     <label>密码</label>
-                    <input name="password" type="password" value="<%= this.data.password %>"/>
+                    <input name="password" type="password" value="<%= this.user.password %>"/>
                 </p>
                 <p class="form-row">
                     <label>密码</label>
-                    <input name="password-confirm" type="password" value="<%= this.data.password %>"/>
+                    <input name="password-confirm" type="password" value="<%= this.user.password %>"/>
                 </p>
                 <p class="form-row">
                     <label class="hidden-xs"></label>

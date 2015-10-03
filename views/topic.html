@@ -32,7 +32,7 @@
                     </span>
                 </div>
                 <div class="media-right">
-                    <span class="badge">200</span>
+                    <span class="badge"><%= (item.comments||[]).length %>/<%= item.read %></span>
                 </div>
             </li>
             <% }.bind(this)); %>

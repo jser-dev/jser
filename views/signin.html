@@ -10,7 +10,7 @@
     <div class="panel-heading">登录</div>
     <div class="panel-body">
    
-        <% this.data=this.data||{} %>
+        <% this.user=this.user||{} %>
         <form action="/signin/submit" method="post" autocomplete="off">
             <p class="form-row alert-text">
                 <label></label>
@@ -18,11 +18,11 @@
             </p>
             <p class="form-row">
                 <label>邮箱</label>
-                <input name="email" type="text" value="<%= this.data.email %>"/>
+                <input name="email" type="text" value="<%= this.user.email %>"/>
             </p>
             <p class="form-row">
                 <label>密码</label>
-                <input name="password" type="password" value="<%= this.data.password %>"/>
+                <input name="password" type="password" value="<%= this.user.password %>"/>
             </p>
             <p class="form-row">
                 <label class="hidden-xs"></label>

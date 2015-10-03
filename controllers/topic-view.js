@@ -17,6 +17,8 @@ TopicViewController.prototype.init = function () {
 	Topic.get(self.topicId, function (err, topic) {
 		topic.content = self.mdParser.parse(topic.content);
 		self.topic = topic;
+		topic.read++;
+		topic.save();
 		self.ready();
 	})
 };

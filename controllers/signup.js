@@ -14,14 +14,18 @@ SignUpController.prototype.index = function () {
 //提交注册信息   
 SignUpController.prototype.submit = function () {
     var self = this;
-    var user = self._newUser();
-    User.signUp(user, function (result) {
-        self.render('signup.html', result);
+    var userInfo = self.getUserInfo();
+    User.signUp(userInfo, function (err, user) {
+        self.render('signup.html', {
+            status: err == null,
+            message: err,
+            user: user || userInfo
+        });
     });
 };
 
 //通过浏览器 post 过来的数据创建一个 “User”
-SignUpController.prototype._newUser = function () {
+SignUpController.prototype.getUserInfo = function () {
     var self = this;
     var user = User.create();
     var req = self.context.request;

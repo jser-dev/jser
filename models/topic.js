@@ -10,13 +10,14 @@ var Topic = module.exports = db.model('topic', {
     content: String, //内容
     type: [String], //类型
     author: { type: db.types.ObjectId, ref: User.schema.name }, //作者
-    datetime: Date, //时间
-    comments: [{ type: db.types.ObjectId, ref: Comment.schema.name }], //评论
-    like: Number, //“赞” 的数量 
-    dislike: Number, //"踩" 的数量
-    status: Number,// 状态,
+    datetime: { type: Date, default: Date.now }, //时间
+    comments: [{ type: db.types.ObjectId, ref: Comment.schema.name, default: [] }], //评论
+    like: { type: Number, default: 0 }, //“赞” 的数量 
+    dislike: { type: Number, default: 0 }, //"踩" 的数量
+    status: { type: Number, default: 0 },// 状态,
     tags: [String], //标签,
-    top: Number, //置顶
+    top: { type: Number, default: 0 }, //置顶,
+    read: { type: Number, default: 0 }
 });
 
 //话题状态

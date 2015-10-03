@@ -5,11 +5,11 @@ var utils = require("../common/utils");
 
 //定义用户模型
 var User = module.exports = db.model('user', {
-    email: String,
-    password: String,
-    name: String,
-    avatar: String,
-    integral: Number
+    email: { type: String, unique: true }, // email
+    password: String, //密码
+    name: { type: String, unique: true }, //名字
+    avatar: String, //头像 
+    integral: { type: Number, default: 0 } //积分
 }); 
 
 //创建一个新用户
@@ -30,32 +30,16 @@ User.getList = function (top, callback) {
 User.signIn = function (user, callback) {
     var self = User;
     if (user.email == '' || user.password == '') {
-        return callback({
-            status: false,
-            message: '用户或者密码错误',
-            data: user
-        });
+        return callback("用户或者密码错误");
     }
     self.findOne({ "email": user.email, "password": user.password }, function (err, foundUser) {
         if (err) {
-            return callback({
-                status: false,
-                message: '发生了异常:' + err,
-                data: user
-            });
+            return callback(err);
         }
         if (foundUser) {
-            return callback({
-                status: true,
-                message: '登陆成功',
-                data: foundUser
-            });
+            return callback(null, foundUser);
         } else {
-            return callback({
-                status: false,
-                message: '用户或者密码错误',
-                data: user
-            });
+            return callback('用户或者密码错误');
         }
     });
 };
@@ -64,41 +48,21 @@ User.signIn = function (user, callback) {
 User.oAuth = function (user, callback) {
     var self = User;
     if (user.email == '' || user.password == '') {
-        return callback({
-            status: false,
-            message: 'oAuth 发生了异常',
-            data: user
-        });
+        return callback('oAuth 发生了异常');
     }
     self.findOne({ "email": user.email }, function (err, foundUser) {
         if (err) {
-            return callback({
-                status: false,
-                message: '发生了异常:' + err,
-                data: user
-            });
+            return callback(err);
         }
         if (foundUser) {
-            return callback({
-                status: true,
-                message: '登陆成功',
-                data: foundUser
-            });
+            return callback(null, foundUser);
         } else {
             user.avatar = user.avatar || self.getAvatar();
             user.save(function (err) {
                 if (err) {
-                    return callback({
-                        status: false,
-                        message: '发生了异常:' + err,
-                        data: user
-                    });
+                    return callback(err);
                 }
-                return callback({
-                    status: true,
-                    message: '登陆成功',
-                    data: user
-                });
+                return callback(null, user);
             });
         }
     });
@@ -115,25 +79,13 @@ User.signUp = function (user, callback) {
     var self = this;
     user.avatar = user.avatar || self.getAvatar();
     if (!self._checkSignUp(user)) {
-        return callback({
-            status: false,
-            message: '用户信息不合法',
-            data: user
-        });
+        return callback('用户信息不合法');
     }
     user.save(function (err) {
         if (err) {
-            return callback({
-                status: false,
-                message: '发生了异常:' + err,
-                data: user
-            });
+            return callback(err);
         }
-        return callback({
-            status: true,
-            message: '注册成功',
-            data: user
-        });
+        return callback(null, user);
     });
 };
 

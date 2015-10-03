@@ -11,19 +11,24 @@ SignInController.prototype.index = function () {
 
 SignInController.prototype.submit = function () {
     var self = this;
-    var user = self._newUser();
-    User.signIn(user, function (result) {
-        if (result.status) {
-            self.context.session.add('user', result.data, function () {
+    var userInfo = self.getUserInfo();
+    User.signIn(userInfo, function (err, user) {
+        if (err) {
+            self.render("signin.html", {
+                status: err == null,
+                message: err,
+                user: userInfo
+            });
+        } else {
+            self.context.session.add('user', user, function () {
                 self.context.redirect("/");
             });
         }
-        self.render("signin.html", result);
     });
 };
 
 //通过浏览器 post 过来的数据创建一个 “User”
-SignInController.prototype._newUser = function () {
+SignInController.prototype.getUserInfo = function () {
     var self = this;
     var user = User.create();
     var req = self.context.request;
