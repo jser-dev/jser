@@ -19,6 +19,7 @@
   "dependencies": {
     "mditor": "^0.0.9",
     "mongoose": "^4.1.9",
+    "nodemailer": "^1.5.0",
     "nokit-runtime": "^1.11.8",
     "request": "^2.64.0",
     "timeago": "^1.4.2"
