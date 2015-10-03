@@ -46,7 +46,10 @@ Topic.new = function (author, callback) {
 
 Topic.get = function (id, callback) {
     var self = Topic;
-    self.findById(id, callback);
+    self.findById(id)
+        .populate('author')
+        .populate('comments')
+        .exec(callback);
 }
 
 Topic.PAGE_SITE = 20;
@@ -72,6 +75,7 @@ Topic.getList = function (options, callback) {
         .skip(options.pageSize * (options.pageIndex - 1))
         .limit(options.pageSize)
         .populate('author')
+        .populate('comments')
         .exec(callback);
 };
 

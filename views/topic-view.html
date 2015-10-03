@@ -7,9 +7,25 @@
 
 <% $.placeBegin("content") %>
 
-<div class="panel panel-default">
+<div class="panel panel-default topic-view">
     <div class="panel-heading">
-        <%= this.topic.title %>
+        <div class="media">
+            <a class="media-left" href="/user/<%= this.topic.author.id %>">
+                <img class="media-object avatar" src="<%= this.topic.author.avatar %>" alt="<%= this.topic.author.name %>">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <%= this.topic.title %>
+                </h4>
+                <span class="topic-info">
+                    <a href="/user/<%= this.topic.author.id %>"><%= this.topic.author.name %></a> 
+                    发布于 <%= $.formatDate(this.topic.datetime,"yyyy-MM-dd hh:mm") %>
+                </span>
+            </div>
+            <div class="media-right">
+        
+            </div>
+        </div>
     </div>
     <div class="panel-body markdown-body">
         <%= this.topic.content %>
