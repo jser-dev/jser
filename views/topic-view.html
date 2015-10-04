@@ -21,7 +21,7 @@
                 </h4>
                 <span class="topic-info">
                     <a href="/user/<%= this.topic.author.id %>"><%= this.topic.author.name %></a> 
-                    发布于 <%= $.formatDate(this.topic.createAt,"yyyy-MM-dd hh:mm") %>
+                    发布于 <%= $.timeago(this.topic.createAt,"yyyy-MM-dd hh:mm") %>
                 </span>
             </div>
             <div class="media-right">
@@ -32,6 +32,7 @@
     <div class="panel-body markdown-body">
         <%= this.topic.html %>
     </div>
+    <% if(this.user){ %>
     <form class="panel-footer" action="/topic/<%= this.id %>/comment" method="post">
             <p class="form-row">
                 <textarea name="content" id="editor" placeholder="内容..."></textarea>
@@ -40,6 +41,11 @@
                  <input type="submit" value="提交评论">
             </p>
     </form>
+    <% }else{ %>
+        <div class="panel-footer">
+            <a href="/signin">登录</a>后可以回复
+        </div>
+    <% } %>
 </div>
 
 <script src="/mditor/build/js/mditor.min.js"></script>

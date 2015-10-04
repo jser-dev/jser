@@ -1,6 +1,7 @@
 "use strict";
 
 var db = require("../common/db");
+var Task = nokit.Task;
 var status = require('./status');
 var User = require('./user');
 
@@ -44,7 +45,7 @@ Topic.get = function (id, callback) {
     var self = Topic;
     self.findById(id)
         .populate('author')
-        .populate('comments')
+        .populate('lastReplayAuthor')
         .exec(callback);
 }
 
