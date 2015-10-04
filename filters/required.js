@@ -5,7 +5,7 @@ Filter.SIGNED = 'signed';
 
 Filter.prototype.onMvcHandle = function (context, next) {
 	var self = this;
-	if (!context.route || context.route.required) {
+	if (!context.route || !context.route.required) {
 		return next();
 	}
     context.session.get('user', function (user) {
