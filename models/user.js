@@ -10,7 +10,8 @@ var User = module.exports = db.model('User', {
     name: { type: String, unique: true }, //名字
     avatar: { type: String, default: '' }, //头像 
     integral: { type: Number, default: 0 }, //积分,
-    signUpAt: { type: Date, default: Date.now }//注册时间
+    signUpAt: { type: Date, default: Date.now },//注册时间
+    role: [{ type: String, default: '' }]
 }); 
 
 //创建一个新用户
@@ -48,8 +49,8 @@ User.signIn = function (user, callback) {
 //通过 oauth 认证一个用户
 User.oAuth = function (user, callback) {
     var self = User;
-    if (user.email == '' || user.password == '') {
-        return callback('oAuth 发生了异常');
+    if (user.email == '') {
+        return callback('oAuth 发生了异常，没有可用 email');
     }
     self.findOne({ "email": user.email }, function (err, foundUser) {
         if (err) {

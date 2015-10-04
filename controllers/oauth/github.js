@@ -73,14 +73,13 @@ GitHubController.prototype.callback = function () {
                 user.email = userInfo.email;
                 user.name = userInfo.login || userInfo.email;
                 user.avatar = userInfo.avatar_url;
-                User.oAuth(user, function (result) {
-                    if (result && result.status) {
-                        self.context.session.add('user', result.data, function () {
-                            self.context.redirect("/");
-                        });
-                    } else {
-                        self.context.error('oauth 认证失败');
+                User.oAuth(user, function (err, authedUser) {
+                    if (err) {
+                        return self.context.error(err);
                     }
+                    self.context.session.add('user', authedUser, function () {
+                        self.context.redirect("/");
+                    });
                 });
             });
         });

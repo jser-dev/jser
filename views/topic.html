@@ -30,7 +30,13 @@
                     </h4>
                     <span class="topic-info">
                         <a href="/user/<%= item.author.id %>"><%= item.author.name %></a> 
-                        发布于 <%= $.formatDate(item.createAt,"yyyy-MM-dd hh:mm") %>
+                        发布于 <%= $.formatDate(item.createAt,"yyyy-MM-dd hh:mm") %> , 
+                        <% if(item.lastReplayAuthor){ %>
+                            <a href="/user/<%= item.lastReplayAuthor.id %>"><%= item.item.lastReplayAuthor.name %></a>
+                            回复于 <%= $.formatDate(item.lastReplayAt,"yyyy-MM-dd hh:mm") %>
+                        <% }else{ %>
+                            无人回复
+                        <% } %>
                     </span>
                 </div>
                 <div class="media-right">

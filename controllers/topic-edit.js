@@ -1,6 +1,7 @@
 "use strict";
 
 var Topic = require('../models/topic');
+var status = require('../models/status');
 
 /**
  * 话是控制器
@@ -49,8 +50,13 @@ TopicEditController.prototype.submit = function () {
         if (err) {
             return self.context.error(err);
         }
-        topic.datetime = new Date();
-        topic.status = Topic.status.PUBLISH;
+        if (topic.status == status.PUBLISH) {
+            topic.updateAt = new Date();
+        } else {
+            topic.createAt = new Date();
+            topic.updateAt = topic.createAt;
+        }
+        topic.status = status.PUBLISH;
         topic.title = self.context.data('title');
         topic.content = self.context.data('content');
         topic.type = self.context.data('type');

@@ -16,10 +16,10 @@ TopicViewController.prototype.init = function () {
 	var self = this;
 	self.topicId = self.context.data('id');
 	Topic.get(self.topicId, function (err, topic) {
-		topic.content = self.mdParser.parse(topic.content);
 		self.topic = topic;
 		topic.read++;
 		topic.save();
+		topic.html = self.mdParser.parse(topic.content);
 		self.ready();
 	})
 };
@@ -42,14 +42,19 @@ TopicViewController.prototype.comment = function () {
 		var comment = new Comment();
 		comment.content = content;
 		comment.author = user;
-		self.topic.comments.push(comment);
-		self.topic.save(function (err) {
+		comment.save(function (err) {
 			if (err) {
 				return self.context.error(err);
 			}
-			self.render("topic-view.html", {
-				id: self.topicId,
-				topic: self.topic
+			self.topic.comments.push(comment);
+			self.topic.save(function (err) {
+				if (err) {
+					return self.context.error(err);
+				}
+				self.render("topic-view.html", {
+					id: self.topicId,
+					topic: self.topic
+				});
 			});
 		});
 	});

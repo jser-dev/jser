@@ -21,7 +21,7 @@
                 </h4>
                 <span class="topic-info">
                     <a href="/user/<%= this.topic.author.id %>"><%= this.topic.author.name %></a> 
-                    发布于 <%= $.formatDate(this.topic.datetime,"yyyy-MM-dd hh:mm") %>
+                    发布于 <%= $.formatDate(this.topic.createAt,"yyyy-MM-dd hh:mm") %>
                 </span>
             </div>
             <div class="media-right">
@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="panel-body markdown-body">
-        <%= this.topic.content %>
+        <%= this.topic.html %>
     </div>
     <form class="panel-footer" action="/topic/<%= this.id %>/comment" method="post">
             <p class="form-row">
