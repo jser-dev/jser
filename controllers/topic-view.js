@@ -1,6 +1,7 @@
 "use strict";
 
 var Topic = require('../models/topic');
+var Comment = require('../models/comment');
 var Mditor = require('mditor');
 
 /**
@@ -36,8 +37,20 @@ TopicViewController.prototype.index = function () {
 
 TopicViewController.prototype.comment = function () {
 	var self = this;
-	self.render("topic-view.html", {
-		id: self.topicId,
-		topic: self.topic
+	self.context.session.get('user', function (user) {
+		var content = self.context.data('content');
+		var comment = new Comment();
+		comment.content = content;
+		comment.author = user;
+		self.topic.comments.push(comment);
+		self.topic.save(function (err) {
+			if (err) {
+				return self.context.error(err);
+			}
+			self.render("topic-view.html", {
+				id: self.topicId,
+				topic: self.topic
+			});
+		});
 	});
 };

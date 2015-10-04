@@ -5,23 +5,27 @@ var User = require("./user");
 var Comment = require('./comment');
 
 //定义话题模型
-var Topic = module.exports = db.model('topic', {
-    title: String, //标题
-    content: String, //内容
-    type: [String], //类型
+var Topic = module.exports = db.model('Topic', {
+    title: { type: String, default: '' }, //标题
+    content: { type: String, default: '' }, //内容
+    type: [{ type: String, default: '' }], //类型
     author: { type: db.types.ObjectId, ref: User.schema.name }, //作者
-    datetime: { type: Date, default: Date.now }, //时间
+    tags: [{ type: String, default: '' }], //标签,
+    createAt: { type: Date, default: Date.now }, //创建时间
+    updateAt: { type: Date, default: Date.now }, //更新时间
     comments: [{ type: db.types.ObjectId, ref: Comment.schema.name, default: [] }], //评论
     like: { type: Number, default: 0 }, //“赞” 的数量 
     dislike: { type: Number, default: 0 }, //"踩" 的数量
-    status: { type: Number, default: 0 },// 状态,
-    tags: [String], //标签,
-    top: { type: Number, default: 0 }, //置顶,
-    read: { type: Number, default: 0 }
+    top: { type: Number, default: 0 }, //置顶, 0: 不置顶，>0: 置顶（值为置顶权重）
+    read: { type: Number, default: 0 }, //阅读数量
+    replay: { type: Number, default: 0 }, //回复数量
+    lastReplayAt: { type: Date, default: Date.now }, //最后回复时间
+    status: { type: Number, default: 0 }// 状态,
 });
 
 //话题状态
 Topic.status = {
+    DELETE: -1,
     DRAFT: 0,
     PUBLISH: 1
 };

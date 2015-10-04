@@ -4,12 +4,13 @@ var db = require("../common/db");
 var utils = require("../common/utils");
 
 //定义用户模型
-var User = module.exports = db.model('user', {
+var User = module.exports = db.model('User', {
     email: { type: String, unique: true }, // email
-    password: String, //密码
+    password: { type: String, default: '' }, //密码
     name: { type: String, unique: true }, //名字
-    avatar: String, //头像 
-    integral: { type: Number, default: 0 } //积分
+    avatar: { type: String, default: '' }, //头像 
+    integral: { type: Number, default: 0 }, //积分,
+    signUpAt: { type: Date, default: Date.now }//注册时间
 }); 
 
 //创建一个新用户

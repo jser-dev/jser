@@ -30,11 +30,11 @@
                     </h4>
                     <span class="topic-info">
                         <a href="/user/<%= item.author.id %>"><%= item.author.name %></a> 
-                        发布于 <%= $.formatDate(item.datetime,"yyyy-MM-dd hh:mm") %>
+                        发布于 <%= $.formatDate(item.createAt,"yyyy-MM-dd hh:mm") %>
                     </span>
                 </div>
                 <div class="media-right">
-                    <span class="badge"><%= (item.comments||[]).length %>/<%= item.read %></span>
+                    <span class="badge"><%= item.replay %>/<%= item.read %></span>
                 </div>
             </li>
             <% }.bind(this)); %>
