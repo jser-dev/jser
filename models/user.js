@@ -34,6 +34,7 @@ User.signIn = function (user, callback) {
     if (user.email == '' || user.password == '') {
         return callback("用户或者密码错误");
     }
+    user.password = utils.hashDigest(user.password);
     self.findOne({ "email": user.email, "password": user.password }, function (err, foundUser) {
         if (err) {
             return callback(err);
@@ -70,19 +71,14 @@ User.oAuth = function (user, callback) {
     });
 };
 
-//检查注册用户
-User._checkSignUp = function (user) {
-    var self = this;
-    return user.email && user.password;
-};
-
 //注册一个用户
 User.signUp = function (user, callback) {
     var self = this;
     user.avatar = user.avatar || self.getAvatar();
-    if (!self._checkSignUp(user)) {
+    if (if (user.email == '' || user.name == '' || user.password == '') {
         return callback('用户信息不合法');
     }
+    user.password = utils.hashDigest(user.password);
     user.save(function (err) {
         if (err) {
             return callback(err);
