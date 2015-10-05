@@ -22,6 +22,6 @@
     "nodemailer": "^1.5.0",
     "nokit-runtime": "^1.11.8",
     "request": "^2.64.0",
-    "timeago-words": "0.0.3"
+    "timeago-words": "^0.0.3"
   }
 }

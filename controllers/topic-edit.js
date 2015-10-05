@@ -61,7 +61,9 @@ TopicEditController.prototype.submit = function () {
         topic.content = self.context.data('content');
         topic.type = self.context.data('type');
         topic.save(function (err) {
-            if (err) {
+            if (err && err.errors && err.errors.title) {
+                return self.context.error(err.errors.title);
+            } else if (err) {
                 return self.context.error(err);
             }
             self.context.redirect("/topic/" + topic.id);

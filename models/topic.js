@@ -7,10 +7,10 @@ var User = require('./user');
 
 //定义话题模型
 var Topic = module.exports = db.model('Topic', {
-    title: { type: String, default: '' }, //标题
-    content: { type: String, default: '' }, //内容
+    title: { type: String, default: '', required: true }, //标题
+    content: { type: String, default: '', required: true }, //内容
     type: [{ type: String, default: '' }], //类型
-    author: { type: db.types.ObjectId, ref: User.schema.name }, //作者
+    author: { type: db.types.ObjectId, ref: User.schema.name, required: true }, //作者
     lastReplayAuthor: { type: db.types.ObjectId, ref: User.schema.name }, //回复数量
     tags: [{ type: String, default: '' }], //标签,
     createAt: { type: Date, default: Date.now }, //创建时间
@@ -23,7 +23,14 @@ var Topic = module.exports = db.model('Topic', {
     replay: { type: Number, default: 0 }, //回复数量
     status: { type: Number, default: status.DRAFT }// 状态,
 });
+//数据验证
 
+Topic.TITLE_MIN_LENGTH = 10;
+Topic.schema.path('title').validate(function (value) {
+    return value && value.length >= Topic.TITLE_MIN_LENGTH;
+}, '标题不能少于 ' + Topic.TITLE_MIN_LENGTH + ' 个字符');
+
+//新建一个 topic
 Topic.new = function (author, callback) {
     var self = Topic;
     self.findOne({ status: status.DRAFT }, function (err, foundTopic) {
@@ -41,6 +48,7 @@ Topic.new = function (author, callback) {
     });
 };
 
+//获取一个 topic
 Topic.get = function (id, callback) {
     var self = Topic;
     self.findById(id)
