@@ -16,9 +16,10 @@ SignUpController.prototype.submit = function () {
     var self = this;
     var userInfo = self.getUserInfo();
     User.signUp(userInfo, function (err, user) {
+        var status = err == null;
         self.render('signup.html', {
-            status: err == null,
-            message: err,
+            status: status,
+            message: status ? "注册成功" : err,
             user: user || userInfo
         });
     });

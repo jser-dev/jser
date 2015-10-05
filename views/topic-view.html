@@ -41,15 +41,13 @@
                  <input type="submit" value="提交评论">
             </p>
     </form>
+    <script src="/mditor/build/js/mditor.min.js"></script>
+    <script>
+        var mditor = new Mditor("#editor");
+    </script>
     <% }else{ %>
         <div class="panel-footer">
             <a href="/signin">登录</a>后可以回复
         </div>
     <% } %>
 </div>
-
-<script src="/mditor/build/js/mditor.min.js"></script>
-<script>
-    var mditor = new Mditor("#editor");
-</script>
-
