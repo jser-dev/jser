@@ -35,7 +35,7 @@
     <% if(this.user){ %>
     <form class="panel-footer" action="/topic/<%= this.id %>/comment" method="post">
             <p class="form-row">
-                <textarea name="content" id="editor" placeholder="内容..."></textarea>
+                <textarea name="content" id="editor" class="editor" placeholder="内容..."></textarea>
             </p>
             <p class="form-row align-right" style="margin-bottom:0px;">
                  <input type="submit" value="提交评论">
