@@ -75,7 +75,7 @@ User.oAuth = function (user, callback) {
 User.signUp = function (user, callback) {
     var self = this;
     user.avatar = user.avatar || self.getAvatar();
-    if (if (user.email == '' || user.name == '' || user.password == '') {
+    if (user.email == '' || user.name == '' || user.password == '') {
         return callback('用户信息不合法');
     }
     user.password = utils.hashDigest(user.password);

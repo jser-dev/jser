@@ -19,6 +19,9 @@ TopicViewController.prototype.init = function () {
 	var task = new Task();
 	task.add('topic', function (done) {
 		Topic.get(self.topicId, function (err, topic) {
+			if (err) {
+				return self.context.error(err);
+			}
 			self.topic = topic;
 			topic.read++;
 			topic.save();
