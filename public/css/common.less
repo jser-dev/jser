@@ -284,15 +284,27 @@ button:hover{
 }
 .form-row input[type="text"],
 .form-row input[type="password"],
-.form-row input[type="email"]{
+.form-row input[type="email"],
+.form-row input[type="file"],
+.form-row input[type="number"]{
+  display: inline-block;
   width: 100%;
   max-width: 300px;
 }
 
-.form-row.mwf input[type="text"],
-.form-row.mwf input[type="password"],
-.form-row.mwf input[type="email"]{
-  max-width: 100%;
+@media (max-width: 767px){
+  .form-row input[type="text"],
+  .form-row input[type="password"],
+  .form-row input[type="email"],
+  .form-row input[type="file"],
+  .form-row input[type="number"]{
+    display: block;
+    max-width: 100%;
+  }
+}
+
+input[type="file"]{
+  border: 1px #ddd solid;
 }
 
 .align-right{

@@ -51,11 +51,29 @@ Topic.new = function (author, callback) {
 //获取一个 topic
 Topic.get = function (id, callback) {
     var self = Topic;
-    self.findById(id)
-        .populate('author')
-        .populate('lastReplayAuthor')
-        .exec(callback);
-}
+    var task = new Task();
+    task.add('topic', function (done) {
+        self.findById(id)
+            .populate('author')
+            .populate('lastReplayAuthor')
+            .exec(function (err, topic) {
+                if (err) {
+                    callback(err);
+                } else {
+                    done(topic);
+                }
+            });
+    });
+    task.add('comments', function (done) {
+        var Comment = require('./comment');
+        done();
+    });
+    task.end(function (rs) {
+        var topic = rs.topic;
+        topic.comments = rs.comments;
+        callback(null, topic);
+    });
+};
 
 Topic.PAGE_SITE = 20;
 
@@ -69,7 +87,7 @@ Topic._options2Where = function (options) {
             type: options.type
         };
     return where;
-}
+};
 
 //加载所有话题
 Topic.getList = function (options, callback) {
