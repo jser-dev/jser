@@ -49,7 +49,9 @@
                     </span>
                 </div>
                 <div class="media-right">
-                    <span class="badge"><%= item.replay %>/<%= item.read %></span>
+                    <a href="/topic/<%= item.id %>#comments">
+                        <span class="badge"><%= item.replay %>/<%= item.read %></span>
+                    </a>
                 </div>
             </li>
             <% }.bind(this)); %>

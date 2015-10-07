@@ -25,7 +25,10 @@ TopicViewController.prototype.init = function () {
 			self.topic = topic;
 			topic.read++;
 			topic.save();
-			topic.html = self.mdParser.parse(topic.content);
+			topic.html = topic.html || self.mdParser.parse(topic.content);
+			topic.comments.forEach(function (comment) {
+				comment.html = comment.html || self.mdParser.parse(comment.content);
+			});
 			done();
 		});
 	});
@@ -57,17 +60,14 @@ TopicViewController.prototype.comment = function () {
 		if (err) {
 			return self.context.error(err);
 		}
+		self.topic.replay++;
 		self.topic.lastReplayAt = comment.updateAt;
 		self.topic.lastReplayAuthor = self.context.user;
 		self.topic.save(function (err) {
 			if (err) {
 				return self.context.error(err);
 			}
-			self.render("topic-view.html", {
-				id: self.topicId,
-				topic: self.topic,
-				user: self.context.user
-			});
+			self.context.redirect("/topic/" + self.topicId + '#' + comment.id);
 		});
 	});
 };

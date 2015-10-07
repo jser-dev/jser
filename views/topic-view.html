@@ -19,7 +19,7 @@
                 <h4 class="media-heading">
                     <%= this.topic.title %>
                 </h4>
-                <span class="topic-info">
+                <span>
                     <a href="/user/<%= this.topic.author.id %>"><%= this.topic.author.name %></a> 
                     发布于 <%= $.timeago(this.topic.createAt,"yyyy-MM-dd hh:mm") %>
                 </span>
@@ -29,24 +29,66 @@
             </div>
         </div>
     </div>
-    <div class="panel-body markdown-body">
+    <div class="panel-body">
+        <div class="markdown-body">
         <%= this.topic.html %>
+        </div>  
+    </div>
+</div>
+
+<a id="comments" class="anchor"></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        回复(<%= this.topic.comments.length %>)
+    </div>
+    <div class="panel-body">
+        <ul class="media-list comment-list">
+        <% $.each(this.topic.comments,function(i,item){ %>
+        <li class="media">
+            <a id="<%= item.id %>" class="anchor"></a>
+            <a class="media-left" href="/user/<%= item.author.id %>">
+                <img class="media-object avatar" src="<%= item.author.avatar %>" alt="<%= item.author.name %>">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">               
+                    <a href="/user/<%= item.author.id %>">
+                        <%= item.author.name %>
+                    </a>
+                     - <%= i+1 %>楼 -   
+                    <span title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
+                        <%= $.timeago(item.createAt) %>
+                    </span> 
+                </h4>
+                <span class="comment-info">
+                    <%= item.html %>
+                </span>
+            </div>
+        </li>
+        <% }.bind(this)); %>
+    </ul> 
+    </div>
+</div>
+    
+    
+<div class="panel panel-default">
+    <div class="panel-heading">
+        添加评论
     </div>
     <% if(this.user){ %>
-    <form class="panel-footer" action="/topic/<%= this.id %>/comment" method="post">
-            <p class="form-row">
-                <textarea name="content" id="editor" class="editor" placeholder="内容..."></textarea>
-            </p>
-            <p class="form-row align-right" style="margin-bottom:0px;">
-                 <input type="submit" value="提交评论">
-            </p>
-    </form>
-    <script src="/mditor/build/js/mditor.min.js"></script>
-    <script>
-        var mditor = new Mditor("#editor");
-    </script>
+        <form class="panel-body" action="/topic/<%= this.id %>/comment" method="post">
+                <p class="form-row">
+                    <textarea name="content" id="editor" class="editor" placeholder="内容..."></textarea>
+                </p>
+                <p class="form-row align-right" style="margin-bottom:0px;">
+                    <input type="submit" value="提交评论">
+                </p>
+        </form>
+        <script src="/mditor/build/js/mditor.min.js"></script>
+        <script>
+            var mditor = new Mditor("#editor");
+        </script>
     <% }else{ %>
-        <div class="panel-footer">
+        <div class="panel-body">
             <a href="/signin">登录</a>后可以回复
         </div>
     <% } %>

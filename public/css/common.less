@@ -198,18 +198,21 @@ body {
   color:#888;
 }
 
-.topic-list li{
+.topic-list li,
+.comment-list li{
   margin: 0px;
   padding: 10px 0px;
   border-bottom: 1px solid #F0F0F0;
 }
 
-.topic-list li:last-child{
+.topic-list li:last-child,
+.comment-list li:last-child{
   padding-bottom: 0px;
   border-bottom: none;
 }
 
-.topic-list li:first-child{
+.topic-list li:first-child,
+.comment-list li:first-child{
   padding-top: 0px;
 }
 
@@ -241,6 +244,16 @@ body {
 .topic-view .panel-heading .topic-info{
   font-size: 14px;
   color:#888;
+}
+
+.comment-list li .avatar{
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+}
+.comment-list li .media-heading{
+    font-size: 14px !important;
+    color:#888;
 }
 
 .pagination{

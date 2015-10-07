@@ -49,7 +49,13 @@ Topic.get = function (id, callback) {
             });
     });
     task.add('comments', function (done) {
-        done();
+        Comment.getListByTopicId(id, function (err, comments) {
+            if (err) {
+                callback(err);
+            } else {
+                done(comments);
+            }
+        })
     });
     task.end(function (rs) {
         var topic = rs.topic;
