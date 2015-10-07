@@ -41,7 +41,7 @@
                     <% if(user){ %>
                     <li>
                         <a href="javascript:;" class="dropdown-toggle user-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <%= user.name||user.email %>
+                          <img class="navbar-avatar" src="<%= user.avatar %>"/><%= user.name||user.email %>
                         </a>
                         <ul class="dropdown-menu user-menu-ul">
                             <li><a href="/profile">个人中心</a></li>
