@@ -2,6 +2,7 @@
 
 var db = require("../common/db");
 var utils = require("../common/utils");
+var status = require("./status");
 
 //定义用户模型
 var User = module.exports = db.model('User', {
@@ -11,7 +12,8 @@ var User = module.exports = db.model('User', {
     avatar: { type: String, default: '', required: true }, //头像 
     integral: { type: Number, default: 0 }, //积分,
     signUpAt: { type: Date, default: Date.now },//注册时间
-    role: [{ type: String, default: '' }]
+    role: [{ type: String, default: '' }],
+    status: { type: Number, default: status.NORMAL }// 状态
 }); 
 
 //数据验证
