@@ -1,4 +1,4 @@
-#JSER Open Source
+# JSER Open Source
 JSER 是一个自由的社区软件，采用宽松的 MIT 协议开源。
 
 # 工具与环境

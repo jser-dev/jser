@@ -7,12 +7,12 @@ var Comment = require('./comment');
 
 //定义话题模型
 var Topic = module.exports = define.Topic;
-//数据验证
 
-Topic.TITLE_MIN_LENGTH = 10;
-Topic.schema.path('title').validate(function (value) {
-    return value && value.length >= Topic.TITLE_MIN_LENGTH;
-}, '标题不能少于 ' + Topic.TITLE_MIN_LENGTH + ' 个字符');
+//数据验证
+// Topic.TITLE_MIN_LENGTH = 10;
+// Topic.schema.path('title').validate(function (value) {
+//     return value && value.length >= Topic.TITLE_MIN_LENGTH;
+// }, '标题不能少于 ' + Topic.TITLE_MIN_LENGTH + ' 个字符');
 
 //新建一个 topic
 Topic.new = function (author, callback) {
@@ -25,6 +25,8 @@ Topic.new = function (author, callback) {
             return callback(null, foundTopic);
         }
         var topic = new Topic();
+        topic.title = author.name + '的新话题';
+        topic.content = "";
         topic.author = author;
         topic.status = status.DRAFT;
         topic.datetime = new Date();

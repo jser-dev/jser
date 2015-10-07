@@ -27,7 +27,7 @@ var User = self.User = db.model('User', {
 //定义话题模型
 var Topic = self.Topic = db.model('Topic', {
     title: { type: String, default: '', required: true }, //标题
-    content: { type: String, default: '', required: true }, //内容
+    content: { type: String, default: '' }, //内容
     type: [{ type: String, default: '' }], //类型
     author: { type: db.types.ObjectId, ref: User.schema.name, required: true }, //作者
     lastReplayAuthor: { type: db.types.ObjectId, ref: User.schema.name }, //回复数量
