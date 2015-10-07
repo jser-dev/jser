@@ -1,20 +1,10 @@
 "use strict";
 
-var db = require("../common/db");
 var utils = require("../common/utils");
-var status = require("./status");
+var define = require("./define");
 
 //定义用户模型
-var User = module.exports = db.model('User', {
-    email: { type: String, unique: true, required: true }, // email
-    password: { type: String, default: '', required: true }, //密码
-    name: { type: String, unique: true, required: true }, //名字
-    avatar: { type: String, default: '', required: true }, //头像 
-    integral: { type: Number, default: 0 }, //积分,
-    signUpAt: { type: Date, default: Date.now },//注册时间
-    role: [{ type: String, default: '' }],
-    status: { type: Number, default: status.NORMAL }// 状态
-}); 
+var User = module.exports = define.User;
 
 //数据验证
 User.PWD_MIN_LENGTH = 6;

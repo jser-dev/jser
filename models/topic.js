@@ -1,28 +1,12 @@
 "use strict";
 
-var db = require("../common/db");
 var Task = nokit.Task;
+var define = require('./define');
 var status = require('./status');
-var User = require('./user');
+var Comment = require('./comment');
 
 //定义话题模型
-var Topic = module.exports = db.model('Topic', {
-    title: { type: String, default: '', required: true }, //标题
-    content: { type: String, default: '', required: true }, //内容
-    type: [{ type: String, default: '' }], //类型
-    author: { type: db.types.ObjectId, ref: User.schema.name, required: true }, //作者
-    lastReplayAuthor: { type: db.types.ObjectId, ref: User.schema.name }, //回复数量
-    tags: [{ type: String, default: '' }], //标签,
-    createAt: { type: Date, default: Date.now }, //创建时间
-    updateAt: { type: Date, default: Date.now }, //更新时间
-    lastReplayAt: { type: Date, default: Date.now }, //最后回复时间
-    like: { type: Number, default: 0 }, //“赞” 的数量 
-    dislike: { type: Number, default: 0 }, //"踩" 的数量
-    top: { type: Number, default: 0 }, //置顶, 0: 不置顶，>0: 置顶（值为置顶权重）
-    read: { type: Number, default: 0 }, //阅读数量
-    replay: { type: Number, default: 0 }, //回复数量
-    status: { type: Number, default: status.DRAFT }// 状态,
-});
+var Topic = module.exports = define.Topic;
 //数据验证
 
 Topic.TITLE_MIN_LENGTH = 10;
@@ -65,7 +49,6 @@ Topic.get = function (id, callback) {
             });
     });
     task.add('comments', function (done) {
-        var Comment = require('./comment');
         done();
     });
     task.end(function (rs) {
