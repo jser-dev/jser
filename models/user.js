@@ -86,7 +86,7 @@ User.signUp = function (user, callback) {
     if (user.email == '' ||
         user.name == '' ||
         user.password == '' ||
-        user.passowrd.length < User.PWD_MIN_LENGTH) {
+        user.password.length < User.PWD_MIN_LENGTH) {
         return callback('用户信息不合法');
     }
     user.password = utils.hashDigest(user.password);
