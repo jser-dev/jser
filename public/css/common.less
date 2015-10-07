@@ -68,6 +68,11 @@ body {
   border-radius: 3px;
 }
 
+.navbar-form{
+  box-shadow: none;
+  -webkit-box-shadow:none;
+}
+
 .form-control{
     background-color: #E1EAF2;
     background-image: none;
@@ -85,6 +90,27 @@ body {
 .navbar-default .navbar-nav>.open>a:hover{
   color: #fff;
   background-color: rgb(7, 103, 200);
+}
+
+.navbar-default .navbar-toggle,
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:active{
+  border: none;
+  background-color: transparent;
+  padding: 7px 8px;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+.navbar-toggle .icon-bar+.icon-bar {
+    margin-top: 7px;
+}
+.navbar-default .navbar-toggle .icon-bar{
+  height: 1px;
+  width: 24px;
+  background-color: #ddd;
+}
+.navbar-default [aria-expanded="true"] .icon-bar{
+  background-color: #fff;
 }
 
 .user-menu-btn,
@@ -342,6 +368,8 @@ input[type="file"]{
 .input-block{
   display: block;
   width: 100% !important;
+  max-width: 100%;
+  min-width: 100%;
 }
 
 .profile-avatar{
