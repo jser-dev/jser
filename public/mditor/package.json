@@ -1,6 +1,6 @@
 {
   "name": "mditor",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器",
   "main": "./lib/index.js",
   "scripts": {
@@ -49,8 +49,8 @@
   },
   "readme": "## 只求极致\n\n[ **M** ] arkdown + E [ **ditor** ] = **Mditor**    \n\n[![version](https://badge.fury.io/js/mditor.svg)](http://badge.fury.io/js/mditor)  \n\nMditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已...  \n\n体验: \n[在线 demo](http://houfeng.net/mditor/demo/index.html)  \n  \n## 浏览器端\n\n##### 第一步:\n\n引入 Mditor 样式文件  \n```html\n<link rel=\"stylesheet\" href=\"../build/css/mditor.min.css\" />\n```\n\n引用 Mditor 脚本文件\n```html\n<script src=\"../build/js/mditor.min.js\"></script>\n```\n\n##### 第二步:\n\n添加 textarea 元素\n```html\n<textarea name=\"editor\" id=\"editor\">\n```\n\n创建 Mditor 实例\n```javascript\nvar mditor = new Mditor(\"#editor\",{\n\theight:300,\n\tfixedHeight:true\n});\n```\n\n## 服务器端\n\n通过 npm 安装\n```sh\nnpm install mditor -save\n```\n\n在服务端解析\n```javascript\nvar mditor = require(\"mditor\");\nvar parser = mditor.Parser();\nvar html = parser.parse(\"** Hello mditor! **\");\n```\n\n## 近时规划\n1. 公开扩展方法及相关 API\n2. 更新 README.md 增加完整 API 说明\n2. 国际化支持\n3. 兼容性测试",
   "readmeFilename": "README.md",
-  "gitHead": "73302f17dcbc1f1b92b8121da96c8bf6d9e34c92",
-  "_id": "mditor@0.0.9",
-  "_shasum": "c03792098a0503ed0bea9fbf68a19713d9844efc",
-  "_from": "mditor@*"
+  "gitHead": "b863107a06d4426dfcf94c9d2630b23b3ee0173a",
+  "_id": "mditor@0.1.0",
+  "_shasum": "21825d87037135454073652c2f14cd9e9cd33d10",
+  "_from": "mditor@>=0.1.0 <0.2.0"
 }
