@@ -17,7 +17,7 @@ var Topic = module.exports = define.Topic;
 //新建一个 topic
 Topic.new = function (author, callback) {
     var self = Topic;
-    self.findOne({ status: status.DRAFT }, function (err, foundTopic) {
+    self.findOne({ "status": status.DRAFT, "author": author.id }, function (err, foundTopic) {
         if (err) {
             return callback(err);
         }

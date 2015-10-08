@@ -29,6 +29,7 @@ self.hashDigest = function (value) {
  * 解析 markdown
  **/
 self.md2html = function (md) {
+	if (!md) return md;
 	self._mdParser = self._mdParser || new Mditor.Parser();
 	return self._mdParser.parse(md);
 }
