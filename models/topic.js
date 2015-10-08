@@ -66,8 +66,6 @@ Topic.get = function (id, callback) {
     });
 };
 
-Topic.PAGE_SITE = 20;
-
 Topic._options2Where = function (options) {
     var self = Topic;
     var where = (!options.type || options.type == 'all') ?
