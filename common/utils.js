@@ -1,4 +1,5 @@
 var crypto = require("crypto");
+var Mditor = require('mditor');
 
 var self = module.exports = (nokit.utils || {});
 
@@ -12,7 +13,7 @@ self.random = function (begin, end) {
 	var range = end - begin;
 	var num = Math.random() * range + begin;
 	return parseInt(num);
-}
+};
 
 /**
  * 对指定字符串进行 sha1 
@@ -22,4 +23,12 @@ self.hashDigest = function (value) {
 	sha1.update(value);
 	sha1.update(HASH_SLOT);
 	return sha1.digest('hex');
+};
+
+/**
+ * 解析 markdown
+ **/
+self.md2html = function (md) {
+	self._mdParser = self._mdParser || new Mditor.Parser();
+	return self._mdParser.parse(md);
 }

@@ -2,6 +2,7 @@
 
 var Topic = require('../models/topic');
 var status = require('../models/status');
+var utils = require('../common/utils');
 
 /**
  * 话是控制器
@@ -59,6 +60,7 @@ TopicEditController.prototype.submit = function () {
         topic.status = status.PUBLISH;
         topic.title = self.context.data('title');
         topic.content = self.context.data('content');
+        topic.html = utils.md2html(topic.content);
         topic.type = self.context.data('type');
         topic.save(function (err) {
             if (err && err.errors && err.errors.title) {

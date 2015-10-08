@@ -2,7 +2,7 @@
 
 var Topic = require('../models/topic');
 var Comment = require('../models/comment');
-var Mditor = require('mditor');
+var utils = require('../common/utils');
 var Task = nokit.Task;
 
 /**
@@ -10,7 +10,6 @@ var Task = nokit.Task;
  **/
 var TopicViewController = module.exports = function () {
 	var self = this;
-	self.mdParser = new Mditor.Parser({});
 };
 
 TopicViewController.prototype.init = function () {
@@ -25,9 +24,9 @@ TopicViewController.prototype.init = function () {
 			self.topic = topic;
 			topic.read++;
 			topic.save();
-			topic.html = topic.html || self.mdParser.parse(topic.content);
+			topic.html = topic.html || utils.md2html(topic.content);
 			topic.comments.forEach(function (comment) {
-				comment.html = comment.html || self.mdParser.parse(comment.content);
+				comment.html = comment.html || utils.md2html(comment.content);
 			});
 			done();
 		});
@@ -54,6 +53,7 @@ TopicViewController.prototype.comment = function () {
 	var content = self.context.data('content');
 	var comment = new Comment();
 	comment.content = content;
+	comment.html = utils.md2html(comment.content);
 	comment.author = self.context.user;
 	comment.topic = self.topic;
 	comment.save(function (err) {
