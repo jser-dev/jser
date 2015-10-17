@@ -2,8 +2,20 @@ var $ = require('jquery');
 var Parser = require('../lib/parser');
 var Toolbar = require('./toolbar');
 var Editor = require('./editor');
+var Key = require('./key');
 
+//常量
 var FULL_SCREEN_CORRECT = 16;
+var UPDATE_VIEWER_DELAY = 20;
+
+//全局变量 -> 模块局部变量
+var win = window;
+var doc = document;
+var body = doc.body;
+
+//shim
+doc.exitFullscreen = doc.exitFullscreen || doc.webkitExitFullscreen;
+body.requestFullscreen = body.requestFullscreen || body.webkitRequestFullscreen;
 
 /**
  * 定义 Mditor 类型
@@ -13,6 +25,7 @@ var Mditor = window.Mditor = module.exports = function (editor, options) {
 	if (!editor) {
 		throw "must specify a textarea.";
 	}
+	options = options || {};
 	self._init();
 	self.ui = {};
 	self.ui.editor = $(editor);
@@ -30,6 +43,8 @@ Mditor.prototype._init = function () {
 	var self = this;
 	self.platform = navigator.platform.toLowerCase();
 	self.EOL = self.platform == 'win32' ? '\r\n' : '\n';
+	self.CMD = self.platform.indexOf('mac') > -1 ? 'command' : 'ctrl';
+	self.INDENT = '\t';
 	return self;
 };
 
@@ -77,7 +92,7 @@ Mditor.prototype._create = function () {
 	ui.body.before(ui.head);
 	ui.toolbar = $('<div class="toolbar"></div>');
 	ui.head.append(ui.toolbar);
-	ui.control = $('<div class="control"><i data-cmd="togglePreview" title="预览" class="fa fa-columns"></i><i data-cmd="toggleFullScreen" title="全屏" class="fa fa-arrows-alt"></i></div>');
+	ui.control = $('<div class="control"></div>');
 	ui.head.append(ui.control);
 	ui.viewer = $('<div class="viewer"></div>');
 	ui.body.append(ui.viewer);
@@ -93,6 +108,7 @@ Mditor.prototype._create = function () {
  **/
 Mditor.prototype._initComponent = function () {
 	var self = this;
+	self.key = new Key(self);
 	self.editor = new Editor(self);
 	self.toolBar = new Toolbar(self);
 	self.parser = new Parser(self);
@@ -105,7 +121,6 @@ Mditor.prototype._initComponent = function () {
 Mditor.prototype.isPreview = function () {
 	var self = this;
 	return self.ui.wraper.hasClass("preview");
-	return self;
 };
 
 /**
@@ -160,8 +175,8 @@ Mditor.prototype.openFullScreen = function (useH5) {
 	//记录旧高度并设定适应全屏的高度
 	self._lastStyle = self.ui.editor.attr('style');
 	self._calcAutoHeight();
-	if (useH5 || self.options.useH5FullScreen) {
-		document.body.webkitRequestFullscreen();
+	if ((useH5 || self.options.useH5FullScreen) && body.requestFullscreen) {
+		body.requestFullscreen();
 	}
 	return self;
 };
@@ -171,8 +186,8 @@ Mditor.prototype.openFullScreen = function (useH5) {
  **/
 Mditor.prototype.closeFullScreen = function (useH5) {
 	var self = this;
-	if (useH5 || self.options.useH5FullScreen) {
-		document.webkitExitFullscreen();
+	if ((useH5 || self.options.useH5FullScreen) && doc.webkitExitFullscreen) {
+		doc.webkitExitFullscreen();
 	}
 	self.ui.wraper.removeClass("fullscreen");
 	if (self._lastStyle) {
@@ -362,10 +377,43 @@ Mditor.prototype._calcScroll = function () {
  **/
 Mditor.prototype._initCommands = function () {
 	var self = this;
-	self.cmd = {
-		"toggleFullScreen": self.toggleFullScreen,
-		"togglePreview": self.togglePreview
-	};
+	for (var name in self) {
+		if (typeof (self[name]) == 'function' && name[0] != '_') {
+			self.addCommand(name, self[name]);
+		}
+	}
+	return self;
+};
+
+/**
+ * 添加一个命令
+ **/
+Mditor.prototype.addCommand = function (name, handler) {
+	var self = this;
+	if (!name || !handler) return;
+	self.cmd = self.cmd || {};
+	self.cmd[name] = handler.bind(self);
+	return self;
+};
+
+/**
+ * 移除一个命令
+ **/
+Mditor.prototype.removeCommand = function (name) {
+	var self = this;
+	self.cmd = self.cmd || {};
+	self.cmd[name] = null;
+	delete self.cmd[name];
+	return self;
+};
+
+Mditor.prototype.execCommand = function (name, event) {
+	var self = this;
+	event = event || {};
+	event.mditor = self;
+	event.toolbar = self.toolbar;
+	event.editor = self.editor;
+	self.cmd[name].call(self, event);
 	return self;
 };
 
@@ -378,10 +426,7 @@ Mditor.prototype._bindCommands = function () {
 		var btn = $(this);
 		var cmdName = btn.attr('data-cmd');
 		if (cmdName && self.cmd[cmdName]) {
-			event.mditor = self;
-			event.toolbar = self.toolbar;
-			event.editor = self.editor;
-			self.cmd[cmdName].call(self, event, self);
+			self.execCommand(cmdName, event);
 			self.focus();
 		} else {
 			throw 'command "' + cmdName + '" not found.';
@@ -390,9 +435,24 @@ Mditor.prototype._bindCommands = function () {
 	return self;
 };
 
+Mditor.prototype._clearUpdateViewerTimer = function () {
+	var self = this;
+	if (self._updateViewerTimer) {
+		clearTimeout(self._updateViewerTimer);
+	}
+	self._updateViewerTimer = null;
+};
+
 Mditor.prototype._updateViewer = function () {
 	var self = this;
-	self.ui.viewer.html(self.getHTML());
+	if (self._updateViewerTimer) {
+		self._clearUpdateViewerTimer();
+	}
+	self._updateViewerTimer = setTimeout(function () {
+		self.ui.viewer.html(self.getHTML());
+		self._clearUpdateViewerTimer();
+		//console.log('preview');
+	}, UPDATE_VIEWER_DELAY);
 	return self;
 };
 
@@ -447,7 +507,7 @@ Mditor.prototype._removeActiveClass = function () {
  **/
 Mditor.prototype.getValue = function () {
 	var self = this;
-	return self.ui.editor.val();
+	return self.editor.getValue();
 };
 
 /**
@@ -455,7 +515,7 @@ Mditor.prototype.getValue = function () {
  **/
 Mditor.prototype.setValue = function (value) {
 	var self = this;
-	self.ui.editor.val(value);
+	self.editor.setValue(value);
 	self._updateViewer();
 	self._calcAutoHeight();
 	return this;

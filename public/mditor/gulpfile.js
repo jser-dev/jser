@@ -9,6 +9,7 @@ var replace = require('gulp-replace');
 var header = require('gulp-header');
 var uglify = require("gulp-uglify");
 var minifycss = require('gulp-minify-css');
+var jshint = require('gulp-jshint');
 var gzip = require('gulp-gzip');
 var pkg = require("./package.json");
 
@@ -34,6 +35,7 @@ gulp.task('browserify', function () {
 		.pipe(source(pkg.name + '.js'))
 		.pipe(buffer())
 		.pipe(replace("{version}", pkg.version))
+		.pipe(replace("{homepage}", pkg.homepage))
 		.pipe(header(banner, pkg))
 		.pipe(gulp.dest('./build/js/'))
 		.pipe(uglify({
@@ -71,6 +73,12 @@ gulp.task('css', function () {
 gulp.task('font', function () {
 	gulp.src(["./node_modules/font-awesome/fonts/*.*"])
 		.pipe(gulp.dest("./build/fonts/"));
+});
+
+gulp.task('lint', function () {
+	return gulp.src(['./lib/*.js', './client/*.js'])
+		.pipe(jshint())
+		.pipe(jshint.reporter('default'));
 });
 
 gulp.task('build', ["browserify", "css", "font"]);
