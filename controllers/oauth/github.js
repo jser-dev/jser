@@ -23,7 +23,7 @@ GitHubController.prototype.index = function () {
     var self = this;
     var query_args = [];
     var state = nokit.utils.newGuid();
-    self.context.session.add(OAUTH_STATE_SESSION_KEY, state, function () {
+    self.context.session.set(OAUTH_STATE_SESSION_KEY, state, function () {
         query_args.push("client_id=" + self.configs.client_id);
         query_args.push("scope=" + self.configs.scope);
         query_args.push("redirect_uri=" + self.configs.redirect_uri);
