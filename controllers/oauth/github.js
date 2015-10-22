@@ -2,6 +2,7 @@
 
 var request = require('request');
 var User = require('../../models/user');
+var utils = require("../../common/utils");
 
 /* global nokit */
 
@@ -73,7 +74,7 @@ GitHubController.prototype.callback = function () {
                 user.email = userInfo.email;
                 user.name = userInfo.login || userInfo.email;
                 user.avatar = userInfo.avatar_url;
-                user.password = '';
+                user.password = utils.newGuid();
                 User.oAuth(user, function (err, authedUser) {
                     if (err) {
                         return self.context.error(err);
