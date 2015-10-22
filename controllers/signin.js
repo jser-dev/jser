@@ -21,7 +21,7 @@ SignInController.prototype.submit = function () {
                 user: userInfo
             });
         } else {
-            self.context.session.add('user', user, function () {
+            self.context.session.set('user', user, function () {
                 self.context.redirect("/");
             });
         }
