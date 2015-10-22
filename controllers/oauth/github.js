@@ -79,7 +79,7 @@ GitHubController.prototype.callback = function () {
                     if (err) {
                         return self.context.error(err);
                     }
-                    self.context.session.add('user', authedUser, function () {
+                    self.context.session.set('user', authedUser, function () {
                         self.context.redirect("/");
                     });
                 });
