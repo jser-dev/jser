@@ -1,6 +1,6 @@
 {
     "debugMode": true,
-    "connectionString": "mongodb://127.0.0.1/jser",
+    "connectionString": "mongodb://jser.cc/jser-dev",
     "handlers": {
         "^/": "$./handlers/mvc"
     },
