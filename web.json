@@ -1,6 +1,6 @@
 {
     "debugMode": true,
-    "connectionString": "mongodb://jser.cc/jser-dev",
+    "connectionString": "mongodb://localhost/jser",
     "handlers": {
         "^/": "$./handlers/mvc"
     },
@@ -82,6 +82,10 @@
             {
                 "pattern": "/about",
                 "target": "./about.js"
+            },
+            {
+                "pattern": "/api",
+                "target": "./api.js"
             },
             {
                 "pattern": "/oauth/github",

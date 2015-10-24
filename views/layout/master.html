@@ -38,7 +38,8 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav">
-                    <li><a href="/">话题</a></li>
+                    <li><a href="/topic">话题</a></li>
+                    <!--<li><a href="/active">活动</a></li>-->
                     <li><a href="/about">关于</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -85,12 +86,34 @@
                         </ul>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        友情社区
+                    </div>
+                    <div class="panel-body">
+                        <ul class="integral-list">
+                            <li><a href="http://www.cnodejs.org">CNodeJs</a></li>
+                            <li><a href="http://www.segmentfult.org">SegmentFult</a></li>
+                            <li><a href="https://ruby-china.org/">Ruby China</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <footer class="footbar">
         <div class="container">
-            Copyright © 2011-2015 <a href="/">JSER.CC</a>
+           <ul class="footbar-nav">
+               <li><a href="/client">客户端</a></li>
+               <li><a href="/api">API</a></li> 
+               <li><a href="https://github.com/jser-dev">GitHub</a></li>
+               <li><a href="http://weibo.com/jser-dev">微博</a></li>
+               <li><a href="http://twitter.com/jser-dev">Twitter</a></li>
+           </ul>
+           <p class="footbar-info">
+               一个 “纯粹、简单、自由” 的 “JS程序猿” 社区，
+               2015-<%= (new Date()).getFullYear() %> <a href="/">JSER.CC</a>
+           </p> 
         </div>
     </footer>
     <script src="/js/jquery.min.js"></script>
