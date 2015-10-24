@@ -1,5 +1,5 @@
 # JSER Open Source
-JSER 是一个自由的社区软件，采用宽松的 MIT 协议开源。
+JSER 是一个简洁自由的开源社区软件，采用宽松的 MIT 协议开源。
 
 # 工具与环境
 1. 运行环境 Node.js
@@ -15,3 +15,4 @@ JSER 是一个自由的社区软件，采用宽松的 MIT 协议开源。
 6. 利用 VSCode 编辑代码，（当然也可以用任何喜欢的文本编辑工具）
 7. 成为 [jser-dev](https://github.com/jser-dev) 成员，可以直接提交代码
 8. 当然，任何人都可以通过 Pull Request 向 JSER 贡献代码。
+

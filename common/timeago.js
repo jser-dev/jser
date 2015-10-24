@@ -1,8 +1,9 @@
 /* global nokit */
 var timeago = require('timeago-words');
+var utils = require('./utils.js');
 
+//时间显示模块
 module.exports.init = function () {
-
 	timeago.settings.suffixAgo = '';
 	timeago.settings.suffixFromNow = '距现在';
 	timeago.settings.seconds = "刚刚";
@@ -17,6 +18,10 @@ module.exports.init = function () {
 	timeago.settings.year = "1年前";
 	timeago.settings.years = "%d年前";
 
+	/**
+	 * 将 timeago 挂在 utils 上 (utils 的为引用为 nokit.utils 参考 common/utils.js)
+	 * utils 可以在模板中通过 $ 调用
+	 **/
 	nokit.utils.timeago = function (dt) {
 		return timeago(dt);
 	};

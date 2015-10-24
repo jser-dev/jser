@@ -16,11 +16,11 @@ var nokit = require("nokit-runtime");
 var console = nokit.console;
 
 var options = {};
- 
+
 /**
  * 设定应程序的根目录
  */
-options.root = __dirname; 
+options.root = __dirname;
 
 /**
  * 可以这里指定应用绑定的端口
@@ -32,11 +32,13 @@ options.port = 8000;
  * 启动 server
  **/
 var server = new nokit.Server(options);
-server.start(function (err, msg) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log(msg);
-    }
+server.start(function(err, msg) {
+	if (err) {
+		console.log(err);
+	} else {
+		console.log(msg);
+	}
 });
+
+
 
