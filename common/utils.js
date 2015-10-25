@@ -59,12 +59,5 @@ self.timeago = ((function () {
 	};
 })());
 
-/**
- * SEO 需要的的公共 meta 信息
- **/
-self.seo = {
-	"name": configs.name,
-	"author": configs.author,
-	"keywords": configs.keywords,
-	"description": configs.description
-};
+//配置
+self.configs = configs;

@@ -92,9 +92,9 @@
                     </div>
                     <div class="panel-body">
                         <ul class="integral-list">
-                            <li><a href="http://www.cnodejs.org">CNodeJs</a></li>
-                            <li><a href="http://segmentfault.com/">SegmentFault</a></li>
-                            <li><a href="https://ruby-china.org/">Ruby China</a></li>
+                            <% $.each($.configs.links,function(i,item){ %>
+                            <li><a href="<%= item.url %>"><%= item.name %></a></li>
+                            <% }) %>
                         </ul>
                     </div>
                 </div>
@@ -106,13 +106,14 @@
            <ul class="footbar-nav">
                <li><a href="/client">客户端</a></li>
                <li><a href="/api">API</a></li> 
-               <li><a href="https://github.com/jser-dev">GitHub</a></li>
-               <li><a href="http://weibo.com/jser-dev">微博</a></li>
-               <li><a href="http://twitter.com/jser-dev">Twitter</a></li>
+               <% $.each($.configs.footbar.links,function(i,item){ %>
+               <li><a href="<%= item.url %>"><%= item.name %></a></li>
+               <% }) %>
            </ul>
            <p class="footbar-info">
-               一个 “纯粹、简单、自由” 的 “JS程序猿” 社区，
-               2015-<%= (new Date()).getFullYear() %> <a href="/">JSER.CC</a>
+               <%= $.configs.footbar.info %>，
+               <%= $.configs.buildYear %>-<%= (new Date()).getFullYear() %> 
+               <a href="/"><%= $.configs.domain %></a>
            </p> 
         </div>
     </footer>

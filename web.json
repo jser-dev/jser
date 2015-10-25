@@ -1,9 +1,11 @@
 {
     "debugMode": true,
     "name": "JSER 社区",
+    "domain": "JSER.CC",
     "author": "JSER Team",
     "keywords": "jser,社区,javascript,nodejs",
     "description": "JSER 是一个 “纯粹、简单、自由” 的 “JS程序猿” 社区",
+    "buildYear": "2015",
     "connStr": "mongodb://localhost/jser",
     "handlers": {
         "^/": "$./handlers/mvc"
@@ -114,5 +116,36 @@
             "client_id": "ceb6ca9d4988885dca39",
             "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9"
         }
+    },
+    "links": [
+        {
+            "name": "CNodeJs",
+            "url": "http://www.cnodejs.org"
+        },
+        {
+            "name": "SegmentFault",
+            "url": "http://segmentfault.com/"
+        },
+        {
+            "name": "Ruby China",
+            "url": "https://ruby-china.org/"
+        }
+    ],
+    "footbar": {
+        "links": [
+            {
+                "name": "GitHub",
+                "url": "https://github.com/jser-dev"
+            },
+            {
+                "name": "微博",
+                "url": "http://weibo.com/jser-dev"
+            },
+            {
+                "name": "Twitter",
+                "url": "http://twitter.com/jser-dev"
+            }
+        ],
+        "info": "一个 “纯粹、简单、自由” 的 “JS程序猿” 社区"
     }
 }
