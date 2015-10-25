@@ -1,7 +1,10 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title>编辑话题 | JSER</title>
+    <title>编辑话题 | <%= $.seo.name %></title>
+    <meta name="keywords" content="<%= $.seo.keywords %>"/>
+    <meta name="description" content="<%= $.seo.description %>"/>
+    <meta name="author" content="<%= $.seo.author %>"/>
     <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
 <% $.placeEnd() >
 

@@ -1,9 +1,10 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <meta name="description" content="JSER 社区">
-    <meta name="author" content="jser team">
-    <title>话题 | JSER</title>
+    <meta name="keywords" content="<%= $.seo.keywords %>"/>
+    <meta name="description" content="<%= $.seo.description %>"/>
+    <meta name="author" content="<%= $.seo.author %>"/>
+    <title>话题 | <%= $.seo.name %></title>
 <% $.placeEnd() >
 
 <% $.placeBegin("content") %>

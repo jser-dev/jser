@@ -1,6 +1,10 @@
 {
     "debugMode": true,
-    "connectionString": "mongodb://localhost/jser",
+    "name": "JSER 社区",
+    "author": "JSER Team",
+    "keywords": "jser,社区,javascript,nodejs",
+    "description": "JSER 是一个 “纯粹、简单、自由” 的 “JS程序猿” 社区",
+    "connStr": "mongodb://localhost/jser",
     "handlers": {
         "^/": "$./handlers/mvc"
     },

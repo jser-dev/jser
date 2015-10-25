@@ -2,7 +2,7 @@ var configs = require("../web.json");
 var mg = require("mongoose");
 
 //与数据库建立连接
-mg.connect(configs.connectionString);
+mg.connect(configs.connStr);
 
 var self = module.exports;
 

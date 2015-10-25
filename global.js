@@ -1,9 +1,14 @@
-var timeago = require('./common/timeago');
-
+/**
+ * 全局应用程序类
+ **/
 var Global = module.exports = function () { };
 
+/**
+ * 在 global 中 require utils，以确保 utils 一些初始化能够完成
+ **/
+var utils = require('./common/utils');
+
 Global.prototype.onStart = function (server, done) {
-    timeago.init();
     done();
 };
 

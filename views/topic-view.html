@@ -1,9 +1,10 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <meta name="description" content="<%= this.topic.title %>">
+    <meta name="keywords" content="<%= this.topic.tags %>,<%= $.seo.keywords %>"/>
+    <meta name="description" content="<%= this.topic.title %> | <%= $.seo.description %>"/>
     <meta name="author" content="<%= this.topic.author.name %>">
-    <title><%= this.topic.title %> | JSER</title>
+    <title><%= this.topic.title %> | <%= $.seo.name %></title>
     <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
 <% $.placeEnd() >
 

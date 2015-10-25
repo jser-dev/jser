@@ -1,7 +1,10 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title>关于 | JSER</title>
+    <title>关于 | <%= $.seo.name %></title>
+    <meta name="keywords" content="<%= $.seo.keywords %>"/>
+    <meta name="description" content="<%= $.seo.description %>"/>
+    <meta name="author" content="<%= $.seo.author %>"/>
 <% $.placeEnd() %>
 
 <% $.placeBegin("content") %>
