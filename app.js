@@ -32,13 +32,10 @@ options.port = 8000;
  * 启动 server
  **/
 var server = new nokit.Server(options);
-server.start(function(err, msg) {
+server.start(function (err, msg) {
 	if (err) {
 		console.log(err);
 	} else {
 		console.log(msg);
 	}
 });
-
-
-
