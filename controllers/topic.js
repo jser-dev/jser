@@ -3,7 +3,7 @@
 var Task = nokit.Task;
 var Topic = require('../models/topic');
 
-var PAGE_SIZE = 15;
+var PAGE_SIZE = 12;
 
 /**
  * 话是控制器

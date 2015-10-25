@@ -88,6 +88,10 @@
                 "target": "./api.js"
             },
             {
+                "pattern": "/client",
+                "target": "./client"
+            },
+            {
                 "pattern": "/oauth/github",
                 "target": "./oauth/github.js"
             },
