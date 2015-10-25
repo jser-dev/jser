@@ -147,5 +147,9 @@
             }
         ],
         "info": "一个 “纯粹、简单、自由” 的 “JS程序猿” 社区"
+    },
+    "guardian": {
+        "name": "@Houfeng",
+        "url": "https://github.com/houfeng"
     }
 }
