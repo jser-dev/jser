@@ -51,6 +51,7 @@ User.oAuth = function (user, callback) {
     if (user.email == '') {
         return callback('oAuth 发生了异常，没有可用 email');
     }
+    user.avatar = user.avatar || self.getAvatar();
     self.findOne({ "email": user.email }, function (err, foundUser) {
         if (err) {
             return callback(err);
