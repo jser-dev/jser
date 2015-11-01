@@ -5,14 +5,12 @@ Filter.SIGNED = 'signed';
 
 Filter.prototype.onMvcHandle = function (context, next) {
 	var self = this;
-    context.session.get('user', function (user) {
-		context.user = user;
-		if (!context.user && self.requiredHas(context, Filter.SIGNED)) {
-			context.redirect('/signin');
-		} else {
-			next();
-		}
-	});
+	context.user = context.session.user;
+	if (!context.user && self.requiredHas(context, Filter.SIGNED)) {
+		context.redirect('/signin');
+	} else {
+		next();
+	}
 };
 
 Filter.prototype.requiredHas = function (context, name) {

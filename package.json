@@ -20,7 +20,8 @@
     "mditor": "^0.1.2",
     "mongoose": "^4.2.3",
     "nodemailer": "^1.8.0",
-    "nokit-runtime": "^1.12.2",
+    "nokit-handler-less": "^1.0.0",
+    "nokit-runtime": "^1.12.4",
     "request": "^2.65.0",
     "timeago-words": "^0.0.3"
   }

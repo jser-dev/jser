@@ -8,7 +8,9 @@
     "buildYear": "2015",
     "connStr": "mongodb://localhost/jser",
     "handlers": {
-        "^/": "$./handlers/mvc"
+        "^/": "$./handlers/mvc",
+        ".css$": "nokit-handler-less",
+        ".less$": "nokit-handler-less"
     },
     "filters": {
         "^/": "./filters/required"
