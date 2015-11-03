@@ -21,8 +21,9 @@ SignInController.prototype.submit = function () {
                 user: userInfo
             });
         } else {
-            self.context.session.user = user;
-            self.context.redirect("/");
+            self.context.session.set("user", user, function () {
+                self.context.redirect("/");
+            });
         }
     });
 };

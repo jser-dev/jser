@@ -15,6 +15,7 @@
     "filters": {
         "^/": "./filters/required"
     },
+    "session": {},
     "mvc": {
         "paths": {
             "controller": "./controllers",

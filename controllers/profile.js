@@ -13,6 +13,7 @@ ProfileController.prototype.index = function () {
 
 ProfileController.prototype.signout = function () {
     var self = this;
-    self.context.session.user = null;
-    self.context.redirect("/");
+    self.context.session.remove("user", function () {
+        self.context.redirect("/");
+    });
 };
