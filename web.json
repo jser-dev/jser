@@ -15,7 +15,11 @@
     "filters": {
         "^/": "./filters/required"
     },
-    "session": {},
+    "session": {
+        "provider": "nokit-session-redis",
+        "host": "localhost",
+        "port": 6379
+    },
     "mvc": {
         "paths": {
             "controller": "./controllers",
