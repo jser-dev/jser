@@ -1,5 +1,5 @@
 {
-    "debugMode": true,
+    "showErrorDetail": true,
     "name": "JSER 社区",
     "domain": "JSER.CC",
     "author": "JSER Team",
