@@ -1,4 +1,4 @@
-var configs = require("../web.json");
+var configs = require("../app.json");
 var mg = require("mongoose");
 
 //与数据库建立连接

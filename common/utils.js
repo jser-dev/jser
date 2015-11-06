@@ -1,7 +1,7 @@
 var crypto = require("crypto");
 var Mditor = require('mditor');
 var timeago = require('timeago-words');
-var configs = require('../web.json');
+var configs = require('../app.json');
 
 var self = module.exports = (nokit.utils || {});
 
