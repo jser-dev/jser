@@ -22,7 +22,7 @@
     "nodemailer": "^1.8.0",
     "nokit-handler-less": "^1.0.0",
     "nokit-session-redis": "^1.0.4",
-    "nokitjs": "^1.13.2",
+    "nokitjs": "^1.13.3",
     "request": "^2.65.0",
     "timeago-words": "^0.0.3"
   },
