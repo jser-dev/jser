@@ -34,7 +34,7 @@ self.md2html = function (md) {
 	if (!md) return md;
 	self._mdParser = self._mdParser || new Mditor.Parser();
 	return self._mdParser.parse(md);
-}
+};
 
 /**
  * 将 timeago 挂在 utils 上 (utils 的为引用为 nokit.utils 参考 common/utils.js)
