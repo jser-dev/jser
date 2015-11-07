@@ -1,7 +1,6 @@
 var crypto = require("crypto");
 var Mditor = require('mditor');
 var timeago = require('timeago-words');
-var configs = require('../app.json');
 
 var self = module.exports = (nokit.utils || {});
 
@@ -59,5 +58,10 @@ self.timeago = ((function () {
 	};
 })());
 
-//配置
-self.configs = configs;
+/**
+ * 初始化 utils 的一属性
+ **/
+self.init = function (server) {
+	//配置
+	self.configs = server.configs;
+};

@@ -1,10 +1,13 @@
-var configs = require("../app.json");
 var mg = require("mongoose");
 
-//与数据库建立连接
-mg.connect(configs.connStr);
-
 var self = module.exports;
+
+//建立链接
+self.connect = function (server, callback) {
+	//与数据库建立连接
+	mg.connect(server.configs.connStr);
+	if (callback) callback();
+};
 
 //mongoose 实例
 self.mg = mg;
@@ -13,7 +16,7 @@ self.mg = mg;
 self.types = mg.Schema.Types;
 
 //定义一个模型
-self.model = function(name, schemaObject) {
+self.model = function (name, schemaObject) {
 	if (!schemaObject) {
 		return mg.model(name);
 	} else {
