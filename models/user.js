@@ -101,4 +101,6 @@ User.getUser = function (id, callback) {
     self.findOne({ "id": id }, callback);
 };
 
+
+
 module.exports = User;
