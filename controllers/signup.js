@@ -1,5 +1,3 @@
-"use strict";
-
 var User = require('../models/user');
 
 //定义 controller

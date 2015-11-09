@@ -9,10 +9,16 @@
 
 <% $.placeBegin("content") %>
 
+<% var user = this.user  %>
 <div class="panel panel-default">
     <div class="panel-heading">基本信息</div>
-    <div class="panel-body">
-       
+    <div class="panel-body user-info">
+        <img class="avatar" src="<%= user.avatar %>"/>
+        <ul class="integral-list">
+            <li>名称: <%= user.name %></li>
+            <li>积分: <%= user.integral %></li>
+            <li>注册: <%= $.timeago(user.signUpAt) %></li>
+        </ul>
     </div>
 </div>
 

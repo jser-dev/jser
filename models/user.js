@@ -1,10 +1,8 @@
-"use strict";
-
 var utils = require("../common/utils");
 var define = require("./define");
 
 //定义用户模型
-var User = module.exports = define.User;
+var User = define.User;
 
 //数据验证
 User.PWD_MIN_LENGTH = 6;
@@ -29,7 +27,7 @@ User.getList = function (top, callback) {
 //登录一个用户
 User.signIn = function (user, callback) {
     var self = User;
-    if (user.email == '' || user.password == '') {
+    if (!user.email || !user.password) {
         return callback("用户或者密码错误");
     }
     user.password = utils.hashDigest(user.password);
@@ -48,7 +46,7 @@ User.signIn = function (user, callback) {
 //通过 oauth 认证一个用户
 User.oAuth = function (user, callback) {
     var self = User;
-    if (user.email == '') {
+    if (!user || !user.email) {
         return callback('oAuth 发生了异常，没有可用 email');
     }
     user.avatar = user.avatar || self.getAvatar();
@@ -74,9 +72,9 @@ User.oAuth = function (user, callback) {
 User.signUp = function (user, callback) {
     var self = this;
     user.avatar = user.avatar || self.getAvatar();
-    if (user.email == '' ||
-        user.name == '' ||
-        user.password == '' ||
+    if (!user.email ||
+        !user.name ||
+        !user.password ||
         user.password.length < User.PWD_MIN_LENGTH) {
         return callback('用户信息不合法');
     }
@@ -89,7 +87,18 @@ User.signUp = function (user, callback) {
     });
 };
 
+//生成一个用户头像
 User.getAvatar = function () {
     var index = utils.random(1, 12);
     return "/images/avatar/" + index + ".png";
-}
+};
+
+/**
+ * 获取一个用户
+ **/
+User.getUser = function (id, callback) {
+    var self = this;
+    self.findOne({ "id": id }, callback);
+};
+
+module.exports = User;
