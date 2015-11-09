@@ -1,5 +1,3 @@
-"use strict";
-
 var Task = nokit.Task;
 var Topic = require('../models/topic');
 

@@ -1,5 +1,3 @@
-"use strict";
-
 var Task = nokit.Task;
 var define = require('./define');
 var status = require('./status');
@@ -57,7 +55,7 @@ Topic.get = function (id, callback) {
             } else {
                 done(comments);
             }
-        })
+        });
     });
     task.end(function (rs) {
         var topic = rs.topic;
@@ -96,6 +94,18 @@ Topic.getCount = function (options, callback) {
     var self = Topic;
     var where = self._options2Where(options);
     self.count(where, callback);
+};
+
+Topic.getLastByAuthor = function (options, callback) {
+    var self = Topic;
+    var where = self._options2Where(options);
+    where.author = options.author;
+    self.find(where).sort({ 'top': -1, '_id': -1 })
+        .skip(0)
+        .limit(10)
+        .populate('author')
+        .populate('lastReplayAuthor')
+        .exec(callback);
 };
 
 //加载所有话题类型

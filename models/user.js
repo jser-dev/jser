@@ -98,9 +98,7 @@ User.getAvatar = function () {
  **/
 User.getUser = function (id, callback) {
     var self = this;
-    self.findOne({ "id": id }, callback);
+    self.findById(id, callback);
 };
-
-
 
 module.exports = User;
