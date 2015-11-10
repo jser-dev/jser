@@ -22,7 +22,7 @@
     },
     "session": {
         "provider": "nokit-session-redis",
-        "host": "locahost",
+        "host": "localhost",
         "port": 6379
     },
     "mvc": {
