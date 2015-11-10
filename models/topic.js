@@ -1,3 +1,4 @@
+/* global nokit */
 var Task = nokit.Task;
 var define = require('./define');
 var status = require('./status');
@@ -65,7 +66,6 @@ Topic.get = function (id, callback) {
 };
 
 Topic._options2Where = function (options) {
-    var self = Topic;
     var where = (!options.type || options.type == 'all') ?
         {
             status: options.status || status.PUBLISH
@@ -110,7 +110,6 @@ Topic.getLastByAuthor = function (options, callback) {
 
 //加载所有话题类型
 Topic.loadTypes = function (callback) {
-    var self = Topic;
     callback(null, [
         {
             text: "精华",
@@ -130,4 +129,19 @@ Topic.loadTypes = function (callback) {
             name: "active"
         }
     ]);
+};
+
+/**
+ * 搜索匹配的话题
+ **/
+Topic.search = function (keyword, callback) {
+    var self = this;
+    self.find({
+        "title": { $regex: keyword, $options: 'i' },
+        "status": status.PUBLISH
+    }).sort({ '_id': 1 })
+        .limit(10)
+        .populate('author')
+        .populate('lastReplayAuthor')
+        .exec(callback);
 };

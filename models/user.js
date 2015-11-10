@@ -15,7 +15,7 @@ User.create = function () {
     return new User();
 };
 
-//加载所有用户
+//加载按积分降序排序的 n 个用户
 User.getList = function (top, callback) {
     var self = User;
     self.find({})
@@ -99,6 +99,17 @@ User.getAvatar = function () {
 User.getUser = function (id, callback) {
     var self = this;
     self.findById(id, callback);
+};
+
+/**
+ * 搜索匹配的人员
+ **/
+User.search = function (keyword, callback) {
+    var self = this;
+    self.find({ "name": { $regex: keyword, $options: 'i' } })
+        .sort({ 'integral': -1, '_id': 1 })
+        .limit(10)
+        .exec(callback);
 };
 
 module.exports = User;
