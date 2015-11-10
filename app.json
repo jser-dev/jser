@@ -15,6 +15,11 @@
     "filters": {
         "^/": "./filters/required"
     },
+    "folders": {
+        "public": {
+            "^/mditor": "./node_modules"
+        }
+    },
     "session": {
         "provider": "nokit-session-redis",
         "host": "locahost",
