@@ -17,12 +17,12 @@
     "url": "git://github.com/jser-dev/jser.git"
   },
   "dependencies": {
-    "mditor": "^0.1.2",
-    "mongoose": "^4.2.4",
-    "nodemailer": "^1.8.0",
+    "mditor": "^0.1.4",
+    "mongoose": "^4.2.5",
+    "nodemailer": "^1.9.0",
     "nokit-handler-less": "^1.0.0",
     "nokit-session-redis": "^1.0.4",
-    "nokitjs": "^1.13.5",
+    "nokitjs": "^1.13.6",
     "request": "^2.65.0",
     "timeago-words": "^0.0.3"
   },
