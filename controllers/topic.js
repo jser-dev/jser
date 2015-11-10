@@ -1,3 +1,4 @@
+/* global nokit */
 var Task = nokit.Task;
 var Topic = require('../models/topic');
 
