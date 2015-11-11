@@ -10,9 +10,20 @@
 <% $.placeBegin("content") %>
 
 <div class="panel panel-default">
-    <div class="panel-heading">积分榜 (前1000名)</div>
+    <div class="panel-heading">积分榜 (前<%= this.top %>名)</div>
     <div class="panel-body">
-       ...
+        <% var userList = this.topUserList %>
+        <ul class="integral-list user-search-list">
+            <% $.each(userList,function(i,item){ %>
+            <li>
+                <a href="/user/<%= item.id %>">
+                <img alt="<%= item.name %>" class="avatar" src="<%= item.avatar %>" />
+                <%= item.name %>
+                </a>
+                <span class="pull-right"><%= item.integral %></span>
+            </li>
+            <% }) %>
+        </ul>
     </div>
 </div>
 

@@ -1,9 +1,7 @@
-"use strict";
-
 /**
  * 活动控制器
  **/
-var AboutController = module.exports = function () { };
+var AboutController = function () { };
 
 /**
  * 默认 action
@@ -14,3 +12,5 @@ AboutController.prototype.index = function () {
     self.render("about.html");
 
 };
+
+module.exports = AboutController;
