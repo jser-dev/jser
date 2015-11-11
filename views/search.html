@@ -64,7 +64,7 @@
             <% $.each(this.userList,function(i,item){ %>
             <li>
                 <a href="/user/<%= item.id %>">
-                <img class="avatar" src="<%= item.avatar %>" />
+                <img alt="<%= item.name %>" class="avatar" src="<%= item.avatar %>" />
                 <%= item.name %>
                 </a>
                 <span class="pull-right topic-info">
