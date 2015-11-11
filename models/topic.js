@@ -140,7 +140,7 @@ Topic.search = function (keyword, callback) {
         "title": { $regex: keyword, $options: 'i' },
         "status": status.PUBLISH
     }).sort({ '_id': 1 })
-        .limit(10)
+        .limit(15)
         .populate('author')
         .populate('lastReplayAuthor')
         .exec(callback);
