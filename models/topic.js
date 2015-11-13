@@ -117,16 +117,20 @@ Topic.loadTypes = function (callback) {
             admin: true,
         },
         {
-            text: "分享",
-            name: "share"
-        },
-        {
             text: "问答",
             name: "qa"
         },
         {
+            text: "分享",
+            name: "share"
+        },
+        {
             text: "活动",
             name: "active"
+        },
+        {
+            text: "招聘",
+            name: "job"
         }
     ]);
 };
