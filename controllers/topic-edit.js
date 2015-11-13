@@ -1,5 +1,3 @@
-"use strict";
-
 var Topic = require('../models/topic');
 var status = require('../models/status');
 var utils = require('../common/utils');
