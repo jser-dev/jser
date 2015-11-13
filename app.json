@@ -124,7 +124,7 @@
         "github": {
             "auth_url": "https://github.com/login/oauth/authorize",
             "token_url": "https://github.com/login/oauth/access_token",
-            "redirect_uri": "http://jser.cc/oauth/github/callback",
+            "redirect_uri": "http://jser.cc:8000/oauth/github/callback",
             "user_url": "https://api.github.com/user",
             "client_id": "ceb6ca9d4988885dca39",
             "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9"
