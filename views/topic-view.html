@@ -46,18 +46,18 @@
         </div>
         <% var user = $.controller.context.user  %>
         <% if(user && user._id===this.topic.author.id){ %>
-        <a href="/topic/<%= this.topic.id %>/edit">
+        <a class="linkbtn" href="/topic/<%= this.topic.id %>/edit">
             <i class="fa fa-edit" title="编辑"></i>
         </a>
-        <a id="delete" href="javascript:deleteTopic('<%= this.topic.id %>');">
+        <a class="linkbtn" id="delete" href="javascript:deleteTopic('<%= this.topic.id %>');">
             <i class="fa fa-trash-o" title="删除"></i>
         </a>
         <% } %>
         <% if(user){ %>
-        <a href="/topic/<%= this.topic.id %>/fixed">
+        <a class="linkbtn" href="/topic/<%= this.topic.id %>/fixed">
             <i class="fa fa-thumb-tack" title="置顶"></i
         </a>
-        <a href="/topic/<%= this.topic.id %>/good">
+        <a class="linkbtn" href="/topic/<%= this.topic.id %>/good">
             <i class="fa fa-certificate" title="精华"></i>
         </a>
         <% } %>
