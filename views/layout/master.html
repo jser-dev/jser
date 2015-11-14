@@ -50,9 +50,9 @@
                           <img class="navbar-avatar" src="<%= user.avatar %>"/><%= user.name||user.email %>
                         </a>
                         <ul class="dropdown-menu user-menu-ul">
-                            <li><a href="/profile">个人中心</a></li>
+                            <li><a href="/user/<%= user._id %>">个人中心</a></li>
                             <li><a href="/control-panel">控制面板</a></li>
-                            <li><a href="/profile/signout">退出</a></li>
+                            <li><a href="/profile/signout">注销登录</a></li>
                         </ul>
                     </li>
                     <% }else{ %>

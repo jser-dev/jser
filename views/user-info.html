@@ -11,7 +11,15 @@
 
 <% var user = this.user  %>
 <div class="panel panel-default">
-    <div class="panel-heading">基本信息</div>
+    <div class="panel-heading">
+        基本信息
+        <% var loginUser = $.controller.context.user  %>
+        <% if(loginUser._id==this.user._id){ %>
+        <a class="pull-right" href="/profile">
+            修改...
+        </a>
+        <% } %>
+    </div>
     <div class="panel-body user-info">
         <img class="avatar" src="<%= user.avatar %>"/>
         <ul class="integral-list">
