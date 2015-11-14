@@ -37,10 +37,15 @@
             <i class="fa fa-thumbs-o-up" title="赞的人数">10</i>
             <i class="fa fa-thumbs-o-down" title="踩的人数">2</i>
         </div>
+        <% var user = $.controller.context.user  %>
+        <% if(user){ %>
         <i class="fa fa-edit" title="编辑"></i>
         <i class="fa fa-trash-o" title="删除"></i>
+        <% } %>
+        <% if(user){ %>
         <i class="fa fa-thumb-tack" title="置顶"></i>
         <i class="fa fa-certificate" title="精华"></i>
+        <% } %>
     </div>
 </div>
 
