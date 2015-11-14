@@ -126,7 +126,7 @@ Topic.loadTypes = function (callback) {
         },
         {
             text: "活动",
-            name: "active"
+            name: "event"
         },
         {
             text: "招聘",
