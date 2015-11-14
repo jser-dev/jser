@@ -68,8 +68,7 @@ TopicViewController.prototype.addGood = function () {
 		if (err) {
 			return self.context.error(err);
 		}
-		self.topic.good = true;
-		self.index();
+		self.context.redirect("/topic/" + self.topicId);
 	});
 };
 
@@ -82,8 +81,7 @@ TopicViewController.prototype.removeGood = function () {
 		if (err) {
 			return self.context.error(err);
 		}
-		self.topic.good = false;
-		self.index();
+		self.context.redirect("/topic/" + self.topicId);
 	});
 };
 
