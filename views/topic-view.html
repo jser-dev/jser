@@ -38,13 +38,13 @@
             <i class="fa fa-thumbs-o-down" title="踩的人数">2</i>
         </div>
         <% var user = $.controller.context.user  %>
-        <% if(user && user.id===this.topic.author.id){ %>
-        <i class="fa fa-edit" title="编辑"></i>
-        <i class="fa fa-trash-o" title="删除"></i>
+        <% if(user && user._id===this.topic.author.id){ %>
+        <a href="/topic/edit/<%= this.topic.id %>"><i class="fa fa-edit" title="编辑"></i></a>
+        <a href="/topic/delete/<%= this.topic.id %>"><i class="fa fa-trash-o" title="删除"></i></a>
         <% } %>
         <% if(user){ %>
-        <i class="fa fa-thumb-tack" title="置顶"></i>
-        <i class="fa fa-certificate" title="精华"></i>
+        <a href="/topic/tack/<%= this.topic.id %>"><i class="fa fa-thumb-tack" title="置顶"></i></a>
+        <a href="/topic/essence/<%= this.topic.id %>"><i class="fa fa-certificate" title="精华"></i></a>
         <% } %>
     </div>
 </div>
