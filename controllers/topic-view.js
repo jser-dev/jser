@@ -60,14 +60,29 @@ TopicViewController.prototype.delete = function () {
 };
 
 /**
- * 加精一个话题
+ * 将话题添加精华
  **/
-TopicViewController.prototype.good = function () {
+TopicViewController.prototype.addGood = function () {
 	var self = this;
-	Topic.good(self.topicId, function (err) {
+	Topic.addGood(self.topicId, function (err) {
 		if (err) {
 			return self.context.error(err);
 		}
+		self.topic.good = true;
+		self.index();
+	});
+};
+
+/**
+ * 将话题移除精华
+ **/
+TopicViewController.prototype.removeGood = function () {
+	var self = this;
+	Topic.removeGood(self.topicId, function (err) {
+		if (err) {
+			return self.context.error(err);
+		}
+		self.topic.good = false;
 		self.index();
 	});
 };

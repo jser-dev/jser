@@ -57,8 +57,8 @@
         <a class="linkbtn" href="/topic/<%= this.topic.id %>/fixed">
             <i class="fa fa-thumb-tack" title="置顶"></i
         </a>
-        <a class="linkbtn" href="/topic/<%= this.topic.id %>/good">
-            <i class="fa fa-certificate" title="精华"></i>
+        <a class="linkbtn" href="/topic/<%= this.topic.id %>/<%= this.topic.good?'removeGood':'addGood' %>">
+            <i class="fa fa-certificate <%= this.topic.good?'active':'' %>" title="精华"></i>
         </a>
         <% } %>
     </div>
