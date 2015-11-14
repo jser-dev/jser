@@ -13,7 +13,7 @@
     <div class="panel-heading">
         <a class="tab <%= this.currentType=='all'?'active':'' %>" href="/topic">所有</a>
         <% $.each(this.types,function(i,item){ %>
-        <a class="tab <%= this.currentType==item.name?'active':'' %>" href="/topic/<%= item.name %>/page/1">
+        <a class="tab <%= this.currentType==item.name?'active':'' %>" href="/topic/<%= item.name %>/p1">
             <%= item.text %>
         </a>
         <% }.bind(this)) %>
@@ -64,17 +64,17 @@
     <div class="panel-footer">
         <ul class="pagination">
             <li>
-            <a href="/topic/<%= this.currentType %>/page/1" aria-label="Previous">
+            <a href="/topic/<%= this.currentType %>/p1" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
             </li>
             <% for(var i=this.pageBegin;i<=this.pageEnd;i++){ %>
             <li class="<%= this.pageIndex==i?'active':'' %>">
-                <a href="/topic/<%= this.currentType %>/page/<%= i %>"><%= i %></a>
+                <a href="/topic/<%= this.currentType %>/p<%= i %>"><%= i %></a>
             </li>
             <% } %>
             <li>
-            <a href="/topic/<%= this.currentType %>/page/<%= this.pageCount||1 %>" aria-label="Next">
+            <a href="/topic/<%= this.currentType %>/p<%= this.pageCount||1 %>" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
             </li>

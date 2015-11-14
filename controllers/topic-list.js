@@ -7,9 +7,9 @@ var PAGE_SIZE = 12;
 /**
  * 话是控制器
  **/
-var TopicController = module.exports = function () { };
+var TopicListController = module.exports = function () { };
 
-TopicController.prototype.init = function () {
+TopicListController.prototype.init = function () {
     var self = this;
     self.currentType = self.context.data('type') || 'all';
     self.pageIndex = self.context.data('pageIndex') || 1;
@@ -50,10 +50,10 @@ TopicController.prototype.init = function () {
 /**
  * 默认 action
  **/
-TopicController.prototype.index = function () {
+TopicListController.prototype.index = function () {
     var self = this;
     Topic.getList(self.options, function (err, list) {
-        self.render("topic.html", {
+        self.render("topic-list.html", {
             types: self.types,
             currentType: self.currentType,
             pageIndex: self.pageIndex,

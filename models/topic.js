@@ -113,12 +113,12 @@ Topic.loadTypes = function (callback) {
     callback(null, [
         {
             text: "精华",
-            name: "essence",
+            name: "good",
             admin: true,
         },
         {
             text: "问答",
-            name: "qa"
+            name: "ask"
         },
         {
             text: "分享",

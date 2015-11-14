@@ -25,7 +25,7 @@ TopicEditController.prototype.new = function () {
         if (err) {
             return self.context.error(err);
         }
-        self.context.redirect("/topic/edit/" + topic.id);
+        self.context.redirect("/topic/" + topic.id + "/edit");
     });
 };
 

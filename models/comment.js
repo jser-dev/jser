@@ -1,7 +1,7 @@
 var define = require('./define');
 
 //定义话题模型
-var Comment = module.exports = define.Comment;
+var Comment = define.Comment;
 
 Comment.getListByTopicId = function (topicId, callback) {
         var self = Comment;
@@ -20,3 +20,5 @@ Comment.getLastByAuthor = function (options, callback) {
                 .populate('topic')
                 .exec(callback);
 };
+
+module.exports = Comment;

@@ -70,14 +70,14 @@
             </div>
             <div class="col-sm-3 col-slide">
                 <div class="panel panel-default">
-                    <form action="/topic/edit/new" method="post" class="panel-body">
+                    <form action="/topic/new" method="post" class="panel-body">
                         <button class="new-topic">发布话题</button>
                     </form>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         积分榜
-                        <a class="pull-right" href="/integral-list">更多...</a>
+                        <a class="pull-right" href="/user/top">更多...</a>
                     </div>
                     <div class="panel-body">
                         <% var userList = $.controller.context.topUserList %>
@@ -85,7 +85,7 @@
                             <% $.each(userList,function(i,item){ %>
                             <li>
                                 <a href="/user/<%= item.id %>"><%= item.name %></a>
-                                <span class="pull-right"><%= item.integral %></span>
+                                <span class="pull-right"><%= item.score %></span>
                             </li>
                             <% }) %>
                         </ul>

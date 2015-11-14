@@ -1,14 +1,14 @@
 var User = require("../models/user");
 
 /**
- * 活动控制器
+ * 积分榜控制器
  **/
-var IntegralListController = function () { };
+var UserTopController = function () { };
 
 /**
  * 默认 action
  **/
-IntegralListController.prototype.index = function () {
+UserTopController.prototype.index = function () {
     var self = this;
     self.top = 100;
     User.getList(self.top, function (err, userList) {
@@ -16,8 +16,8 @@ IntegralListController.prototype.index = function () {
             return self.context.error(err);
         }
         self.topUserList = userList;
-        self.render("integral-list.html", self);
+        self.render("user-top.html", self);
     });
 };
 
-module.exports = IntegralListController;
+module.exports = UserTopController;

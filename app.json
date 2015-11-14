@@ -34,14 +34,14 @@
         "routes": [
             {
                 "pattern": "/",
-                "target": "./topic"
+                "target": "./topic-list"
             },
             {
                 "pattern": "/topic",
-                "target": "./topic"
+                "target": "./topic-list"
             },
             {
-                "pattern": "/topic/edit/new",
+                "pattern": "/topic/new",
                 "action": "new",
                 "target": "./topic-edit",
                 "required": [
@@ -56,8 +56,8 @@
                 ]
             },
             {
-                "pattern": "/topic/{type}/page/{pageIndex}",
-                "target": "./topic.js"
+                "pattern": "/topic/{type}/p{pageIndex}",
+                "target": "./topic-list"
             },
             {
                 "pattern": "/topic/{id}",
@@ -91,12 +91,12 @@
                 ]
             },
             {
-                "pattern": "/user/{id}",
-                "target": "./user-info"
+                "pattern": "/user/top",
+                "target": "./user-top"
             },
             {
-                "pattern": "/integral-list",
-                "target": "./integral-list"
+                "pattern": "/user/{id}",
+                "target": "./user-info"
             },
             {
                 "pattern": "/about",
