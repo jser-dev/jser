@@ -54,10 +54,10 @@
         </a>
         <% } %>
         <% if(user){ %>
-        <a class="linkbtn" href="/topic/<%= this.topic.id %>/fixed">
-            <i class="fa fa-thumb-tack" title="置顶"></i
+        <a class="linkbtn" href="/topic/<%= this.topic.id %>/<%= this.topic.top>0?'removeTop':'setTop' %>">
+            <i class="fa fa-thumb-tack <%= this.topic.top>0?'active':'' %>" title="置顶"></i
         </a>
-        <a class="linkbtn" href="/topic/<%= this.topic.id %>/<%= this.topic.good?'removeGood':'addGood' %>">
+        <a class="linkbtn" href="/topic/<%= this.topic.id %>/<%= this.topic.good?'removeGood':'setGood' %>">
             <i class="fa fa-certificate <%= this.topic.good?'active':'' %>" title="精华"></i>
         </a>
         <% } %>

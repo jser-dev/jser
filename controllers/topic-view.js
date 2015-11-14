@@ -62,9 +62,9 @@ TopicViewController.prototype.delete = function () {
 /**
  * 将话题添加精华
  **/
-TopicViewController.prototype.addGood = function () {
+TopicViewController.prototype.setGood = function () {
 	var self = this;
-	Topic.addGood(self.topicId, function (err) {
+	Topic.setGood(self.topicId, function (err) {
 		if (err) {
 			return self.context.error(err);
 		}
@@ -78,6 +78,32 @@ TopicViewController.prototype.addGood = function () {
 TopicViewController.prototype.removeGood = function () {
 	var self = this;
 	Topic.removeGood(self.topicId, function (err) {
+		if (err) {
+			return self.context.error(err);
+		}
+		self.context.redirect("/topic/" + self.topicId);
+	});
+};
+
+/**
+ * 将话题置顶
+ **/
+TopicViewController.prototype.setTop = function () {
+	var self = this;
+	Topic.setTop(self.topicId, function (err) {
+		if (err) {
+			return self.context.error(err);
+		}
+		self.context.redirect("/topic/" + self.topicId);
+	});
+};
+
+/**
+ * 将话题移除置顶
+ **/
+TopicViewController.prototype.removeTop = function () {
+	var self = this;
+	Topic.removeTop(self.topicId, function (err) {
 		if (err) {
 			return self.context.error(err);
 		}

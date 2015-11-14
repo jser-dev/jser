@@ -112,7 +112,7 @@ Topic.delete = function (id, callback) {
 /**
  * 设定为精华
  **/
-Topic.addGood = function (id, callback) {
+Topic.setGood = function (id, callback) {
     var self = this;
     self.findById(id, function (err, item) {
         if (err || !item) {
@@ -133,6 +133,34 @@ Topic.removeGood = function (id, callback) {
             return callback(err);
         }
         item.good = false;
+        item.save(callback);
+    });
+};
+
+/**
+ * 设定为精华
+ **/
+Topic.setTop = function (id, callback) {
+    var self = this;
+    self.findById(id, function (err, item) {
+        if (err || !item) {
+            return callback(err);
+        }
+        item.top = 1;
+        item.save(callback);
+    });
+};
+
+/**
+ * 移除精华
+ **/
+Topic.removeTop = function (id, callback) {
+    var self = this;
+    self.findById(id, function (err, item) {
+        if (err || !item) {
+            return callback(err);
+        }
+        item.top = 0;
         item.save(callback);
     });
 };
