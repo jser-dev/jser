@@ -25,9 +25,7 @@ UserInfoController.prototype.index = function () {
         });
     });
     task.add(function (done) {
-        Topic.getLastByAuthor({
-            author: userId
-        }, function (err, topicList) {
+        Topic.getLastByUserId(userId, function (err, topicList) {
             if (err) {
                 return this.context.error(err);
             }
@@ -36,9 +34,7 @@ UserInfoController.prototype.index = function () {
         });
     });
     task.add(function (done) {
-        Comment.getLastByAuthor({
-            author: userId
-        }, function (err, commentList) {
+        Comment.getLastByUserId(userId, function (err, commentList) {
             if (err) {
                 return this.context.error(err);
             }

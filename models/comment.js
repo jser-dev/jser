@@ -11,9 +11,11 @@ Comment.getListByTopicId = function (topicId, callback) {
                 .exec(callback);
 };
 
-Comment.getLastByAuthor = function (options, callback) {
+Comment.getLastByUserId = function (userId, callback) {
         var self = Comment;
-        self.find(options).sort({ '_id': -1 })
+        self.find({
+                author: userId
+        }).sort({ '_id': -1 })
                 .skip(0)
                 .limit(5)
                 .populate('author')

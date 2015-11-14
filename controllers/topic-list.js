@@ -13,11 +13,19 @@ TopicListController.prototype.init = function () {
     var self = this;
     self.currentType = self.context.data('type') || 'all';
     self.pageIndex = self.context.data('pageIndex') || 1;
+    //处理查询选项
     self.options = {
         pageSize: PAGE_SIZE,
         pageIndex: self.pageIndex,
-        type: self.currentType
     };
+    //处理查询条件
+    self.options.conditions = {};
+    if (self.currentType == 'good') {
+        self.options.conditions.good = true;
+    } else {
+        self.options.conditions.type = self.currentType;
+    }
+    //创建并行查询任务
     var task = new Task();
     task.add("types", function (done) {
         Topic.loadTypes(function (err, types) {
@@ -28,7 +36,7 @@ TopicListController.prototype.init = function () {
         });
     });
     task.add("count", function (done) {
-        Topic.getCount(self.options, function (err, count) {
+        Topic.getCount(self.options.conditions , function (err, count) {
             if (err) {
                 return self.context.error(err);
             }

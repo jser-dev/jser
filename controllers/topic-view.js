@@ -60,6 +60,19 @@ TopicViewController.prototype.delete = function () {
 };
 
 /**
+ * 加精一个话题
+ **/
+TopicViewController.prototype.good = function () {
+	var self = this;
+	Topic.good(self.topicId, function (err) {
+		if (err) {
+			return self.context.error(err);
+		}
+		self.index();
+	});
+};
+
+/**
  * 添加评论
  **/
 TopicViewController.prototype.comment = function () {

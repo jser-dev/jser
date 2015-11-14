@@ -41,6 +41,7 @@ var Topic = self.Topic = db.model('Topic', {
     top: { type: Number, default: 0 }, //置顶, 0: 不置顶，>0: 置顶（值为置顶权重）
     read: { type: Number, default: 0 }, //阅读数量
     replay: { type: Number, default: 0 }, //回复数量
+    good: { type: Boolean, default: false }, //是否精华
     status: { type: Number, default: status.DRAFT }// 状态,
 });
 

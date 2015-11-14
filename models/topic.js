@@ -16,7 +16,10 @@ var Topic = module.exports = define.Topic;
 //新建一个 topic
 Topic.new = function (author, callback) {
     var self = Topic;
-    self.findOne({ "status": status.DRAFT, "author": author.id }, function (err, foundTopic) {
+    self.findOne({
+        "status": status.DRAFT,
+        "author": author.id
+    }, function (err, foundTopic) {
         if (err) {
             return callback(err);
         }
@@ -65,29 +68,37 @@ Topic.get = function (id, callback) {
     });
 };
 
-Topic._options2Where = function (options) {
-    var where = (!options.type || options.type == 'all') ?
-        {
-            status: options.status || status.PUBLISH
-        } : {
-            status: options.status || status.PUBLISH,
-            type: options.type
-        };
-    return where;
+//处理查询条件
+Topic._handleConditions = function (conditions) {
+    conditions = conditions || {};
+    conditions.status = conditions.status || status.PUBLISH;
+    if (!conditions.type || conditions.type == 'all') {
+        delete conditions.type;
+    }
+    return conditions;
 };
 
 //加载所有话题
 Topic.getList = function (options, callback) {
     var self = Topic;
     options = options || {};
-    var where = self._options2Where(options);
-    self.find(where)
+    options.conditions = self._handleConditions(options.conditions);
+    self.find(options.conditions)
         .sort({ 'top': -1, '_id': -1 })
         .skip(options.pageSize * (options.pageIndex - 1))
         .limit(options.pageSize)
         .populate('author')
         .populate('lastReplayAuthor')
         .exec(callback);
+};
+
+/**
+ * 获取指定条件的记录数量
+ **/
+Topic.getCount = function (conditions, callback) {
+    var self = Topic;
+    conditions = self._handleConditions(conditions);
+    self.count(conditions, callback);
 };
 
 /**
@@ -99,19 +110,41 @@ Topic.delete = function (id, callback) {
 };
 
 /**
- * 获取指定条件的记录数量
+ * 设定为精华
  **/
-Topic.getCount = function (options, callback) {
-    var self = Topic;
-    var where = self._options2Where(options);
-    self.count(where, callback);
+Topic.addGood = function (id, callback) {
+    var self = this;
+    self.findById(id, function (err, item) {
+        if (err || !item) {
+            return callback(err);
+        }
+        item.good = true;
+        item.save(callback);
+    });
 };
 
-Topic.getLastByAuthor = function (options, callback) {
+/**
+ * 移除精华
+ **/
+Topic.removeGood = function (id, callback) {
+    var self = this;
+    self.findById(id, function (err, item) {
+        if (err || !item) {
+            return callback(err);
+        }
+        item.good = false;
+        item.save(callback);
+    });
+};
+
+/**
+ * 获取指定用户的最近话题
+ **/
+Topic.getLastByUserId = function (userId, callback) {
     var self = Topic;
-    var where = self._options2Where(options);
-    where.author = options.author;
-    self.find(where).sort({ 'top': -1, '_id': -1 })
+    self.find({
+        author: userId
+    }).sort({ 'top': -1, '_id': -1 })
         .skip(0)
         .limit(10)
         .populate('author')
