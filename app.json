@@ -34,23 +34,23 @@
         "routes": [
             {
                 "pattern": "/",
-                "target": "./topic.js"
+                "target": "./topic"
             },
             {
                 "pattern": "/topic",
-                "target": "./topic.js"
+                "target": "./topic"
             },
             {
                 "pattern": "/topic/edit/new",
                 "action": "new",
-                "target": "./topic-edit.js",
+                "target": "./topic-edit",
                 "required": [
                     "signed"
                 ]
             },
             {
-                "pattern": "/topic/edit/{id}",
-                "target": "./topic-edit.js",
+                "pattern": "/topic/{id}/edit",
+                "target": "./topic-edit",
                 "required": [
                     "signed"
                 ]
@@ -61,30 +61,30 @@
             },
             {
                 "pattern": "/topic/{id}",
-                "target": "./topic-view.js"
+                "target": "./topic-view"
             },
             {
                 "pattern": "/signup",
-                "target": "./signup.js"
+                "target": "./signup"
             },
             {
                 "pattern": "/signin",
-                "target": "./signin.js"
+                "target": "./signin"
             },
             {
                 "pattern": "/forget-password",
-                "target": "./forget-password.js"
+                "target": "./forget-password"
             },
             {
                 "pattern": "/profile",
-                "target": "./profile.js",
+                "target": "./profile",
                 "required": [
                     "signed"
                 ]
             },
             {
                 "pattern": "/control-panel",
-                "target": "./control-panel.js",
+                "target": "./control-panel",
                 "required": [
                     "signed",
                     "admin"
@@ -92,19 +92,19 @@
             },
             {
                 "pattern": "/user/{id}",
-                "target": "./user-info.js"
+                "target": "./user-info"
             },
             {
                 "pattern": "/integral-list",
-                "target": "./integral-list.js"
+                "target": "./integral-list"
             },
             {
                 "pattern": "/about",
-                "target": "./about.js"
+                "target": "./about"
             },
             {
                 "pattern": "/api",
-                "target": "./api.js"
+                "target": "./api"
             },
             {
                 "pattern": "/client",
@@ -112,11 +112,11 @@
             },
             {
                 "pattern": "/oauth/github",
-                "target": "./oauth/github.js"
+                "target": "./oauth/github"
             },
             {
                 "pattern": "/search",
-                "target": "./search.js"
+                "target": "./search"
             }
         ]
     },
