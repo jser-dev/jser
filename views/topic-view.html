@@ -6,6 +6,13 @@
     <meta name="description" content="<%= this.topic.title %> | <%= $.configs.description %>"/>
     <meta name="author" content="<%= this.topic.author.name %>">
     <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
+    <script>
+    function deleteTopic(id){
+        if(confirm("确认删除当前话题")){
+            location.href="/topic/"+id+"/delete";
+        }
+    };
+    </script>
 <% $.placeEnd() >
 
 <% $.placeBegin("content") %>
@@ -42,7 +49,7 @@
         <a href="/topic/<%= this.topic.id %>/edit">
             <i class="fa fa-edit" title="编辑"></i>
         </a>
-        <a href="/topic/<%= this.topic.id %>/delete">
+        <a id="delete" href="javascript:deleteTopic('<%= this.topic.id %>');">
             <i class="fa fa-trash-o" title="删除"></i>
         </a>
         <% } %>

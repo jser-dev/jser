@@ -46,6 +46,22 @@ TopicViewController.prototype.index = function () {
 	});
 };
 
+/**
+ * 删除一个贴子
+ **/
+TopicViewController.prototype.delete = function () {
+	var self = this;
+	Topic.delete(self.topicId, function (err) {
+		if (err) {
+			return self.context.error(err);
+		}
+		self.context.redirect("/topic");
+	});
+};
+
+/**
+ * 添加评论
+ **/
 TopicViewController.prototype.comment = function () {
 	var self = this;
 	var content = self.context.data('content');

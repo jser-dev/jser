@@ -90,6 +90,17 @@ Topic.getList = function (options, callback) {
         .exec(callback);
 };
 
+/**
+ * 删除一个话题
+ **/
+Topic.delete = function (id, callback) {
+    var self = this;
+    self.remove({ "_id": id }, callback);
+};
+
+/**
+ * 获取指定条件的记录数量
+ **/
 Topic.getCount = function (options, callback) {
     var self = Topic;
     var where = self._options2Where(options);
