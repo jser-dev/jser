@@ -1,18 +1,8 @@
 var db = require("../common/db");
+var status = require('./status');
 var self = module.exports;
 
-/**
- * 定义话题或回复的状态
- **/
-var status = self.status = {
-    DELETE: -2,
-    DRAFT: -1,
-    NORMAL: 0,
-    PUBLISH: 1,
-    LOCK: 2
-};
-
-//定义用户模型
+//定议用户模型
 var User = self.User = db.model('User', {
     email: { type: String, unique: true, required: true }, // email
     password: { type: String, default: '', required: true }, //密码
@@ -25,7 +15,7 @@ var User = self.User = db.model('User', {
     status: { type: Number, default: status.NORMAL }// 状态
 }); 
 
-//定义话题模型
+//定议话题模型
 var Topic = self.Topic = db.model('Topic', {
     title: { type: String, default: '', required: true }, //标题
     content: { type: String, default: '' }, //内容
@@ -43,10 +33,10 @@ var Topic = self.Topic = db.model('Topic', {
     read: { type: Number, default: 0 }, //阅读数量
     replay: { type: Number, default: 0 }, //回复数量
     good: { type: Boolean, default: false }, //是否精华
-    status: { type: Number, default: status.DRAFT }// 状态,
+    status: { type: Number, default: status.topic.DRAFT }// 状态,
 });
 
-//定义评论模型
+//定议评论模型
 var Comment = self.Comment = db.model('Comment', {
     topic: { type: db.types.ObjectId, ref: Topic.schema.name, required: true }, //所属话题
     content: { type: String, default: '', required: true }, //内容
@@ -56,5 +46,16 @@ var Comment = self.Comment = db.model('Comment', {
     updateAt: { type: Date, default: Date.now }, //更新时间
     like: { type: Number, default: 0 }, //“赞” 的数量 
     dislike: { type: Number, default: 0 }, //"踩" 的数量
-    status: { type: Number, default: status.PUBLISH }// 状态,
+    status: { type: Number, default: status.comment.PUBLISH }// 状态,
+});
+
+//定议消息模型
+var Message = self.Message = db.model("Message", {
+    from: { type: String }, //发送者
+    to: { type: String }, //接收者
+    title: { type: String },//标题
+    content: { type: String },//内容
+    link: { type: String },//链接
+    sendAt: { type: Date, default: Date.now }, //发送时间
+    status: { type: Number, default: status.message.UNREAD }// 状态,
 });

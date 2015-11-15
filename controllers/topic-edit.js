@@ -1,5 +1,5 @@
 var Topic = require('../models/topic');
-var status = require('../models/status');
+var status = require('../models/status').topic;
 var utils = require('../common/utils');
 
 /**

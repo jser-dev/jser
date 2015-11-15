@@ -1,5 +1,3 @@
-"use strict";
-
 var utils = require('../common/utils');
 var User = require('../models/user');
 
