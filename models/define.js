@@ -11,7 +11,8 @@ var User = self.User = db.model('User', {
     score: { type: Number, default: 0 }, //积分,
     signUpAt: { type: Date, default: Date.now },//注册时间
     role: [{ type: String, default: '' }],
-    status: { type: Number, default: status.user.NORMAL }// 状态
+    verifyCode:{ type: String, default: ''}, //邮箱验证码
+    status: { type: Number, default: status.NORMAL }// 状态
 }); 
 
 //定议话题模型

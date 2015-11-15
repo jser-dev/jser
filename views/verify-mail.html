@@ -1,0 +1,24 @@
+<% $.master("./layout/master.html") %> 
+    
+<% $.placeBegin("head") %>
+    <title>注册 | <%= $.configs.name %></title>
+    <meta name="keywords" content="<%= $.configs.keywords %>"/>
+    <meta name="description" content="<%= $.configs.description %>"/>
+    <meta name="author" content="<%= $.configs.author %>"/>
+<% $.placeEnd() >
+
+<% $.placeBegin("content") %>
+
+<div class="panel panel-default">
+    <div class="panel-heading">注册</div>
+    <div class="panel-body">
+        <% if(this.user){ %>
+            <%= this.user.email %> 验证成功,<a href='/signin'>现在登录</a></p>
+        <% }else{ %>
+              验证失败，请<a href='/signup'>注册新用户</a></p>
+        <% } %>
+    </div>
+</div>
+
+
+<% $.placeEnd() %>
