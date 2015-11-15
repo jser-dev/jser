@@ -106,7 +106,13 @@ Topic.getCount = function (conditions, callback) {
  **/
 Topic.delete = function (id, callback) {
     var self = this;
-    self.remove({ "_id": id }, callback);
+    self.findById(id, function (err, item) {
+        if (err || !item) {
+            return callback(err);
+        }
+        item.status = status.DELETED;
+        item.save(callback);
+    });
 };
 
 /**
