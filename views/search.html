@@ -21,7 +21,11 @@
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">
+                        <label class="topic-type"><%= $.configs.topicTypes[item.type].text %></label>                 
                         <a href="/topic/<%= item.id %>"><%= item.title %></a>
+                        <% if(item.good){ %>
+                        <label class="topic-label good">精华</label>
+                        <% } %>
                     </h4>
                     <span class="topic-info">
                         <a href="/user/<%= item.author.id %>"><%= item.author.name %></a> 
