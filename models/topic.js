@@ -1,8 +1,8 @@
 /* global nokit */
 var Task = nokit.Task;
 var define = require('./define');
-var status = require('./status');
 var Comment = require('./comment');
+var status = require('./status').topic;
 
 //定义话题模型
 var Topic = module.exports = define.Topic;

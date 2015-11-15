@@ -1,4 +1,5 @@
 var define = require('./define');
+var status = require("./status").comment;
 
 //定义话题模型
 var Comment = define.Comment;
