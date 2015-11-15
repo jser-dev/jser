@@ -2,7 +2,7 @@ var db = require("../common/db");
 var status = require('./status');
 var self = module.exports;
 
-//定议用户模型
+//定义用户模型
 var User = self.User = db.model('User', {
     email: { type: String, unique: true, required: true }, // email
     password: { type: String, default: '', required: true }, //密码
@@ -11,11 +11,11 @@ var User = self.User = db.model('User', {
     score: { type: Number, default: 0 }, //积分,
     signUpAt: { type: Date, default: Date.now },//注册时间
     role: [{ type: String, default: '' }],
-    verifyCode:{ type: String, default: ''}, //邮箱验证码
+    verifyCode: { type: String, default: '' }, //邮箱验证码
     status: { type: Number, default: status.user.NORMAL }// 状态
 }); 
 
-//定议话题模型
+//定义话题模型
 var Topic = self.Topic = db.model('Topic', {
     title: { type: String, default: '', required: true }, //标题
     content: { type: String, default: '' }, //内容
@@ -36,7 +36,7 @@ var Topic = self.Topic = db.model('Topic', {
     status: { type: Number, default: status.topic.DRAFT }// 状态,
 });
 
-//定议评论模型
+//定义评论模型
 var Comment = self.Comment = db.model('Comment', {
     topic: { type: db.types.ObjectId, ref: Topic.schema.name, required: true }, //所属话题
     content: { type: String, default: '', required: true }, //内容
@@ -49,7 +49,7 @@ var Comment = self.Comment = db.model('Comment', {
     status: { type: Number, default: status.comment.PUBLISH }// 状态,
 });
 
-//定议消息模型
+//定义消息模型
 var Message = self.Message = db.model("Message", {
     from: { type: String }, //发送者
     to: { type: String }, //接收者
@@ -58,4 +58,10 @@ var Message = self.Message = db.model("Message", {
     link: { type: String },//链接
     sendAt: { type: Date, default: Date.now }, //发送时间
     status: { type: Number, default: status.message.UNREAD }// 状态,
+});
+
+//定义权限配置模型
+var Access = self.Access = db.model("Access", {
+    role: { type: String }, //角色名称
+    users: { type: String }, //用户id列表（逗号隔开）
 });
