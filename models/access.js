@@ -2,26 +2,21 @@ var define = require('./define');
 var status = require("./status").comment;
 
 //定义话题模型
-var Comment = define.Comment;
+var Access = define.Access;
 
-Comment.getListByTopicId = function (topicId, callback) {
-        var self = Comment;
-        self.find({ "topic": topicId })
-                .sort({ '_id': 1 })
-                .populate('author')
-                .exec(callback);
+Access.read = function (callback) {
+	var self = this;
+	self.find(null, callback);
 };
 
-Comment.getLastByUserId = function (userId, callback) {
-        var self = Comment;
-        self.find({
-                author: userId
-        }).sort({ '_id': -1 })
-                .skip(0)
-                .limit(5)
-                .populate('author')
-                .populate('topic')
-                .exec(callback);
+Access.save = function (accessList, callback) {
+	var self = this;
+	self.remove({ id: { $ne: "" } }, function (err) {
+		if (err) {
+			return callback(err);
+		}
+		Access.create(accessList, callback);
+	});
 };
 
-module.exports = Comment;
+module.exports = Access;

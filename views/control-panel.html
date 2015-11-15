@@ -12,13 +12,13 @@
 <div class="panel panel-default">
     <div class="panel-heading">权限管理</div>
     <div class="panel-body">
-        <form method="/control-panel/saveAccess" method="post">
+        <form action="/control-panel/saveAccess" method="post">
             <% $.each($.configs.roles,function(roleName,role){ %>
             <div class="form-row">
                 <h5><%= role.text %></h5>
-                <textarea name="<%= roleName %>"></textarea>
+                <textarea name="<%= roleName %>"><%= this.access[roleName] %></textarea>
             </div>
-            <% }) %>
+            <% }.bind(this)) %>
             <p class="form-row">
                 <input type="submit" value="保存"/> 
             </p>
