@@ -1,6 +1,8 @@
+/* global nokit */
 var User = require('../models/user');
 var Topic = require("../models/topic");
 var Comment = require("../models/comment");
+var Message = require("../models/message");
 var Task = nokit.Task;
 
 /**
@@ -39,6 +41,15 @@ UserInfoController.prototype.index = function () {
                 return this.context.error(err);
             }
             self.commentList = commentList;
+            done();
+        });
+    });
+    task.add(function (done) {
+        Message.getAllByUserId(userId, function (err, msgList) {
+            if (err) {
+                return this.context.error(err);
+            }
+            self.msgList = msgList;
             done();
         });
     });

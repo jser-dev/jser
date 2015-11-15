@@ -31,6 +31,37 @@
 </div>
 
 <div class="panel panel-default">
+    <div class="panel-heading">
+        我的消息
+        <a class="pull-right" href="/user/<%=this.userId%>/markAllToRead">
+            全部标记为已读
+        </a>
+        <a class="pull-right" href="/user/<%=this.userId%>/clearMessage">
+            清空
+        </a>
+    </div>
+    <div class="panel-body">
+       <% if(this.msgList &&　this.msgList.length>0){ %>
+        <ul class="integral-list topic-list">
+            <% $.each(this.topicList,function(i,item){ %>
+            <a href="/user/<%=this.userId%>/deleteMessage?msgId=<%= item._id %>">
+                删除
+            </a>
+            <li>
+                <%= item.content %>
+                <span class="pull-right topic-info" title="<%= $.formatDate(item.sendAt,'yyyy-MM-dd hh:mm') %>">
+                     <%= $.timeago(item.sendAt) %>
+                </span>
+            </li>
+            <% }.bind(this)); %>
+        </ul>
+        <% }else{ %>
+        <p class="topic-empty align-left">没有消息</p>
+        <% } %>
+    </div>
+</div>
+
+<div class="panel panel-default">
     <div class="panel-heading">最近话题</div>
     <div class="panel-body">
        <% if(this.topicList &&　this.topicList.length>0){ %>
