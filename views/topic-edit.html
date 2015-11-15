@@ -26,7 +26,7 @@
                 <% $.each(this.types,function(i,item){ %>
                     <% if(item.admin)return; %>
                     <li>
-                        <input type="radio" name="type" id="<%= item.name %>" value="<%= item.name %>">
+                        <input type="radio" name="type" id="<%= item.name %>" value="<%= item.name %>" <%= item.name==this.topic.type?'checked':'' %>>
                         <label for="<%= item.name %>"><%= item.text %></label>
                     </li>
                 <% }.bind(this)) %>
