@@ -1,4 +1,5 @@
 var utils = require("../common/utils");
+var mail = require("./mail");
 var define = require("./define");
 
 //定义用户模型
@@ -36,6 +37,7 @@ User.signIn = function (user, callback) {
             return callback(err);
         }
         if (foundUser) {
+            //
             return callback(null, foundUser);
         } else {
             return callback('用户或者密码错误');
@@ -78,12 +80,18 @@ User.signUp = function (user, callback) {
         user.password.length < User.PWD_MIN_LENGTH) {
         return callback('用户信息不合法');
     }
+    user.verifyCode = utils.newGuid();
     user.password = utils.hashDigest(user.password);
     user.save(function (err) {
         if (err) {
             return callback(err);
         }
-        return callback(null, user);
+        mail.sendForReg(user, function (err) {
+            if (err) {
+                return callback(err);
+            }
+            return callback(null, user);
+        });
     });
 };
 
@@ -111,5 +119,29 @@ User.search = function (keyword, callback) {
         .limit(10)
         .exec(callback);
 };
+
+/**
+ * 验证邮编编码
+ **/
+User.verifyMail = function (verifyCode, callback) {
+    var self = this;
+    self.findOne({ "verifyCode": verifyCode }, function (err, foundUser) {
+        if (err) {
+            return callback(err);
+        }
+        if (foundUser) {
+            foundUser.verifyCode = '';
+            foundUser.save(function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, foundUser);
+            });
+        } else {
+            return callback(null, null);
+        }
+    });
+};
+
 
 module.exports = User;

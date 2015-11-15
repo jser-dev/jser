@@ -68,6 +68,10 @@
                 "target": "./signup"
             },
             {
+                "pattern": "/verify/{verifyCode}",
+                "target": "./verify-mail"
+            },
+            {
                 "pattern": "/signin",
                 "target": "./signin"
             },
@@ -136,6 +140,23 @@
         },
         "job": {
             "text": "招聘"
+        }
+    },
+    "mail": {
+        "service": "qq",
+        "port": 465,
+        "secureConnection": true,
+        "auth": {
+            "user": "313219151@qq.com",
+            "pass": "wangyuejun123"
+        },
+        "reg_tmpl": {
+            "subject": "请确认你在 JSER 的注册邮箱",
+            "body": "请点击如下链接，激活您的邮箱: http://127.0.0.1:8000/verify/<%= this.verifyCode %>"
+        },
+        "pwd_tmpl": {
+            "subject": "JSER 密码找回",
+            "body": "请点击如下链接，找回您的密码: <%= this.verifyCode %>"
         }
     },
     "oauth": {

@@ -1,6 +1,6 @@
 {
     "showErrorDetail": true,
-    "connStr": "mongodb://xhou.net/jser",
+    "connStr": "mongodb://127.0.0.1/jser",
     "session": {
         "host": "xhou.net",
         "port": 6379
