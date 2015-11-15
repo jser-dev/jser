@@ -12,7 +12,7 @@ var MessageController = function () { };
  **/
 MessageController.prototype.index = function () {
     var self = this;
-    var userId = self.context.data("id");
+    var userId = self.context.user._id;
     var task = Task.create();
     task.add(function (done) {
         Message.getAllByUserId(userId, function (err, msgList) {

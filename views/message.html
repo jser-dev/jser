@@ -15,10 +15,10 @@
         我的消息
         <ul class="pull-right heading-nav">
             <li>
-                <a href="/user/<%=this.userId%>/markAllToRead">全部标记为已读</a>
+                <a href="/message/markAllToRead">全部标记为已读</a>
             </li>
             <li>
-                <a href="/user/<%=this.userId%>/clearMessage">清空</a>
+                <a href="/message/clearMessage">清空</a>
             </li>
         </ul>
     </div>
@@ -26,7 +26,7 @@
        <% if(this.msgList &&　this.msgList.length>0){ %>
         <ul class="integral-list topic-list">
             <% $.each(this.topicList,function(i,item){ %>
-            <a href="/user/<%=this.userId%>/deleteMessage?msgId=<%= item._id %>">
+            <a href="/message/deleteMessage?msgId=<%= item._id %>">
                 删除
             </a>
             <li>

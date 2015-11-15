@@ -103,8 +103,11 @@
                 "target": "./user-info"
             },
             {
-                "pattern": "/message/{id}",
-                "target": "./message"
+                "pattern": "/message",
+                "target": "./message",
+                "required": [
+                    "signed"
+                ]
             },
             {
                 "pattern": "/about",
