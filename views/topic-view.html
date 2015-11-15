@@ -54,6 +54,9 @@
         </a>
         <% } %>
         <% if(user){ %>
+        <a class="linkbtn" id="delete" href="javascript:deleteTopic('<%= this.topic.id %>');">
+            <i class="fa fa-trash-o" title="删除"></i>
+        </a>
         <a class="linkbtn" href="/topic/<%= this.topic.id %>/<%= this.topic.top>0?'removeTop':'setTop' %>">
             <i class="fa fa-thumb-tack <%= this.topic.top>0?'active':'' %>" title="置顶"></i
         </a>

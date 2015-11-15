@@ -12,8 +12,8 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <a class="tab <%= this.currentType=='all'?'active':'' %>" href="/topic">所有</a>
-        <% $.each(this.types,function(i,item){ %>
-        <a class="tab <%= this.currentType==item.name?'active':'' %>" href="/topic/<%= item.name %>/p1">
+        <% $.each($.configs.topicTypes,function(name,item){ %>
+        <a class="tab <%= this.currentType==name?'active':'' %>" href="/topic/<%= name %>/p1">
             <%= item.text %>
         </a>
         <% }.bind(this)) %>
@@ -27,7 +27,8 @@
                     <img class="media-object avatar" src="<%= item.author.avatar %>" alt="<%= item.author.name %>">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">                  
+                    <h4 class="media-heading"> 
+                        <label class="topic-type"><%= $.configs.topicTypes[item.type].text %></label>                 
                         <a href="/topic/<%= item.id %>"><%= item.title %></a>
                         <% if(item.top>0){ %>
                         <label class="topic-label top">置顶</label>

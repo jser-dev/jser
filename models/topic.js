@@ -180,33 +180,6 @@ Topic.getLastByUserId = function (userId, callback) {
         .exec(callback);
 };
 
-//加载所有话题类型
-Topic.loadTypes = function (callback) {
-    callback(null, [
-        {
-            text: "精华",
-            name: "good",
-            admin: true,
-        },
-        {
-            text: "问答",
-            name: "ask"
-        },
-        {
-            text: "分享",
-            name: "share"
-        },
-        {
-            text: "活动",
-            name: "event"
-        },
-        {
-            text: "招聘",
-            name: "job"
-        }
-    ]);
-};
-
 /**
  * 搜索匹配的话题
  **/

@@ -120,6 +120,24 @@
             }
         ]
     },
+    "topicTypes": {
+        "good": {
+            "text": "精华",
+            "admin": true
+        },
+        "ask": {
+            "text": "问答"
+        },
+        "share": {
+            "text": "分享"
+        },
+        "event": {
+            "text": "活动"
+        },
+        "job": {
+            "text": "招聘"
+        }
+    },
     "oauth": {
         "github": {
             "auth_url": "https://github.com/login/oauth/authorize",

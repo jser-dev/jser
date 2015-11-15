@@ -9,14 +9,8 @@ var TopicEditController = module.exports = function () { };
 
 TopicEditController.prototype.init = function () {
     var self = this;
-    Topic.loadTypes(function (err, types) {
-        if (err) {
-            return self.context.error(err);
-        }
-        self.topicId = self.context.data('id');
-        self.topicTypes = types;
-        self.ready();
-    });
+    self.topicId = self.context.data('id');
+    self.ready();
 };
 
 TopicEditController.prototype.new = function () {

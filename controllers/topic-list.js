@@ -27,16 +27,8 @@ TopicListController.prototype.init = function () {
     }
     //创建并行查询任务
     var task = new Task();
-    task.add("types", function (done) {
-        Topic.loadTypes(function (err, types) {
-            if (err) {
-                return self.context.error(err);
-            }
-            done(types);
-        });
-    });
     task.add("count", function (done) {
-        Topic.getCount(self.options.conditions , function (err, count) {
+        Topic.getCount(self.options.conditions, function (err, count) {
             if (err) {
                 return self.context.error(err);
             }
@@ -44,7 +36,6 @@ TopicListController.prototype.init = function () {
         });
     });
     task.end(function (result) {
-        self.types = result["types"];
         self.count = result["count"];
         self.pageCount = parseInt((self.count + (PAGE_SIZE - 1)) / PAGE_SIZE);
         self.pageBegin = self.pageIndex - 2;
