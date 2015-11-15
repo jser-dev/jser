@@ -339,7 +339,7 @@ body {
 }
 
 /*form*/
-input{
+input, textarea{
     padding: 8px 10px;
 }
 input[type="button"],
@@ -370,10 +370,13 @@ button:hover{
 .form-row input[type="password"],
 .form-row input[type="email"],
 .form-row input[type="file"],
-.form-row input[type="number"]{
+.form-row input[type="number"],
+.form-row textarea{
   display: inline-block;
   width: 100%;
   max-width: 300px;
+  border-color: rgb(222, 222, 222);
+  resize: none;
 }
 
 @media (max-width: 767px){

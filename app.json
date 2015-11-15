@@ -13,7 +13,7 @@
         ".less$": "nokit-handler-less"
     },
     "filters": {
-        "^/::required": "./filters/required",
+        "^/::access": "./filters/access",
         "^/::data": "./filters/common-data"
     },
     "folders": {

@@ -10,9 +10,19 @@
 <% $.placeBegin("content") %>
 
 <div class="panel panel-default">
-    <div class="panel-heading">控制面板</div>
+    <div class="panel-heading">权限管理</div>
     <div class="panel-body">
-        ...
+        <form method="/control-panel/saveAccess" method="post">
+            <% $.each($.configs.roles,function(roleName,role){ %>
+            <div class="form-row">
+                <h5><%= role.text %></h5>
+                <textarea name="<%= roleName %>"></textarea>
+            </div>
+            <% }) %>
+            <p class="form-row">
+                <input type="submit" value="保存"/> 
+            </p>
+        </form>
     </div>
 </div>
 
