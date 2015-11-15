@@ -12,7 +12,7 @@ var User = self.User = db.model('User', {
     signUpAt: { type: Date, default: Date.now },//注册时间
     role: [{ type: String, default: '' }],
     verifyCode:{ type: String, default: ''}, //邮箱验证码
-    status: { type: Number, default: status.NORMAL }// 状态
+    status: { type: Number, default: status.user.NORMAL }// 状态
 }); 
 
 //定议话题模型

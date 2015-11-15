@@ -16,9 +16,8 @@ VerifyMailController.prototype.index = function () {
         if (err) {
             return self.context.error(err);
         }
-        self.render("verify-mail.html", {"user":user});
-    })
-
+        self.render("verify-mail.html", { "user": user });
+    });
 };
 
 module.exports = VerifyMailController;

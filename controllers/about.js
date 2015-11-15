@@ -1,5 +1,5 @@
 /**
- * 活动控制器
+ * 关于控制器
  **/
 var AboutController = function () { };
 

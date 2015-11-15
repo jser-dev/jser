@@ -103,6 +103,10 @@
                 "target": "./user-info"
             },
             {
+                "pattern": "/message/{id}",
+                "target": "./message"
+            },
+            {
                 "pattern": "/about",
                 "target": "./about"
             },
