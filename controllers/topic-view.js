@@ -68,7 +68,7 @@ TopicViewController.prototype.setGood = function () {
 		if (err) {
 			return self.context.error(err);
 		}
-		self.context.redirect("/topic/" + self.topicId);
+		self.context.redirect("/topic/" + self.topicId + "#control");
 	});
 };
 
@@ -81,7 +81,7 @@ TopicViewController.prototype.removeGood = function () {
 		if (err) {
 			return self.context.error(err);
 		}
-		self.context.redirect("/topic/" + self.topicId);
+		self.context.redirect("/topic/" + self.topicId + "#control");
 	});
 };
 
@@ -94,7 +94,7 @@ TopicViewController.prototype.setTop = function () {
 		if (err) {
 			return self.context.error(err);
 		}
-		self.context.redirect("/topic/" + self.topicId);
+		self.context.redirect("/topic/" + self.topicId + "#control");
 	});
 };
 
@@ -107,7 +107,7 @@ TopicViewController.prototype.removeTop = function () {
 		if (err) {
 			return self.context.error(err);
 		}
-		self.context.redirect("/topic/" + self.topicId);
+		self.context.redirect("/topic/" + self.topicId + "#control");
 	});
 };
 
