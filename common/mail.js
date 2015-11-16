@@ -7,10 +7,10 @@ var transporter = null;
 
 self.send = function (options, callback) {
     if (!transporter) {
-        transporter = nodemailer.createTransport(utils.configs.mail);
+        transporter = nodemailer.createTransport(utils.configs.mail.conn);
     }
     options = options || {};
-    options.from =  utils.configs.mail.auth.user;
+    options.from = utils.configs.mail.conn.auth.user;
     transporter.sendMail(options, callback);
 };
 

@@ -28,7 +28,7 @@
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading"> 
-                        <label class="topic-type"><%= $.configs.topicTypes[item.type].text %></label>                 
+                        <label class="topic-type"><%= ($.configs.topicTypes[item.type]||{}).text %></label>                 
                         <a href="/topic/<%= item.id %>"><%= item.title %></a>
                         <% if(item.top>0){ %>
                         <label class="topic-label top">置顶</label>

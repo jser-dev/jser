@@ -150,12 +150,14 @@
         }
     },
     "mail": {
-        "service": "qq",
-        "port": 465,
-        "secureConnection": true,
-        "auth": {
-            "user": "313219151@qq.com",
-            "pass": "wangyuejun123"
+        "conn": {
+            "host": "smtp.exmail.qq.com",
+            "port": 465,
+            "secure": true,
+            "auth": {
+                "user": "service@jser.cc",
+                "pass": "Pass01!"
+            }
         },
         "reg_tmpl": {
             "subject": "请确认你在 JSER 的注册邮箱",

@@ -20,7 +20,7 @@ self.sendForReg = function (user, callback) {
 	self.createTmpls();
 	
 	var options = {};
-	options.from = utils.configs.mail.auth.user; //发件人
+	options.from = utils.configs.mail.conn.auth.user; //发件人
 	options.to = user.email; //收件人
 	options.subject = tmpls.reg_subject();        //主题
 	options.html = tmpls.reg_body(user);  //内容
