@@ -159,13 +159,13 @@
                 "pass": "Pass01!"
             }
         },
-        "from": "JSER社区<service@jser.cc>",
+        "from": "JSER社区 <service@jser.cc>",
         "reg_tmpl": {
-            "subject": "请确认你在 JSER 的注册邮箱",
+            "subject": "确认您的注册",
             "body": "./tmpls/verify-mail.html"
         },
         "pwd_tmpl": {
-            "subject": "JSER 密码找回",
+            "subject": "找回您的密码",
             "body": "./tmpls/reset-password.html"
         }
     },
