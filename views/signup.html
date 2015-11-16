@@ -13,7 +13,7 @@
     <div class="panel-heading">注册</div>
     <div class="panel-body">
         <% if(this.status){ %>
-            <p><%= this.message %>,<a href='/signin'>现在登录</a></p>
+            <p><%= this.message %>, 请验证您的邮箱后 <a href='/signin'>登录</a></p>
         <% }else{ %>
             <% this.user=this.user||{} %>
             <form action="/signup/submit" method="post" autocomplete="off">

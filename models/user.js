@@ -5,12 +5,6 @@ var define = require("./define");
 //定义用户模型
 var User = define.User;
 
-//数据验证
-User.PWD_MIN_LENGTH = 6;
-User.schema.path('password').validate(function (value) {
-    return value && value.length >= User.PWD_MIN_LENGTH;
-}, '密码不能少于 ' + User.PWD_MIN_LENGTH + ' 个字符');
-
 //创建一个新用户
 User.create = function () {
     return new User();
@@ -32,12 +26,14 @@ User.signIn = function (user, callback) {
         return callback("用户或者密码错误");
     }
     user.password = utils.hashDigest(user.password);
-    self.findOne({ "email": user.email, "password": user.password }, function (err, foundUser) {
+    self.findOne({ 
+        "email": user.email, 
+        "password": user.password }, 
+    function (err, foundUser) {
         if (err) {
-            return callback(err);
+            return callback(err); 
         }
         if (foundUser) {
-            //
             return callback(null, foundUser);
         } else {
             return callback('用户或者密码错误');
@@ -70,27 +66,58 @@ User.oAuth = function (user, callback) {
     });
 };
 
+//根据一个字段检查是否存在用户
+User.existsByField=function(field,value,callback){
+    var options={};
+    options[field]=value;
+    self.findOne(options, function (err, foundUser) {
+        if (err) {
+            return callback(err);
+        }
+        return callback(null, foundUser);
+    });
+};
+
 //注册一个用户
 User.signUp = function (user, callback) {
     var self = this;
     user.avatar = user.avatar || self.getAvatar();
-    if (!user.email ||
-        !user.name ||
-        !user.password ||
-        user.password.length < User.PWD_MIN_LENGTH) {
-        return callback('用户信息不合法');
+    if (!user.email || user.email.indexOf('@') < 0) {
+        return callback("请填写正确的邮箱");
     }
-    user.verifyCode = utils.newGuid();
-    user.password = utils.hashDigest(user.password);
-    user.save(function (err) {
-        if (err) {
-            return callback(err);
-        }
-        mail.sendForReg(user, function (err) {
-            if (err) {
+    if (!user.name || user.name.length < 2) {
+        return callback("名字最少需要两个字符");
+    }
+    if (!user.password || user.password.length < 6) {
+        return callback('密码最少需要六个字符');
+    }
+    self.existsByField("email",user.email,function(err,existsUser){
+       if(err){
+           return callback(err);
+       } 
+       if(existsUser){
+           return callback('邮箱 "'+user.email+'" 已经被使用');
+       }
+        self.existsByField("name",user.name,function(err,existsUser){
+            if(err){
                 return callback(err);
+            } 
+            if(existsUser){
+                return callback('名字 "'+user.email+'" 已经被使用');
             }
-            return callback(null, user);
+            user.verifyCode = utils.newGuid();
+            user.password = utils.hashDigest(user.password);
+            user.save(function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                mail.sendForReg(user, function (err) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    return callback(null, user);
+                });
+            });
         });
     });
 };
@@ -121,7 +148,7 @@ User.search = function (keyword, callback) {
 };
 
 /**
- * 验证邮编编码
+ * 验证邮箱
  **/
 User.verifyMail = function (verifyCode, callback) {
     var self = this;
