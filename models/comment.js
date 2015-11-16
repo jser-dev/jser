@@ -15,7 +15,8 @@ Comment.getListByTopicId = function (topicId, callback) {
 Comment.getLastByUserId = function (userId, callback) {
         var self = Comment;
         self.find({
-                author: userId
+                author: userId,
+                status: status.PUBLISH
         }).sort({ '_id': -1 })
                 .skip(0)
                 .limit(5)

@@ -177,7 +177,8 @@ Topic.removeTop = function (id, callback) {
 Topic.getLastByUserId = function (userId, callback) {
     var self = Topic;
     self.find({
-        author: userId
+        author: userId,
+        status: status.PUBLISH
     }).sort({ 'top': -1, '_id': -1 })
         .skip(0)
         .limit(10)
