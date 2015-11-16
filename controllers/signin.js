@@ -14,7 +14,7 @@ SignInController.prototype.submit = function () {
     User.signIn(userInfo, function (err, user) {
         if (err) {
             self.render("signin.html", {
-                status: err == null,
+                status: !err,
                 message: err,
                 user: userInfo
             });

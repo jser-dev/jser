@@ -25,21 +25,19 @@ User.signIn = function (user, callback) {
     if (!user.email || !user.password) {
         return callback("用户或者密码错误");
     }
-    user.password = utils.hashDigest(user.password);
     self.findOne({ 
-        "email": user.email, 
-        "password": user.password }, 
+        "email": new RegExp(user.email,"igm"), 
+        "password": utils.hashDigest(user.password) }, 
     function (err, foundUser) {
         if (err) {
-            return callback(err); 
+            return callback(err,user); 
         }
-        if(foundUser.verifyCode){
-            return callback("该用户的邮箱还未验证");
-        }
-        if (foundUser) {
+        if(foundUser && foundUser.verifyCode){
+            return callback("该用户的邮箱还未验证",user);
+        }else if (foundUser) {
             return callback(null, foundUser);
         } else {
-            return callback('用户或者密码错误');
+            return callback('用户或者密码错误',user);
         }
     });
 };
