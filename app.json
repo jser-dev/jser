@@ -159,13 +159,14 @@
                 "pass": "Pass01!"
             }
         },
+        "from": "JSER社区<service@jser.cc>",
         "reg_tmpl": {
             "subject": "请确认你在 JSER 的注册邮箱",
-            "body": "请点击如下链接，激活您的邮箱: http://127.0.0.1:8000/verify/<%= this.verifyCode %>"
+            "body": "./tmpls/verify-mail.html"
         },
         "pwd_tmpl": {
             "subject": "JSER 密码找回",
-            "body": "请点击如下链接，找回您的密码: <%= this.verifyCode %>"
+            "body": "./tmpls/reset-password.html"
         }
     },
     "oauth": {

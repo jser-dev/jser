@@ -62,6 +62,8 @@ self.timeago = ((function () {
  * 初始化 utils 的一属性
  **/
 self.init = function (server) {
+	//server
+	self.server = server;
 	//配置
 	self.configs = server.configs;
 };
