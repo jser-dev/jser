@@ -4,10 +4,10 @@ var self = module.exports;
 
 //定义用户模型
 var User = self.User = db.model('User', {
-    email: { type: String, unique: true, required: true }, // email
-    password: { type: String, default: '', required: true }, //密码
-    name: { type: String, unique: true, required: true }, //名字
-    avatar: { type: String, default: '', required: true }, //头像 
+    email: { type: String, unique: true, required: true, trim: true }, // email
+    password: { type: String, default: '', required: true, trim: true }, //密码
+    name: { type: String, unique: true, required: true, trim: true }, //名字
+    avatar: { type: String, default: '', required: true, trim: true }, //头像 
     score: { type: Number, default: 0 }, //积分,
     signUpAt: { type: Date, default: Date.now },//注册时间
     role: [{ type: String, default: '' }],
@@ -17,13 +17,13 @@ var User = self.User = db.model('User', {
 
 //定义话题模型
 var Topic = self.Topic = db.model('Topic', {
-    title: { type: String, default: '', required: true }, //标题
+    title: { type: String, default: '', required: true, trim: true }, //标题
     content: { type: String, default: '' }, //内容
     html: { type: String, default: '' }, //html内容
-    type: [{ type: String, default: '' }], //类型
+    type: [{ type: String, default: '', trim: true }], //类型
     author: { type: db.types.ObjectId, ref: User.schema.name, required: true }, //作者
     lastReplayAuthor: { type: db.types.ObjectId, ref: User.schema.name }, //回复数量
-    tags: [{ type: String, default: '' }], //标签,
+    tags: [{ type: String, default: '', trim: true }], //标签,
     createAt: { type: Date, default: Date.now }, //创建时间
     updateAt: { type: Date, default: Date.now }, //更新时间
     lastReplayAt: { type: Date, default: Date.now }, //最后回复时间

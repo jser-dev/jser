@@ -13,7 +13,7 @@ User.create = function () {
 //加载按积分降序排序的 n 个用户
 User.getList = function (top, callback) {
     var self = User;
-    self.find({})
+    self.find({}) 
         .sort({ 'integral': -1, '_id': 1 })
         .limit(top)
         .exec(callback);
@@ -32,6 +32,9 @@ User.signIn = function (user, callback) {
     function (err, foundUser) {
         if (err) {
             return callback(err); 
+        }
+        if(foundUser.verifyCode){
+            return callback("该用户的邮箱还未验证");
         }
         if (foundUser) {
             return callback(null, foundUser);
@@ -68,8 +71,9 @@ User.oAuth = function (user, callback) {
 
 //根据一个字段检查是否存在用户
 User.existsByField=function(field,value,callback){
+    var self = this;
     var options={};
-    options[field]=value;
+    options[field]=new RegExp(value,"igm");
     self.findOne(options, function (err, foundUser) {
         if (err) {
             return callback(err);
@@ -103,10 +107,10 @@ User.signUp = function (user, callback) {
                 return callback(err);
             } 
             if(existsUser){
-                return callback('名字 "'+user.email+'" 已经被使用');
+                return callback('名字 "'+user.name+'" 已经被使用');
             }
-            user.verifyCode = utils.newGuid();
             user.password = utils.hashDigest(user.password);
+            user.verifyCode = utils.newGuid();
             user.save(function (err) {
                 if (err) {
                     return callback(err);

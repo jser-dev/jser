@@ -14,10 +14,9 @@ SignUpController.prototype.submit = function () {
     var self = this;
     var userInfo = self.getUserInfo();
     User.signUp(userInfo, function (err, user) {
-        var status = !!err;
         self.render('signup.html', {
-            status: status,
-            message: status ? "注册成功" : err,
+            status: !err,
+            message: err || "注册成功",
             user: user || userInfo
         });
     });
