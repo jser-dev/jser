@@ -1,6 +1,6 @@
 {
   "name": "jser",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "一个纯粹而简的社区软件",
   "main": "./app.js",
   "keywords": [
