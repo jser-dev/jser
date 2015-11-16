@@ -1,5 +1,6 @@
 {
-  "name": "jser",
+  "name": "jser.cc",
+  "rawName": "jser",
   "version": "0.0.1",
   "description": "一个纯粹而简的社区软件",
   "main": "./app.js",
