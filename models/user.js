@@ -8,12 +8,12 @@ var fs = require("fs");
 var User = define.User;
 
 //创建一个新用户
-User.create = function() {
+User.create = function () {
     return new User();
 };
 
 //加载按积分降序排序的 n 个用户
-User.getList = function(top, callback) {
+User.getList = function (top, callback) {
     var self = User;
     self.find({})
         .sort({
@@ -25,16 +25,16 @@ User.getList = function(top, callback) {
 };
 
 //登录一个用户
-User.signIn = function(user, callback) {
+User.signIn = function (user, callback) {
     var self = User;
     if (!user.email || !user.password) {
         return callback("账号或者密码错误");
     }
     self.findOne({
-            "email": new RegExp(user.email, "igm"),
-            "password": utils.hashDigest(user.password)
-        },
-        function(err, foundUser) {
+        "email": new RegExp(user.email, "igm"),
+        "password": utils.hashDigest(user.password)
+    },
+        function (err, foundUser) {
             if (err) {
                 return callback(err, user);
             }
@@ -49,7 +49,7 @@ User.signIn = function(user, callback) {
 };
 
 //通过 oauth 认证一个用户
-User.oAuth = function(user, callback) {
+User.oAuth = function (user, callback) {
     var self = User;
     if (!user || !user.email) {
         return callback('oAuth 发生了异常，没有可用 email');
@@ -57,7 +57,7 @@ User.oAuth = function(user, callback) {
     user.avatar = user.avatar || self.getAvatar();
     self.findOne({
         "email": user.email
-    }, function(err, foundUser) {
+    }, function (err, foundUser) {
         if (err) {
             return callback(err);
         }
@@ -65,7 +65,7 @@ User.oAuth = function(user, callback) {
             return callback(null, foundUser);
         } else {
             user.avatar = user.avatar || self.getAvatar();
-            user.save(function(err) {
+            user.save(function (err) {
                 if (err) {
                     return callback(err);
                 }
@@ -76,11 +76,11 @@ User.oAuth = function(user, callback) {
 };
 
 //根据一个字段检查是否存在用户
-User.existsByField = function(field, value, callback) {
+User.existsByField = function (field, value, callback) {
     var self = this;
     var options = {};
     options[field] = new RegExp(value, "igm");
-    self.findOne(options, function(err, foundUser) {
+    self.findOne(options, function (err, foundUser) {
         if (err) {
             return callback(err);
         }
@@ -89,7 +89,7 @@ User.existsByField = function(field, value, callback) {
 };
 
 //注册一个用户
-User.signUp = function(user, callback) {
+User.signUp = function (user, callback) {
     var self = this;
     user.avatar = user.avatar || self.getAvatar();
     if (!user.email || user.email.indexOf('@') < 0) {
@@ -101,14 +101,14 @@ User.signUp = function(user, callback) {
     if (!user.password || user.password.length < 6) {
         return callback('密码最少需要六个字符');
     }
-    self.existsByField("email", user.email, function(err, existsUser) {
+    self.existsByField("email", user.email, function (err, existsUser) {
         if (err) {
             return callback(err);
         }
         if (existsUser) {
             return callback('邮箱 "' + user.email + '" 已经被使用');
         }
-        self.existsByField("name", user.name, function(err, existsUser) {
+        self.existsByField("name", user.name, function (err, existsUser) {
             if (err) {
                 return callback(err);
             }
@@ -117,11 +117,11 @@ User.signUp = function(user, callback) {
             }
             user.password = utils.hashDigest(user.password);
             user.verifyCode = utils.newGuid();
-            user.save(function(err) {
+            user.save(function (err) {
                 if (err) {
                     return callback(err);
                 }
-                mail.sendForReg(user, function(err) {
+                mail.sendForReg(user, function (err) {
                     if (err) {
                         return callback(err);
                     }
@@ -133,7 +133,7 @@ User.signUp = function(user, callback) {
 };
 
 //生成一个用户头像
-User.getAvatar = function() {
+User.getAvatar = function () {
     var index = utils.random(1, 12);
     return "/images/avatar/" + index + ".png";
 };
@@ -141,7 +141,7 @@ User.getAvatar = function() {
 /**
  * 获取一个用户
  **/
-User.getUser = function(id, callback) {
+User.getUser = function (id, callback) {
     var self = this;
     self.findById(id, callback);
 };
@@ -149,14 +149,14 @@ User.getUser = function(id, callback) {
 /**
  * 搜索匹配的人员
  **/
-User.search = function(keyword, callback) {
+User.search = function (keyword, callback) {
     var self = this;
     self.find({
-            "name": {
-                $regex: keyword,
-                $options: 'i'
-            }
-        })
+        "name": {
+            $regex: keyword,
+            $options: 'i'
+        }
+    })
         .sort({
             'integral': -1,
             '_id': 1
@@ -168,17 +168,17 @@ User.search = function(keyword, callback) {
 /**
  * 验证邮箱
  **/
-User.verifyMail = function(verifyCode, callback) {
+User.verifyMail = function (verifyCode, callback) {
     var self = this;
     self.findOne({
         "verifyCode": verifyCode
-    }, function(err, foundUser) {
+    }, function (err, foundUser) {
         if (err) {
             return callback(err);
         }
         if (foundUser) {
             foundUser.verifyCode = '';
-            foundUser.save(function(err) {
+            foundUser.save(function (err) {
                 if (err) {
                     return callback(err);
                 }
@@ -191,7 +191,7 @@ User.verifyMail = function(verifyCode, callback) {
 };
 
 //设置密码
-User.setPassword = function(opts, callback) {
+User.setPassword = function (opts, callback) {
     var self = this;
     if (!opts.password || opts.password.length < 6) {
         return callback('密码最少需要六个字符');
@@ -199,14 +199,14 @@ User.setPassword = function(opts, callback) {
     self.update({
         "_id": opts.id
     }, {
-        $set: {
-            password: utils.hashDigest(opts.password)
-        }
-    }, callback);
+            $set: {
+                password: utils.hashDigest(opts.password)
+            }
+        }, callback);
 };
 
 //初始化七牛
-User._initQiQiu = function() {
+User._initQiQiu = function () {
     var self = this;
     if (!self.quClient) {
         var qnConfigs = utils.configs.qiniu;
@@ -219,47 +219,52 @@ User._initQiQiu = function() {
     }
 };
 
-User._uploadAvatar = function(baseInfo, callback) {
+User._getAvatarFileName = function (avatarUrl) {
+    avatarUrl = avatarUrl || "";
+    return avatarUrl.split('/').pop().split('?')[0];
+};
+
+User._uploadAvatar = function (baseInfo, callback) {
     var self = this;
-    var fileKey = "avatar-" + baseInfo.id;
-    self.quClient.delete(fileKey, function(err) {
+    var oldFileKey = this._getAvatarFileName(baseInfo.oldAvatar);
+    var newFileKey = "avatar-" + baseInfo.id + "-" + Date.now();
+    self.quClient.delete(oldFileKey || newFileKey, function (err) {
         self.quClient.upload(fs.createReadStream(baseInfo.avatar), {
-            key: fileKey
-        }, function(err, result) {
+            key: newFileKey
+        }, function (err, result) {
             if (err) {
                 return callback(err);
             }
-            baseInfo.avatar = self.quClient.imageView(fileKey, {
+            baseInfo.avatar = self.quClient.imageView(newFileKey, {
                 mode: 1,
                 width: 160,
                 height: 160,
                 q: 50,
                 format: 'png'
             });
-            baseInfo.avatar = baseInfo.avatar.replace(fileKey + "?", fileKey + "?" + Date.now() + "&");
             callback(null, baseInfo);
         });
     });
 };
 
-User.updateUser = function(id, obj, callback) {
+User.updateUser = function (id, obj, callback) {
     var self = this;
     self.update({
         "_id": id
     }, {
-        $set: obj
-    }, function(err, rs) {
-        callback(err, rs);
-    });
+            $set: obj
+        }, function (err, rs) {
+            callback(err, rs);
+        });
 };
 
-User.saveBaseInfo = function(baseInfo, callback) {
+User.saveBaseInfo = function (baseInfo, callback) {
     var self = this;
     if (!baseInfo.name || baseInfo.name.length < 2) {
         return callback("名字最少需要两个字符");
     }
     self._initQiQiu();
-    self.existsByField("name", baseInfo.name, function(err, existsUser) {
+    self.existsByField("name", baseInfo.name, function (err, existsUser) {
         if (err) {
             return callback(err);
         }
@@ -269,15 +274,15 @@ User.saveBaseInfo = function(baseInfo, callback) {
         if (!baseInfo.avatar) {
             return self.updateUser(baseInfo.id, {
                 name: baseInfo.name
-            }, function(err) {
+            }, function (err) {
                 callback(err, baseInfo);
             });
         }
-        self._uploadAvatar(baseInfo, function(err, info) {
+        self._uploadAvatar(baseInfo, function (err, info) {
             self.updateUser(info.id, {
                 name: info.name,
                 avatar: info.avatar
-            }, function(err) {
+            }, function (err) {
                 callback(err, info);
             });
         });
