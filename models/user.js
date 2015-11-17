@@ -62,7 +62,6 @@ User.oAuth = function (user, callback) {
     if (!user || !user.email) {
         return callback('oAuth 发生了异常，没有可用 email');
     }
-    //user.avatar = user.avatar || self.getRandomAvatar();
     self.findOne({
         "email": user.email
     }, function (err, foundUser) {
@@ -70,7 +69,13 @@ User.oAuth = function (user, callback) {
             return callback(err);
         }
         if (foundUser) {
-            return callback(null, foundUser);
+            foundUser.verifyCode = "";
+            foundUser.save(function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, foundUser);
+            });
         } else {
             user.avatar = user.avatar || self.getRandomAvatar();
             user.save(function (err) {
