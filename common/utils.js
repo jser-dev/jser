@@ -29,15 +29,6 @@ self.hashDigest = function (value) {
 };
 
 /**
- * 解析 markdown
- **/
-self.md2html = function (md) {
-	if (!md) return md;
-	self._mdParser = self._mdParser || new Mditor.Parser();
-	return self._mdParser.parse(md);
-};
-
-/**
  * 将 timeago 挂在 utils 上 (utils 的为引用为 nokit.utils 参考 common/utils.js)
  * utils 可以在模板中通过 $ 调用
  **/
@@ -72,3 +63,25 @@ self.init = function (server) {
 
 //状态常量
 self.status = status;
+
+//转换 @xxx
+var atRegExp = new RegExp("\\s*\\@\\w+\\s+", "igm");
+self.convertAt = function (str) {
+	if (!str) return str;
+	str = str.replace(atRegExp, function (item) {
+		item = item.trim();
+		var name = item.substr(1);
+		return " [" + item + "](/user/" + name + ") ";
+	});
+	return str;
+};
+
+/**
+ * 解析 markdown
+ **/
+self.md2html = function (md) {
+	if (!md) return md;
+	md = self.convertAt(md);
+	self._mdParser = self._mdParser || new Mditor.Parser();
+	return self._mdParser.parse(md);
+};
