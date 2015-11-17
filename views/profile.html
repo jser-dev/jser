@@ -9,13 +9,16 @@
 
 <% $.placeBegin("content") %>
 
+<a id="saveBaseInfo"></a>
 <div class="panel panel-default">
-    <div class="panel-heading">基本信息</div>
+    <div class="panel-heading">
+        基本信息
+    </div>
     <div class="panel-body profile">
-       <form action="/profile/save" method="post" autocomplete="off">
+       <form action="/profile/saveBaseInfo#saveBaseInfo" method="post" enctype="multipart/form-data" autocomplete="off">
             <p class="form-row alert-text">
                 <label></label>
-                <%= this.message %>
+                <%= this.saveBaseInfoMessage %>
             </p>
             <p class="form-row">
                 <label>邮件</label>
@@ -27,11 +30,11 @@
             </p>
             <p class="form-row">
                 <label>头像</label>
-                <input name="avatar" type="file" value="<%= this.user.email %>"/>
+                <input name="avatar" type="file" />
             </p>
             <p class="form-row">
                 <label class="hidden-xs"></label>
-                <img class="avatar" src="<%= this.user.avatar %>"/>
+                <img class="avatar" src="<%= this.user.avatar %>" />
             </p>
             <p class="form-row">
                 <label class="hidden-xs"></label>
@@ -44,25 +47,24 @@
     </div>
 </div>
 
+<a id="changePassword"></a>
 <div class="panel panel-default">
-    <div class="panel-heading">修改密码</div>
+    <div class="panel-heading">
+        修改密码
+    </div>
     <div class="panel-body">
-       <form action="/profile/save" method="post" autocomplete="off">
+       <form action="/profile/changePassword#changePassword" method="post" autocomplete="off">
             <p class="form-row alert-text">
                 <label></label>
-                <%= this.message %>
-            </p>
-            <p class="form-row">
-                <label>密码</label>
-                <input name="passowrd" type="password"/>
+                <%= this.changePasswordMessage %>
             </p>
             <p class="form-row">
                 <label>新密码</label>
-                <input name="newPassowrd" type="password"/>
+                <input name="password" type="password"/>
             </p>
             <p class="form-row">
                 <label>确认</label>
-                <input name="newPassowrd" type="password"/>
+                <input name="confirmPassword" type="password"/>
             </p>
             <p class="form-row">
                 <label class="hidden-xs"></label>
