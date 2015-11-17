@@ -28,7 +28,7 @@ User.getList = function(top, callback) {
 User.signIn = function(user, callback) {
     var self = User;
     if (!user.email || !user.password) {
-        return callback("用户或者密码错误");
+        return callback("账号或者密码错误");
     }
     self.findOne({
             "email": new RegExp(user.email, "igm"),
@@ -39,11 +39,11 @@ User.signIn = function(user, callback) {
                 return callback(err, user);
             }
             if (foundUser && foundUser.verifyCode) {
-                return callback("该用户的邮箱还未验证", user);
+                return callback("该账号的邮箱还未验证", user);
             } else if (foundUser) {
                 return callback(null, foundUser);
             } else {
-                return callback('用户或者密码错误', user);
+                return callback('账号或者密码错误', user);
             }
         });
 };
