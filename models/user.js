@@ -39,7 +39,7 @@ User.signIn = function (user, callback) {
                 return callback(err, user);
             }
             if (foundUser && foundUser.verifyCode) {
-                return callback("该账号的邮箱还未验证", user);
+                return callback("该账号的邮箱还未验证，请查收邮件或重新注册", user);
             } else if (foundUser) {
                 return callback(null, foundUser);
             } else {
@@ -54,7 +54,7 @@ User.oAuth = function (user, callback) {
     if (!user || !user.email) {
         return callback('oAuth 发生了异常，没有可用 email');
     }
-    user.avatar = user.avatar || self.getAvatar();
+    //user.avatar = user.avatar || self.getRandomAvatar();
     self.findOne({
         "email": user.email
     }, function (err, foundUser) {
@@ -64,7 +64,7 @@ User.oAuth = function (user, callback) {
         if (foundUser) {
             return callback(null, foundUser);
         } else {
-            user.avatar = user.avatar || self.getAvatar();
+            user.avatar = user.avatar || self.getRandomAvatar();
             user.save(function (err) {
                 if (err) {
                     return callback(err);
@@ -88,10 +88,41 @@ User.existsByField = function (field, value, callback) {
     });
 };
 
+//根据 email 清除未验证的用户
+User.clearNotVerifiedByEmail = function (email, callback) {
+    var self = this;
+    self.remove({
+        "email": email,
+        "verifyCode": { $ne: "" }
+    }, callback);
+};
+
+User.checkEmailOrName = function (user, callback) {
+    var self = this;
+    self.clearNotVerifiedByEmail(user.email, function () {
+        self.existsByField("email", user.email, function (err, existsUser) {
+            if (err) {
+                return callback(err);
+            }
+            if (existsUser) {
+                return callback('邮箱 "' + user.email + '" 已经被使用');
+            }
+            self.existsByField("name", user.name, function (err, existsUser) {
+                if (err) {
+                    return callback(err);
+                }
+                if (existsUser) {
+                    return callback('名字 "' + user.name + '" 已经被使用');
+                }
+            });
+        });
+    });
+};
+
 //注册一个用户
 User.signUp = function (user, callback) {
     var self = this;
-    user.avatar = user.avatar || self.getAvatar();
+    user.avatar = user.avatar || self.getRandomAvatar();
     if (!user.email || user.email.indexOf('@') < 0) {
         return callback("请填写正确的邮箱");
     }
@@ -101,39 +132,30 @@ User.signUp = function (user, callback) {
     if (!user.password || user.password.length < 6) {
         return callback('密码最少需要六个字符');
     }
-    self.existsByField("email", user.email, function (err, existsUser) {
+    self.checkEmailOrName(user, function (err) {
         if (err) {
             return callback(err);
         }
-        if (existsUser) {
-            return callback('邮箱 "' + user.email + '" 已经被使用');
-        }
-        self.existsByField("name", user.name, function (err, existsUser) {
+        user.password = utils.hashDigest(user.password);
+        user.verifyCode = utils.newGuid();
+        user.save(function (err) {
             if (err) {
                 return callback(err);
             }
-            if (existsUser) {
-                return callback('名字 "' + user.name + '" 已经被使用');
-            }
-            user.password = utils.hashDigest(user.password);
-            user.verifyCode = utils.newGuid();
-            user.save(function (err) {
+            mail.sendForReg(user, function (err) {
                 if (err) {
                     return callback(err);
                 }
-                mail.sendForReg(user, function (err) {
-                    if (err) {
-                        return callback(err);
-                    }
-                    return callback(null, user);
-                });
+                return callback(null, user);
             });
         });
     });
 };
 
-//生成一个用户头像
-User.getAvatar = function () {
+/**
+ * 随机生成一个用户头像 URL
+ **/
+User.getRandomAvatar = function () {
     var index = utils.random(1, 12);
     return "/images/avatar/" + index + ".png";
 };
@@ -190,7 +212,9 @@ User.verifyMail = function (verifyCode, callback) {
     });
 };
 
-//设置密码
+/**
+ * 设置用户的密码
+ **/
 User.setPassword = function (opts, callback) {
     var self = this;
     if (!opts.password || opts.password.length < 6) {
@@ -205,7 +229,9 @@ User.setPassword = function (opts, callback) {
         }, callback);
 };
 
-//初始化七牛
+/**
+ * 初始化 QiQiu Client
+ **/
 User._initQiQiu = function () {
     var self = this;
     if (!self.quClient) {
@@ -219,11 +245,17 @@ User._initQiQiu = function () {
     }
 };
 
+/**
+ * 根据 URL 获取头像文件名
+ **/
 User._getAvatarFileName = function (avatarUrl) {
     avatarUrl = avatarUrl || "";
     return avatarUrl.split('?')[0].split('/').pop();
 };
 
+/**
+ * 上传用户头像到 QiQiu
+ **/
 User._uploadAvatar = function (baseInfo, callback) {
     var self = this;
     var newFileKey = "avatar-" + baseInfo.id + "-" + Date.now();
@@ -247,6 +279,9 @@ User._uploadAvatar = function (baseInfo, callback) {
     });
 };
 
+/**
+ * 根据 ID 更新用户的某几个字段
+ **/
 User.updateUser = function (id, obj, callback) {
     var self = this;
     self.update({
@@ -258,6 +293,9 @@ User.updateUser = function (id, obj, callback) {
         });
 };
 
+/**
+ * 保存用户基本信息
+ **/
 User.saveBaseInfo = function (baseInfo, callback) {
     var self = this;
     if (!baseInfo.name || baseInfo.name.length < 2) {
