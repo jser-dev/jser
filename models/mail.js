@@ -29,7 +29,10 @@ self.sendForReg = function (user, callback) {
 	var options = {};
 	options.to = user.email; //收件人
 	options.subject = tmpls.reg_subject();        //主题
-	options.html = tmpls.reg_body(user);  //内容
+	options.html = tmpls.reg_body({
+		"user": user,
+		"configs": utils.configs
+	});  //内容
 	mail.send(options, callback);
 };
 
