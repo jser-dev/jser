@@ -240,7 +240,7 @@ User._uploadAvatar = function (baseInfo, callback) {
             q: 50,
             format: 'png'
         });
-        var oldFileKey = this._getAvatarFileName(baseInfo.oldAvatar);
+        var oldFileKey = self._getAvatarFileName(baseInfo.oldAvatar);
         self.quClient.delete(oldFileKey, function (err) {
             callback(null, baseInfo);
         });
