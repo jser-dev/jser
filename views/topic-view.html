@@ -51,7 +51,7 @@
             <i class="fa fa-thumbs-o-down" title="踩的人数">2</i>
         </div>
         <% var user = $.controller.context.user  %>
-        <% if(user && user._id===this.topic.author.id){ %>
+        <% if(user && user._id.toString()==this.topic.author._id.toString()){ %>
         <a class="linkbtn" href="/topic/<%= this.topic.id %>/edit">
             <i class="fa fa-edit" title="编辑"></i>
         </a>
