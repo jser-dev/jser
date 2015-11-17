@@ -229,7 +229,6 @@ User._uploadAvatar = function(baseInfo, callback) {
             if (err) {
                 return callback(err);
             }
-            //baseInfo.avatar = result.url;
             baseInfo.avatar = self.quClient.imageView(fileKey, {
                 mode: 1,
                 width: 160,
@@ -237,7 +236,7 @@ User._uploadAvatar = function(baseInfo, callback) {
                 q: 50,
                 format: 'png'
             });
-            baseInfo.avatar += "?" + Date.now();
+            baseInfo.avatar = baseInfo.avatar.replace(fileKey + "?", fileKey + "?" + Date.now() + "&");
             callback(null, baseInfo);
         });
     });
