@@ -221,7 +221,7 @@ User._initQiQiu = function () {
 
 User._getAvatarFileName = function (avatarUrl) {
     avatarUrl = avatarUrl || "";
-    return avatarUrl.split('/').pop().split('?')[0];
+    return avatarUrl.split('?')[0].split('/').pop();
 };
 
 User._uploadAvatar = function (baseInfo, callback) {
