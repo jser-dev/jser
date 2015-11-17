@@ -4,15 +4,21 @@ var define = require("./define");
 var qn = require("qn");
 var fs = require("fs");
 
-//定义用户模型
+/**
+ * 定义用户模型
+ **/
 var User = define.User;
 
-//创建一个新用户
+/**
+ * 创建一个新用户
+ **/
 User.create = function () {
     return new User();
 };
 
-//加载按积分降序排序的 n 个用户
+/**
+ * 加载按积分降序排序的 n 个用户
+ **/
 User.getList = function (top, callback) {
     var self = User;
     self.find({})
@@ -24,7 +30,9 @@ User.getList = function (top, callback) {
         .exec(callback);
 };
 
-//登录一个用户
+/**
+ * 登录一个用户
+ **/
 User.signIn = function (user, callback) {
     var self = User;
     if (!user.email || !user.password) {
@@ -39,7 +47,7 @@ User.signIn = function (user, callback) {
                 return callback(err, user);
             }
             if (foundUser && foundUser.verifyCode) {
-                return callback("该账号的邮箱还未验证，请查收邮件或重新注册", user);
+                return callback("该账号的邮箱还未验证，请完成验证或重新注册", user);
             } else if (foundUser) {
                 return callback(null, foundUser);
             } else {
@@ -48,7 +56,9 @@ User.signIn = function (user, callback) {
         });
 };
 
-//通过 oauth 认证一个用户
+/**
+ * 通过 oauth 认证一个用户
+ **/
 User.oAuth = function (user, callback) {
     var self = User;
     if (!user || !user.email) {
@@ -75,7 +85,9 @@ User.oAuth = function (user, callback) {
     });
 };
 
-//根据一个字段检查是否存在用户
+/**
+ * 根据一个字段检查是否存在用户
+ **/
 User.existsByField = function (field, value, callback) {
     var self = this;
     var options = {};
@@ -88,7 +100,9 @@ User.existsByField = function (field, value, callback) {
     });
 };
 
-//根据 email 清除未验证的用户
+/**
+ * 根据 email 清除未验证的用户
+ **/
 User.clearNotVerifiedByEmail = function (email, callback) {
     var self = this;
     self.remove({
@@ -97,6 +111,9 @@ User.clearNotVerifiedByEmail = function (email, callback) {
     }, callback);
 };
 
+/**
+ * 检查 email 或 name 是否存在
+ **/
 User.checkEmailOrName = function (user, callback) {
     var self = this;
     self.clearNotVerifiedByEmail(user.email, function () {
@@ -113,13 +130,17 @@ User.checkEmailOrName = function (user, callback) {
                 }
                 if (existsUser) {
                     return callback('名字 "' + user.name + '" 已经被使用');
+                } else {
+                    return callback();
                 }
             });
         });
     });
 };
 
-//注册一个用户
+/**
+ * 注册一个用户
+ **/
 User.signUp = function (user, callback) {
     var self = this;
     user.avatar = user.avatar || self.getRandomAvatar();
