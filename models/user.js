@@ -21,8 +21,10 @@ User.create = function () {
  **/
 User.getList = function (top, callback) {
     var self = User;
-    self.find({}).sort({
-        'integral': -1,
+    self.find({
+        "verifyCode": ""
+    }).sort({
+        'score': -1,
         '_id': 1
     }).limit(top).exec(callback);
 };
@@ -191,12 +193,13 @@ User.getUser = function (id, callback) {
 User.search = function (keyword, callback) {
     var self = this;
     self.find({
+        "verifyCode": "",
         "name": {
             $regex: keyword,
             $options: 'i'
         }
     }).sort({
-        'integral': -1,
+        'score': -1,
         '_id': 1
     }).limit(10).exec(callback);
 };
