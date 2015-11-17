@@ -226,22 +226,22 @@ User._getAvatarFileName = function (avatarUrl) {
 
 User._uploadAvatar = function (baseInfo, callback) {
     var self = this;
-    var oldFileKey = this._getAvatarFileName(baseInfo.oldAvatar);
     var newFileKey = "avatar-" + baseInfo.id + "-" + Date.now();
-    self.quClient.delete(oldFileKey || newFileKey, function (err) {
-        self.quClient.upload(fs.createReadStream(baseInfo.avatar), {
-            key: newFileKey
-        }, function (err, result) {
-            if (err) {
-                return callback(err);
-            }
-            baseInfo.avatar = self.quClient.imageView(newFileKey, {
-                mode: 1,
-                width: 160,
-                height: 160,
-                q: 50,
-                format: 'png'
-            });
+    self.quClient.upload(fs.createReadStream(baseInfo.avatar), {
+        key: newFileKey
+    }, function (err, result) {
+        if (err) {
+            return callback(err);
+        }
+        baseInfo.avatar = self.quClient.imageView(newFileKey, {
+            mode: 1,
+            width: 160,
+            height: 160,
+            q: 50,
+            format: 'png'
+        });
+        var oldFileKey = this._getAvatarFileName(baseInfo.oldAvatar);
+        self.quClient.delete(oldFileKey, function (err) {
             callback(null, baseInfo);
         });
     });
