@@ -199,9 +199,19 @@
             "access": []
         }
     },
-    "scoreRule": {
-        "topic": 2,
-        "comment": 1
+    "scoreRules": {
+        "topic-add": 2,
+        "topic-del": -2,
+        "good-add": 5,
+        "good-del": -5,
+        "top-add": 5,
+        "top-del": -5,
+        "like-add": 1,
+        "link-del": -1,
+        "dislink-add": 0,
+        "dislink-del": 0,
+        "comment-add": 1,
+        "comment-del": -1
     },
     "links": [
         {

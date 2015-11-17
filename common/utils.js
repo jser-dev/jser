@@ -1,6 +1,8 @@
+/* global nokit */
 var crypto = require("crypto");
 var Mditor = require('mditor');
 var timeago = require('timeago-words');
+var status = require("../models/status");
 
 var self = module.exports = (nokit.utils || {});
 
@@ -67,3 +69,6 @@ self.init = function (server) {
 	//配置
 	self.configs = server.configs;
 };
+
+//状态常量
+self.status = status;

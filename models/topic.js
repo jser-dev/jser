@@ -3,22 +3,18 @@ var Task = nokit.Task;
 var define = require('./define');
 var Comment = require('./comment');
 var status = require('./status').topic;
+var score = require('./score');
+var utils = require('../common/utils');
 
 //定义话题模型
 var Topic = module.exports = define.Topic;
-
-//数据验证
-// Topic.TITLE_MIN_LENGTH = 10;
-// Topic.schema.path('title').validate(function (value) {
-//     return value && value.length >= Topic.TITLE_MIN_LENGTH;
-// }, '标题不能少于 ' + Topic.TITLE_MIN_LENGTH + ' 个字符');
 
 //新建一个 topic
 Topic.new = function (author, callback) {
     var self = Topic;
     self.findOne({
         "status": status.DRAFT,
-        "author": author.id
+        "author": author._id
     }, function (err, foundTopic) {
         if (err) {
             return callback(err);
@@ -27,13 +23,35 @@ Topic.new = function (author, callback) {
             return callback(null, foundTopic);
         }
         var topic = new Topic();
-        topic.title = author.name + '的新话题';
+        topic.title = "";
         topic.content = "";
-        topic.author = author;
+        topic.author = author._id;
         topic.status = status.DRAFT;
         topic.datetime = new Date();
         topic.save(callback);
+        score.add(author._id, "topic-add");
     });
+};
+
+//保存一个话题
+Topic.save = function (topic, callback) {
+    if (!topic.title || topic.title.length < 10) {
+        return callback("话题标题不能少于 10 个字");
+    }
+    if (!topic.content || topic.content.length < 1) {
+        return callback("话题内容不能少于 1 个字");
+    }
+    if (!topic.type || topic.type.length < 1) {
+        return callback("请选择话题类型");
+    }
+    topic.html = utils.md2html(topic.content);
+    if (topic.status == status.PUBLISH) {
+        topic.updateAt = new Date();
+    } else {
+        topic.createAt = new Date();
+        topic.updateAt = topic.createAt;
+    }
+    topic.save(callback);
 };
 
 //获取一个 topic
@@ -112,6 +130,7 @@ Topic.delete = function (id, callback) {
         }
         item.status = status.DELETED;
         item.save(callback);
+        score.add(item.author, "topic-del");
     });
 };
 
@@ -126,6 +145,7 @@ Topic.setGood = function (id, callback) {
         }
         item.good = true;
         item.save(callback);
+        score.add(item.author, "good-add");
     });
 };
 
@@ -140,6 +160,7 @@ Topic.removeGood = function (id, callback) {
         }
         item.good = false;
         item.save(callback);
+        score.add(item.author, "good-del");
     });
 };
 
@@ -154,6 +175,7 @@ Topic.setTop = function (id, callback) {
         }
         item.top = 1;
         item.save(callback);
+        score.add(item.author, "top-add");
     });
 };
 
@@ -168,6 +190,7 @@ Topic.removeTop = function (id, callback) {
         }
         item.top = 0;
         item.save(callback);
+        score.add(item.author, "top-del");
     });
 };
 

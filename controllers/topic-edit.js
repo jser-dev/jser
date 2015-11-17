@@ -1,6 +1,5 @@
 var Topic = require('../models/topic');
 var status = require('../models/status').topic;
-var utils = require('../common/utils');
 
 /**
  * 话是控制器
@@ -30,9 +29,9 @@ TopicEditController.prototype.index = function () {
             return self.context.error(err);
         }
         self.render("topic-edit.html", {
-            topic: topic,
-            id: self.topicId,
-            types: self.topicTypes
+            "topic": topic,
+            "id": self.topicId,
+            "types": self.topicTypes
         });
     });
 };
@@ -43,24 +42,24 @@ TopicEditController.prototype.submit = function () {
         if (err) {
             return self.context.error(err);
         }
-        if (topic.status == status.PUBLISH) {
-            topic.updateAt = new Date();
+        if (self.context.data("publish")) {
+            topic.status = status.PUBLISH;
         } else {
-            topic.createAt = new Date();
-            topic.updateAt = topic.createAt;
+            topic.status = status.DRAFT;
         }
-        topic.status = status.PUBLISH;
         topic.title = self.context.data('title');
         topic.content = self.context.data('content');
-        topic.html = utils.md2html(topic.content);
         topic.type = self.context.data('type');
-        topic.save(function (err) {
-            if (err && err.errors && err.errors.title) {
-                return self.context.error(err.errors.title);
-            } else if (err) {
-                return self.context.error(err);
+        Topic.save(topic, function (err) {
+            if (!err && topic.status == status.PUBLISH) {
+                return self.context.redirect("/topic/" + topic.id);
             }
-            self.context.redirect("/topic/" + topic.id);
+            self.render("topic-edit.html", {
+                "saveMessage": err || "保存成功",
+                "topic": topic,
+                "id": self.topicId,
+                "types": self.topicTypes
+            });
         });
     });
 };

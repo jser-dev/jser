@@ -17,7 +17,7 @@ var User = self.User = db.model('User', {
 
 //定义话题模型
 var Topic = self.Topic = db.model('Topic', {
-    title: { type: String, default: '', required: true, trim: true }, //标题
+    title: { type: String, default: '', trim: true }, //标题
     content: { type: String, default: '' }, //内容
     html: { type: String, default: '' }, //html内容
     type: [{ type: String, default: '', trim: true }], //类型

@@ -15,6 +15,9 @@
         编辑话题
     </div>
     <form class="panel-body" action="/topic/<%= this.id %>/edit/submit" method="post" autocomplete="off">
+        <p class="form-row alert-text">
+            <%= this.saveMessage %>
+        </p>
         <p class="form-row mwf">
             <input name="title" type="text" class="input-block" placeholder="标题(10字以上)..." mamaxlength="144" value="<%= this.topic.title %>">
         </p>
@@ -33,7 +36,9 @@
             </ul>
         </p>
         <p class="form-row align-right">
-            <input type="submit" value="发布">
+            <input id="publish" name="publish" type="checkbox" value="1" <%= this.topic.status==$.status.topic.PUBLISH?'checked':'' %>>
+            <label for="publish" style="width:auto;">发布</label>
+            <input type="submit" value="保存">
         </p>
     </form>
 </div>
