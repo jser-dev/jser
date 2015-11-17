@@ -21,13 +21,10 @@ User.create = function () {
  **/
 User.getList = function (top, callback) {
     var self = User;
-    self.find({})
-        .sort({
-            'integral': -1,
-            '_id': 1
-        })
-        .limit(top)
-        .exec(callback);
+    self.find({}).sort({
+        'integral': -1,
+        '_id': 1
+    }).limit(top).exec(callback);
 };
 
 /**
@@ -41,19 +38,18 @@ User.signIn = function (user, callback) {
     self.findOne({
         "email": new RegExp(user.email, "igm"),
         "password": utils.hashDigest(user.password)
-    },
-        function (err, foundUser) {
-            if (err) {
-                return callback(err, user);
-            }
-            if (foundUser && foundUser.verifyCode) {
-                return callback("该账号的邮箱还未验证，请完成验证或重新注册", user);
-            } else if (foundUser) {
-                return callback(null, foundUser);
-            } else {
-                return callback('账号或者密码错误', user);
-            }
-        });
+    }, function (err, foundUser) {
+        if (err) {
+            return callback(err, user);
+        }
+        if (foundUser && foundUser.verifyCode) {
+            return callback("该账号的邮箱还未验证，请完成验证或重新注册", user);
+        } else if (foundUser) {
+            return callback(null, foundUser);
+        } else {
+            return callback('账号或者密码错误', user);
+        }
+    });
 };
 
 /**
@@ -199,13 +195,10 @@ User.search = function (keyword, callback) {
             $regex: keyword,
             $options: 'i'
         }
-    })
-        .sort({
-            'integral': -1,
-            '_id': 1
-        })
-        .limit(10)
-        .exec(callback);
+    }).sort({
+        'integral': -1,
+        '_id': 1
+    }).limit(10).exec(callback);
 };
 
 /**
@@ -241,13 +234,7 @@ User.setPassword = function (opts, callback) {
     if (!opts.password || opts.password.length < 6) {
         return callback('密码最少需要六个字符');
     }
-    self.update({
-        "_id": opts.id
-    }, {
-            $set: {
-                password: utils.hashDigest(opts.password)
-            }
-        }, callback);
+    self.update({ "_id": opts.id }, { $set: { password: utils.hashDigest(opts.password) } }, callback);
 };
 
 /**
@@ -305,13 +292,7 @@ User._uploadAvatar = function (baseInfo, callback) {
  **/
 User.updateUser = function (id, obj, callback) {
     var self = this;
-    self.update({
-        "_id": id
-    }, {
-            $set: obj
-        }, function (err, rs) {
-            callback(err, rs);
-        });
+    self.update({ "_id": id }, { $set: obj }, callback);
 };
 
 /**
