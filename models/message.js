@@ -2,7 +2,9 @@ var define = require('./define');
 var status = require("./status").message;
 var utils = require("../common/utils");
 
-//定义话题模型
+/**
+ * 定义站内消息模型
+ **/
 var Message = define.Message;
 
 /**
@@ -22,9 +24,7 @@ Message.getAllByUserId = function (userId, callback) {
  **/
 Message.markAllToReadByUserId = function (userId, callback) {
 	var self = this;
-	self.update({ status: status.UNREAD },
-	 { $set: { status:status.READ }},
-	 callback);
+	self.update({ status: status.UNREAD },{ $set: { status:status.READ }},callback);
 };
 
 /**
@@ -32,9 +32,7 @@ Message.markAllToReadByUserId = function (userId, callback) {
  **/
 Message.deleteAllByUserId = function (userId, callback) {
 	var self = this;
-	self.update({ status: {$ne:status.DELETED} }, 
-	{ $set: { status:status.DELETED }},
-	callback);
+	self.update({ status: {$ne:status.DELETED} }, { $set: { status:status.DELETED }},callback);
 };
 
 /**

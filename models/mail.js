@@ -7,7 +7,10 @@ var fs = require("fs");
 var self = module.exports;
 var tmpls = null;
 
-self.createTmpls = function () {
+/**
+ * 编辑邮件模板
+ **/
+self.compileTmpls = function () {
 	if (!tmpls) {
 		var mailConfigs = utils.configs.mail;
 		tmpls = {};
@@ -24,27 +27,24 @@ self.createTmpls = function () {
 	}
 };
 
+/**
+ * 发送注册验证邮件
+ **/
 self.sendForReg = function (user, callback) {
-	self.createTmpls();
+	self.compileTmpls();
 	var options = {};
 	options.to = user.email; //收件人
 	options.subject = tmpls.reg_subject();        //主题
 	options.html = tmpls.reg_body({
 		"user": user,
 		"configs": utils.configs
-	});  //内容
+	});
 	mail.send(options, callback);
 };
 
+/**
+ * 发送密码找回邮件
+ **/
 self.sendForPwd = function (options, callback) {
 
 };
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,14 @@
 var define = require('./define');
 var status = require("./status").comment;
 
-//定义话题模型
+/**
+ * 定义评论模型
+ **/
 var Comment = define.Comment;
 
+/**
+ * 根据 topicId 获取评论列表
+ **/
 Comment.getListByTopicId = function (topicId, callback) {
         var self = Comment;
         self.find({ "topic": topicId })
@@ -12,6 +17,9 @@ Comment.getListByTopicId = function (topicId, callback) {
                 .exec(callback);
 };
 
+/**
+ * 根据 userId 获取用户最近的评论
+ **/
 Comment.getLastByUserId = function (userId, callback) {
         var self = Comment;
         self.find({

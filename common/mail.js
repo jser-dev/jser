@@ -4,6 +4,9 @@ var nodemailer = require('nodemailer');
 var self = module.exports;
 var transporter = null;
 
+/**
+ * 发送一封邮件
+ **/
 self.send = function (options, callback) {
     var mailConfigs = utils.configs.mail;
     if (!transporter) {
@@ -13,4 +16,3 @@ self.send = function (options, callback) {
     options.from = options.from || mailConfigs.from;
     transporter.sendMail(options, callback);
 };
-
