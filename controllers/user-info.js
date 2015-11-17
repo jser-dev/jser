@@ -20,7 +20,7 @@ UserInfoController.prototype.index = function () {
     task.add(function (done) {
         User.getUser(userId, function (err, user) {
             if (err) {
-                return this.context.error(err);
+                return self.context.error(err);
             }
             self.user = user;
             done();
@@ -29,7 +29,7 @@ UserInfoController.prototype.index = function () {
     task.add(function (done) {
         Topic.getLastByUserId(userId, function (err, topicList) {
             if (err) {
-                return this.context.error(err);
+                return self.context.error(err);
             }
             self.topicList = topicList;
             done();
@@ -38,7 +38,7 @@ UserInfoController.prototype.index = function () {
     task.add(function (done) {
         Comment.getLastByUserId(userId, function (err, commentList) {
             if (err) {
-                return this.context.error(err);
+                return self.context.error(err);
             }
             self.commentList = commentList;
             done();
@@ -47,7 +47,7 @@ UserInfoController.prototype.index = function () {
     task.add(function (done) {
         Message.getAllByUserId(userId, function (err, msgList) {
             if (err) {
-                return this.context.error(err);
+                return self.context.error(err);
             }
             self.msgList = msgList;
             done();
