@@ -7,9 +7,14 @@
     <meta name="author" content="<%= this.topic.author.name %>">
     <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
     <script>
-    function deleteTopic(id){
+    function deleteTopic(){
         if(confirm("确认删除当前话题")){
-            location.href="/topic/"+id+"/delete";
+            location.href="/topic/<%= this.topic.id %>/delete";
+        }
+    }
+    function deleteComment(commentId){
+        if(confirm("确认删除选择的评论")){
+            location.href="/topic/<%= this.topic.id %>/delComment?commentId="+commentId;
         }
     };
     </script>
@@ -50,7 +55,7 @@
         <a class="linkbtn" href="/topic/<%= this.topic.id %>/edit">
             <i class="fa fa-edit" title="编辑"></i>
         </a>
-        <a class="linkbtn" id="delete" href="javascript:deleteTopic('<%= this.topic.id %>');">
+        <a class="linkbtn" id="delete" href="javascript:deleteTopic();">
             <i class="fa fa-trash-o" title="删除"></i>
         </a>
         <% } %>
@@ -88,6 +93,7 @@
                         <span title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
                             <%= $.timeago(item.createAt) %>
                         </span> 
+                        <a class="pull-right" href="javascript:deleteComment('<%= item.id %>')">删除</a>
                     </h4>
                     <span class="comment-info markdown-body">
                         <%= item.html %>
@@ -101,13 +107,18 @@
         <% } %>
     </div>
     <% if(this.user){ %>
-        <form class="panel-footer comment-form" action="/topic/<%= this.id %>/comment" method="post">
-                <p class="form-row">
-                    <textarea name="content" id="editor" class="editor" placeholder="内容..."></textarea>
-                </p>
-                <p class="form-row align-right" style="margin-bottom:0px;">
-                    <input type="submit" value="提交评论">
-                </p>
+        <a id="comment-editor" class="anchor"></a>
+        <form class="panel-footer comment-form" action="/topic/<%= this.id %>/addComment" method="post">
+            <p class="form-row alert-text">
+                <%= this.commentMessage %>
+            </p>
+            <p class="form-row">
+                <textarea name="content" id="editor" class="editor" placeholder="内容..."><%= this.newComment %></textarea>
+            </p>
+            <p class="form-row align-right" style="margin-bottom:0px;">
+                
+                <input type="submit" value="提交评论">
+            </p>
         </form>
         <script src="/mditor/build/js/mditor.min.js"></script>
         <script>

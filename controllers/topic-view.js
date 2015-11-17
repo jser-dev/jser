@@ -1,3 +1,4 @@
+/* global nokit */
 var Topic = require('../models/topic');
 var Comment = require('../models/comment');
 var utils = require('../common/utils');
@@ -6,9 +7,7 @@ var Task = nokit.Task;
 /**
  * 话是控制器
  **/
-var TopicViewController = module.exports = function () {
-	var self = this;
-};
+var TopicViewController = module.exports = function () { };
 
 TopicViewController.prototype.init = function () {
 	var self = this;
@@ -20,12 +19,9 @@ TopicViewController.prototype.init = function () {
 				return self.context.error(err);
 			}
 			self.topic = topic;
+			//阅读数 +1
 			topic.read++;
 			topic.save();
-			topic.html = topic.html || utils.md2html(topic.content);
-			topic.comments.forEach(function (comment) {
-				comment.html = comment.html || utils.md2html(comment.content);
-			});
 			done();
 		});
 	});
@@ -114,26 +110,37 @@ TopicViewController.prototype.removeTop = function () {
 /**
  * 添加评论
  **/
-TopicViewController.prototype.comment = function () {
+TopicViewController.prototype.addComment = function () {
 	var self = this;
 	var content = self.context.data('content');
 	var comment = new Comment();
 	comment.content = content;
-	comment.html = utils.md2html(comment.content);
 	comment.author = self.context.user;
 	comment.topic = self.topic;
-	comment.save(function (err) {
+	Comment.save(comment, function (err) {
+		if (!err) {
+			self.context.redirect("/topic/" + self.topicId + '#' + comment.id);
+		}
+		self.render("topic-view.html", {
+			"commentMessage": err + "<script>location.href+='#comment-editor'</script>",
+			"id": self.topicId,
+			"topic": self.topic,
+			"user": self.context.user,
+			"newComment": content
+		});
+	});
+};
+
+/**
+ * 删除一个评论
+ **/
+TopicViewController.prototype.delComment = function () {
+	var self = this;
+	var commentId = self.context.data("commentId");
+	Comment.delete(commentId, function (err) {
 		if (err) {
 			return self.context.error(err);
 		}
-		self.topic.replay++;
-		self.topic.lastReplayAt = comment.updateAt;
-		self.topic.lastReplayAuthor = self.context.user;
-		self.topic.save(function (err) {
-			if (err) {
-				return self.context.error(err);
-			}
-			self.context.redirect("/topic/" + self.topicId + '#' + comment.id);
-		});
+		self.context.redirect("/topic/" + self.topicId + "#comments");
 	});
 };

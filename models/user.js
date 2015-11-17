@@ -242,7 +242,7 @@ User.setPassword = function (opts, callback) {
     if (!opts.password || opts.password.length < 6) {
         return callback('密码最少需要六个字符');
     }
-    self.update({ "_id": opts.id }, { $set: { password: utils.hashDigest(opts.password) } }, callback);
+    self.updateUser(opts.id, { password: utils.hashDigest(opts.password) }, callback);
 };
 
 /**

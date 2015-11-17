@@ -130,8 +130,10 @@ Topic.delete = function (id, callback) {
         }
         item.status = status.DELETED;
         item.save(callback);
+        Comment.deleteByTopicId(id);//删除对应的评论
         score.add(item.author, "topic-del");
     });
+
 };
 
 /**
