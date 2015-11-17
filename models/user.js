@@ -221,15 +221,16 @@ User._initQiQiu = function() {
 
 User._uploadAvatar = function(baseInfo, callback) {
     var self = this;
-    self.quClient.delete(baseInfo.id, function(err) {
+    var fileKey = "avatar-" + baseInfo.id;
+    self.quClient.delete(fileKey, function(err) {
         self.quClient.upload(fs.createReadStream(baseInfo.avatar), {
-            key: baseInfo.id
+            key: fileKey
         }, function(err, result) {
             if (err) {
                 return callback(err);
             }
             //baseInfo.avatar = result.url;
-            baseInfo.avatar = self.quClient.imageView(baseInfo.id, {
+            baseInfo.avatar = self.quClient.imageView(fileKey, {
                 mode: 1,
                 width: 160,
                 height: 160,

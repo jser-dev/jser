@@ -172,8 +172,8 @@
     "qiniu": {
         "accessKey": "lcYIZbinrE49oaGQwNBULIwz3eTgPM7-tliV50_V",
         "secretKey": "5MHsJyKNB-H8x7Ct9CY6adEavUtZ4s1BsxKf3iYz",
-        "bucket": "nokit",
-        "origin": "http://7xjuyk.com1.z0.glb.clouddn.com/"
+        "bucket": "jser",
+        "origin": "http://7xoe0v.com1.z0.glb.clouddn.com"
     },
     "oauth": {
         "github": {
