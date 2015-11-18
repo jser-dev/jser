@@ -6,6 +6,10 @@
     "keywords": "jser社区,js社区,jser,js,javascript,nodejs,node.js,前端,前端社区,社区",
     "description": "JSER 是一个 “纯粹、简单、自由” 的 “JS程序猿” 社区",
     "buildYear": "2015",
+    "https": {
+        "cert": "./certs/jser.cc.crt",
+        "key": "./certs/jser.cc.key"
+    },
     "connStr": "mongodb://localhost/jser",
     "handlers": {
         "^/": "$./handlers/mvc",
@@ -173,7 +177,7 @@
         "accessKey": "lcYIZbinrE49oaGQwNBULIwz3eTgPM7-tliV50_V",
         "secretKey": "5MHsJyKNB-H8x7Ct9CY6adEavUtZ4s1BsxKf3iYz",
         "bucket": "jser",
-        "origin": "http://7xoe0v.com1.z0.glb.clouddn.com"
+        "origin": "https://dn-jser.qbox.me"
     },
     "oauth": {
         "github": {
