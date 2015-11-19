@@ -7,6 +7,6 @@
         "port": 6379
     },
     "https": {
-        "enabled": false
+        "enabled": true
     }
 }
