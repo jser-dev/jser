@@ -6,5 +6,7 @@
         "host": "xhou.net",
         "port": 6379
     },
-    "https": false
+    "https": {
+        "enabled": false
+    }
 }
