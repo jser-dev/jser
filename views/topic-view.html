@@ -25,7 +25,7 @@
 <div class="panel panel-default topic-view">
     <div class="panel-heading">
         <div class="media">
-            <a class="media-left" href="/user/<%= this.topic.author.id %>">
+            <a class="media-left" href="/user/<%= this.topic.author.name %>">
                 <img class="media-object avatar" src="<%= this.topic.author.avatar %>" alt="<%= this.topic.author.name %>">
             </a>
             <div class="media-body">
@@ -33,7 +33,7 @@
                     <%= this.topic.title %>
                 </h4>
                 <span class="topic-info">
-                    <a href="/user/<%= this.topic.author.id %>"><%= this.topic.author.name %></a> 
+                    <a href="/user/<%= this.topic.author.name %>"><%= this.topic.author.name %></a> 
                     发布于 <%= $.timeago(this.topic.createAt,"yyyy-MM-dd hh:mm") %>
                 </span>
             </div>
@@ -81,12 +81,12 @@
             <% $.each(this.topic.comments,function(i,item){ %>
             <li class="media">
                 <a id="<%= item.id %>" class="anchor"></a>
-                <a class="media-left" href="/user/<%= item.author.id %>">
+                <a class="media-left" href="/user/<%= item.author.name %>">
                     <img class="media-object avatar" src="<%= item.author.avatar %>" alt="<%= item.author.name %>">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">               
-                        <a href="/user/<%= item.author.id %>">
+                        <a href="/user/<%= item.author.name %>">
                             <%= item.author.name %>
                         </a>
                         - <%= i+1 %>楼 -   

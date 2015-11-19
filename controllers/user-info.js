@@ -10,24 +10,30 @@ var Task = nokit.Task;
  **/
 var UserInfoController = function () { };
 
+UserInfoController.prototype.init = function () {
+    var self = this;
+    self.uname = self.context.data("name");
+    User.getUserByName(self.uname, function (err, user) {
+        if (err) {
+            return self.context.error(err);
+        }
+        if (!user) {
+            return self.context.notFound();
+        }
+        self.user = user;
+        self.userId = user._id;
+        self.ready();
+    });
+};
+
 /**
  * 默认 action
  **/
 UserInfoController.prototype.index = function () {
     var self = this;
-    var userId = self.context.data("id");
     var task = Task.create();
     task.add(function (done) {
-        User.getUser(userId, function (err, user) {
-            if (err) {
-                return self.context.error(err);
-            }
-            self.user = user;
-            done();
-        });
-    });
-    task.add(function (done) {
-        Topic.getLastByUserId(userId, function (err, topicList) {
+        Topic.getLastByUserId(self.userId, function (err, topicList) {
             if (err) {
                 return self.context.error(err);
             }
@@ -36,7 +42,7 @@ UserInfoController.prototype.index = function () {
         });
     });
     task.add(function (done) {
-        Comment.getLastByUserId(userId, function (err, commentList) {
+        Comment.getLastByUserId(self.userId, function (err, commentList) {
             if (err) {
                 return self.context.error(err);
             }
@@ -45,7 +51,7 @@ UserInfoController.prototype.index = function () {
         });
     });
     task.add(function (done) {
-        Message.getAllByUserId(userId, function (err, msgList) {
+        Message.getAllByUserId(self.userId, function (err, msgList) {
             if (err) {
                 return self.context.error(err);
             }

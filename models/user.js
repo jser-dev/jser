@@ -193,6 +193,14 @@ User.getUser = function (id, callback) {
 };
 
 /**
+ * 通过名称获取用户
+ **/
+User.getUserByName = function (name, callback) {
+    var self = this;
+    self.findOne({ "name": new RegExp(name, "igm") }, callback);
+};
+
+/**
  * 搜索匹配的人员
  **/
 User.search = function (keyword, callback) {

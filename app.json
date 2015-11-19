@@ -104,7 +104,7 @@
                 "target": "./user-top"
             },
             {
-                "pattern": "/user/{id}",
+                "pattern": "/user/{name}",
                 "target": "./user-info"
             },
             {

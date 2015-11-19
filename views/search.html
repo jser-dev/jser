@@ -6,7 +6,7 @@
     <meta name="description" content="<%= $.configs.description %>"/>
     <meta name="author" content="<%= $.configs.author %>"/>
 <% $.placeEnd() %>
-
+   
 <% $.placeBegin("content") %>
 
 <div class="panel panel-default">
@@ -16,7 +16,7 @@
         <ul class="media-list topic-list">
             <% $.each(this.topicList,function(i,item){ %>
             <li class="media">
-                <a class="media-left" href="/user/<%= item.author.id %>">
+                <a class="media-left" href="/user/<%= item.author.name %>">
                     <img class="media-object avatar" src="<%= item.author.avatar %>" alt="<%= item.author.name %>">
                 </a>
                 <div class="media-body">
@@ -28,13 +28,13 @@
                         <% } %>
                     </h4>
                     <span class="topic-info">
-                        <a href="/user/<%= item.author.id %>"><%= item.author.name %></a> 
+                        <a href="/user/<%= item.author.name %>"><%= item.author.name %></a> 
                         发布于 
                         <span title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
                             <%= $.timeago(item.createAt) %>
                         </span> , 
                         <% if(item.lastReplayAuthor){ %>
-                            <a href="/user/<%= item.lastReplayAuthor.id %>">
+                            <a href="/user/<%= item.lastReplayAuthor.name %>">
                                 <%= item.lastReplayAuthor.name %>
                             </a>
                             回复于 
@@ -67,7 +67,7 @@
        <ul class="integral-list user-search-list">
             <% $.each(this.userList,function(i,item){ %>
             <li>
-                <a href="/user/<%= item.id %>">
+                <a href="/user/<%= item.name %>">
                 <img alt="<%= item.name %>" class="avatar" src="<%= item.avatar %>" />
                 <%= item.name %>
                 </a>

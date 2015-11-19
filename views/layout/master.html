@@ -51,7 +51,7 @@
                         </a>
                         <ul class="dropdown-menu user-menu-ul">
                             <li><a href="/message">我的消息</a></li>
-                            <li><a href="/user/<%= user._id %>">个人中心</a></li>
+                            <li><a href="/user/<%= user.name %>">个人中心</a></li>
                             <li><a href="/control-panel">控制面板</a></li>
                             <li><a href="/profile/signout">注销登录</a></li>
                         </ul>
@@ -85,7 +85,7 @@
                         <ul class="integral-list">
                             <% $.each(userList,function(i,item){ %>
                             <li>
-                                <a href="/user/<%= item.id %>"><%= item.name %></a>
+                                <a href="/user/<%= item.name %>"><%= item.name %></a>
                                 <span class="pull-right"><%= item.score %></span>
                             </li>
                             <% }) %>

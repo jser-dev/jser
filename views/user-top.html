@@ -16,7 +16,7 @@
         <ul class="integral-list user-search-list">
             <% $.each(userList,function(i,item){ %>
             <li>
-                <a href="/user/<%= item.id %>">
+                <a href="/user/<%= item.name %>">
                 <img alt="<%= item.name %>" class="avatar" src="<%= item.avatar %>" />
                 <%= item.name %>
                 </a>
