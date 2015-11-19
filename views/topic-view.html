@@ -2,7 +2,7 @@
     
 <% $.placeBegin("head") %>
     <title><%= this.topic.title %> | <%= $.configs.name %></title>
-    <meta name="keywords" content="<%= this.topic.tags %>,<%= $.configs.keywords %>"/>
+    <meta name="keywords" content="<%= this.topic.tags||this.topic.title %>,<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= this.topic.title %> | <%= $.configs.description %>"/>
     <meta name="author" content="<%= this.topic.author.name %>">
     <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
