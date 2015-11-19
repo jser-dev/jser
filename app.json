@@ -7,6 +7,7 @@
     "description": "JSER 是一个 “纯粹、简单、自由” 的 “JS程序猿” 社区",
     "buildYear": "2015",
     "https": {
+        "enabled": true,
         "cert": "./certs/jser.cc.crt",
         "key": "./certs/jser.cc.key"
     },
