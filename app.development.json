@@ -6,7 +6,9 @@
         "host": "xhou.net",
         "port": 6379
     },
+    "port": 8443,
     "https": {
-        "enabled": true
+        "enabled": true,
+        "redirectPort": 8080
     }
 }
