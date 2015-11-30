@@ -50,15 +50,15 @@ UserInfoController.prototype.index = function () {
             done();
         });
     });
-    task.add(function (done) {
-        Message.getAllByUserId(self.userId, function (err, msgList) {
-            if (err) {
-                return self.context.error(err);
-            }
-            self.msgList = msgList;
-            done();
-        });
-    });
+    // task.add(function (done) {
+    //     Message.getAllByUserId(self.userId, function (err, msgList) {
+    //         if (err) {
+    //             return self.context.error(err);
+    //         }
+    //         self.msgList = msgList;
+    //         done();
+    //     });
+    // });
     task.end(function () {
         self.render("user-info.html", self);
     });

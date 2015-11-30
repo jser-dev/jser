@@ -14,9 +14,9 @@
     <div class="panel-heading">
         基本信息
         <% var loginUser = $.controller.context.user  %>
-        <% if(loginUser && loginUser._id==this.user._id){ %>
+        <% if(loginUser && loginUser._id.toString()==this.user._id.toString()){ %>
         <a class="pull-right" href="/profile">
-            修改...
+            修改
         </a>
         <% } %>
     </div>
