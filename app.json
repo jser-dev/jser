@@ -9,8 +9,8 @@
     "port": 443,
     "https": {
         "enabled": true,
-        "cert": "./certs/jser.cc.crt",
-        "key": "./certs/jser.cc.key",
+        "cert": "./_certs/jser.cc.crt",
+        "key": "./_certs/jser.cc.key",
         "redirectPort": 80
     },
     "connStr": "mongodb://localhost/jser",
