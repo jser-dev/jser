@@ -2,7 +2,6 @@
     "showErrorDetail": true,
     "connStr": "mongodb://localhost/jser",
     "session": {
-        "provider": "$./providers/session-process",
         "host": "xhou.net",
         "port": 6379
     },
