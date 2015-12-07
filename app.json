@@ -39,8 +39,8 @@
             "view": "./views"
         },
         "routes": {
-            "/::GET": "./topic-list",
-            "/topic::GET": "./topic-list",
+            "/::get": "./topic-list",
+            "/topic::get": "./topic-list",
             "/topic/new": {
                 "action": "new",
                 "target": "./topic-edit",
