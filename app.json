@@ -38,105 +38,55 @@
             "controller": "./controllers",
             "view": "./views"
         },
-        "routes": [
-            {
-                "pattern": "/",
-                "target": "./topic-list"
-            },
-            {
-                "pattern": "/topic",
-                "target": "./topic-list"
-            },
-            {
-                "pattern": "/topic/new",
+        "routes": {
+            "/::GET": "./topic-list",
+            "/topic::GET": "./topic-list",
+            "/topic/new": {
                 "action": "new",
                 "target": "./topic-edit",
                 "required": [
                     "signed"
                 ]
             },
-            {
-                "pattern": "/topic/{id}/edit",
+            "/topic/{id}/edit": {
                 "target": "./topic-edit",
                 "required": [
                     "signed"
                 ]
             },
-            {
-                "pattern": "/topic/{type}/p{pageIndex}",
-                "target": "./topic-list"
-            },
-            {
-                "pattern": "/topic/{id}",
-                "target": "./topic-view"
-            },
-            {
-                "pattern": "/signup",
-                "target": "./signup"
-            },
-            {
-                "pattern": "/verify/{verifyCode}",
-                "target": "./verify-mail"
-            },
-            {
-                "pattern": "/signin",
-                "target": "./signin"
-            },
-            {
-                "pattern": "/forget-password",
-                "target": "./forget-password"
-            },
-            {
-                "pattern": "/profile",
+            "/topic/{type}/p{pageIndex}": "./topic-list",
+            "/topic/{id}": "./topic-view",
+            "/signup": "./signup",
+            "/verify/{verifyCode}": "./verify-mail",
+            "/signin": "./signin",
+            "/forget-password": "./forget-password",
+            "/profile": {
                 "target": "./profile",
                 "required": [
                     "signed"
                 ]
             },
-            {
-                "pattern": "/control-panel",
+            "/control-panel": {
                 "target": "./control-panel",
                 "required": [
                     "signed",
                     "admin"
                 ]
             },
-            {
-                "pattern": "/user/top",
-                "target": "./user-top"
-            },
-            {
-                "pattern": "/user/{name}",
-                "target": "./user-info"
-            },
-            {
-                "pattern": "/message",
+            "/user/top": "./user-top",
+            "/user/{name}": "./user-info",
+            "/message": {
                 "target": "./message",
                 "required": [
                     "signed"
                 ]
             },
-            {
-                "pattern": "/about",
-                "target": "./about"
-            },
-            {
-                "pattern": "/api",
-                "target": "./api"
-            },
-            {
-                "pattern": "/client",
-                "target": "./client"
-            },
-            {
-                "pattern": "/oauth/github",
-                "target": "./oauth/github"
-            },
-            {
-                "pattern": "/search",
-                "target": "./search"
-            }
-        ]
+            "/about": "./about",
+            "/api": "./api",
+            "/client": "./client",
+            "/oauth/github": "./oauth/github",
+            "/search": "./search"
+        }
     },
     "topicTypes": {
         "good": {
