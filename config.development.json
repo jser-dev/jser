@@ -2,7 +2,7 @@
     "showErrorDetail": true,
     "connStr": "mongodb://localhost/jser",
     "session": {
-        "host": "xhou.net",
+        "host": "127.0.0.1",
         "port": 6379
     },
     "port": 8443,
