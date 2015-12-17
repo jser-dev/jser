@@ -5,7 +5,7 @@ var utils = require('../common/utils');
 var Task = nokit.Task;
 
 /**
- * 话是控制器
+ * 话题控制器
  **/
 var TopicViewController = module.exports = function () { };
 
