@@ -62,24 +62,15 @@ Topic.get = function (id, callback) {
         self.findById(id)
             .populate('author')
             .populate('lastReplayAuthor')
-            .exec(function (err, topic) {
-                if (err) {
-                    callback(err);
-                } else {
-                    done(topic);
-                }
-            });
+            .exec(done);
     });
     task.add('comments', function (done) {
-        Comment.getListByTopicId(id, function (err, comments) {
-            if (err) {
-                callback(err);
-            } else {
-                done(comments);
-            }
-        });
+        Comment.getListByTopicId(id, done);
     });
-    task.end(function (rs) {
+    task.end(function (err, rs) {
+        if (err) {
+            return callback(err);
+        }
         var topic = rs.topic;
         topic.comments = rs.comments;
         callback(null, topic);

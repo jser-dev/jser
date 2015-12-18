@@ -32,10 +32,13 @@ TopicListController.prototype.init = function () {
             if (err) {
                 return self.context.error(err);
             }
-            done(count);
+            done(null, count);
         });
     });
-    task.end(function (result) {
+    task.end(function (err, result) {
+        if (err) {
+            return self.context.error(err);
+        }
         self.count = result["count"];
         self.pageCount = parseInt((self.count + (PAGE_SIZE - 1)) / PAGE_SIZE);
         self.pageBegin = self.pageIndex - 2;
