@@ -1,6 +1,7 @@
 /* global nokit */
 var Topic = require('../models/topic');
 var Comment = require('../models/comment');
+var status = require('../models/status');
 var utils = require('../common/utils');
 var Task = nokit.Task;
 
@@ -18,13 +19,12 @@ TopicViewController.prototype.init = function () {
 			if (err) {
 				return self.context.error(err);
 			}
-			if (!topic) {
+			if (!topic ||
+				(topic.status != status.PUBLISH &&
+					self.context.route.action != 'delete')) {
 				return self.context.notFound();
 			}
 			self.topic = topic;
-			//阅读数 +1
-			topic.read++;
-			topic.save();
 			done();
 		});
 	});
@@ -38,6 +38,9 @@ TopicViewController.prototype.init = function () {
  **/
 TopicViewController.prototype.index = function () {
     var self = this;
+	//阅读数 +1
+	self.topic.read++;
+	self.topic.save();
 	self.render("topic-view.html", {
 		id: self.topicId,
 		topic: self.topic,
