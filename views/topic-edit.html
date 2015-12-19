@@ -11,11 +11,14 @@
 <% $.placeBegin("content") %>
 
 <div class="panel panel-default">
+     <% var user = $.context.user  %>
     <div class="panel-heading">
         编辑话题
+        <% if(user && (user.isAdmin||user._id.toString()==this.topic.author._id.toString())){ %>
         <form class="pull-right inline" method="post" action="/topic/<%= this.id %>/delete">
             <a href="javascript:;" onclick="if(confirm('确认删除当前话题'))this.parentNode.submit()">删除</a>
         </form>
+        <% } %>
     </div>
     <form class="panel-body" action="/topic/<%= this.id %>/edit/submit" method="post" autocomplete="off">
         <p class="form-row alert-text">

@@ -52,7 +52,7 @@
                         <ul class="dropdown-menu user-menu-ul">
                             <li><a href="/message">我的消息</a></li>
                             <li><a href="/user/<%= user.name %>">个人中心</a></li>
-                            <li><a href="/control-panel">控制面板</a></li>
+                            <!--<li><a href="/control-panel">控制面板</a></li>-->
                             <li><a href="/profile/signout">注销登录</a></li>
                         </ul>
                     </li>
@@ -119,7 +119,7 @@
            <p class="footbar-info">
                <%= $.configs.footbar.info %> , 
                <%= $.configs.buildYear %>-<%= (new Date()).getFullYear() %> , 
-               <a href="/"><%= $.configs.domain %></a>
+               <a href="/"><%= $.configs.domain.toUpperCase() %></a>
            </p> 
         </div>
     </footer>

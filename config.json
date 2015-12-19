@@ -1,7 +1,7 @@
 {
     "showErrorDetail": false,
     "name": "JSER社区",
-    "domain": "JSER.CC",
+    "domain": "jser.cc",
     "author": "JSER Team",
     "keywords": "jser社区,js社区,jser,js,javascript,nodejs,node.js,前端,前端社区,社区",
     "description": "JSER 是一个 “纯粹、简单、自由” 的 “JS程序猿” 社区",
@@ -203,6 +203,9 @@
             "access": []
         }
     },
+    "adminUser": [
+        "admin@xhou.net2"
+    ],
     "scoreRules": {
         "topic-add": 2,
         "topic-del": -2,

@@ -33,11 +33,11 @@
 <div class="panel panel-default">
     <div class="panel-heading">草稿话题</div>
     <div class="panel-body">
-       <% if(this.topicList &&　this.topicList.length>0){ %>
+       <% if(this.draftList &&　this.draftList.length>0){ %>
         <ul class="integral-list topic-list">
             <% $.each(this.draftList,function(i,item){ %>
             <li>
-                <a href="/topic/<%= item.id %>/edit"><%= item.title %></a>
+                <a href="/topic/<%= item.id %>/edit"><%= item.title || "无标题" %></a>
                 <span class="pull-right topic-info" title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
                      <%= $.timeago(item.createAt) %>
                 </span>

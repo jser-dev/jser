@@ -34,12 +34,12 @@
         <a id="control"></a>
     </div>
     <div class="panel-footer">
-        <div class="thumbs pull-right">
+        <!--<div class="thumbs pull-right">
             <i class="fa fa-thumbs-o-up" title="赞的人数">10</i>
             <i class="fa fa-thumbs-o-down" title="踩的人数">2</i>
-        </div>
+        </div>-->
         <% var user = $.controller.context.user  %>
-        <% if(user && user._id.toString()==this.topic.author._id.toString()){ %>
+        <% if(user && (user.isAdmin||user._id.toString()==this.topic.author._id.toString())){ %>
         <form class="inline" method="post" action="/topic/<%= this.topic.id %>/edit">
             <i class="fa fa-edit" title="编辑" onclick="this.parentNode.submit()"></i>
         </form>
@@ -47,7 +47,7 @@
             <i class="fa fa-trash-o" title="删除" onclick="if(confirm('确认删除当前话题'))this.parentNode.submit()"></i>
         </form>
         <% } %>
-        <% if(user){ %>
+        <% if(user && user.isAdmin){ %>
         <form class="inline" method="post" action="/topic/<%= this.topic.id %>/<%= this.topic.top>0?'removeTop':'setTop' %>">
             <i class="fa fa-thumb-tack <%= this.topic.top>0?'active':'' %>" title="置顶" onclick="this.parentNode.submit()"></i>
         </form>
@@ -81,10 +81,12 @@
                         <span title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
                             <%= $.timeago(item.createAt) %>
                         </span>
+                        <% if(user && (user.isAdmin||user._id.toString()==item.author._id.toString())){ %>
                         <form class="pull-right inline" method="post" action="/topic/<%= this.topic.id %>/delComment">
                             <input type="hidden" name="commentId" value="<%= item.id %>"> 
                             <a href="javascript:;" onclick="if(confirm('确认删除当前话题'))this.parentNode.submit()">删除</a>
                         </form>
+                        <% } %>
                     </h4>
                     <span class="comment-info markdown-body">
                         <%= item.html %>

@@ -45,12 +45,8 @@ Topic.save = function (topic, callback) {
         return callback("请选择话题类型");
     }
     topic.html = utils.md2html(topic.content);
-    if (topic.status == status.PUBLISH) {
-        topic.updateAt = new Date();
-    } else {
-        topic.createAt = new Date();
-        topic.updateAt = topic.createAt;
-    }
+    topic.createAt = topic.createAt || new Date();
+    topic.updateAt = new Date();
     topic.save(callback);
 };
 
@@ -226,8 +222,8 @@ Topic.search = function (keyword, callback) {
 Topic.getDraftList = function (userId, callback) {
     var self = Topic;
     self.find({
-        author: userId,
-        status: status.DRAFT
+        status: status.DRAFT,
+        author: userId.toString()
     }).sort({ 'top': -1, '_id': -1 })
         .populate('author')
         .populate('lastReplayAuthor')
