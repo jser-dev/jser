@@ -32,34 +32,22 @@ UserInfoController.prototype.init = function () {
 UserInfoController.prototype.index = function () {
     var self = this;
     var task = Task.create();
-    task.add(function (done) {
-        Topic.getLastByUserId(self.userId, function (err, topicList) {
-            if (err) {
-                return self.context.error(err);
-            }
-            self.topicList = topicList;
-            done();
-        });
+    task.add("topicList", function (done) {
+        Topic.getLastByUserId(self.userId, done);
     });
-    task.add(function (done) {
-        Comment.getLastByUserId(self.userId, function (err, commentList) {
-            if (err) {
-                return self.context.error(err);
-            }
-            self.commentList = commentList;
-            done();
-        });
+    task.add("commentList", function (done) {
+        Comment.getLastByUserId(self.userId, done);
     });
-    // task.add(function (done) {
-    //     Message.getAllByUserId(self.userId, function (err, msgList) {
-    //         if (err) {
-    //             return self.context.error(err);
-    //         }
-    //         self.msgList = msgList;
-    //         done();
-    //     });
-    // });
-    task.end(function () {
+    task.add("draftList", function (done) {
+        Topic.getDraftList(self.userId, done);
+    });
+    task.end(function (err, rs) {
+        if (err) {
+            return self.context.error(err);
+        }
+        self.topicList = rs.topicList;
+        self.commentList = rs.commentList;
+        self.draftList = rs.draftList;
         self.render("user-info.html", self);
     });
 };

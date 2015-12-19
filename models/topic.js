@@ -219,3 +219,17 @@ Topic.search = function (keyword, callback) {
         .populate('lastReplayAuthor')
         .exec(callback);
 };
+
+/**
+ * 获取草稿列表
+ **/
+Topic.getDraftList = function (userId, callback) {
+    var self = Topic;
+    self.find({
+        author: userId,
+        status: status.DRAFT
+    }).sort({ 'top': -1, '_id': -1 })
+        .populate('author')
+        .populate('lastReplayAuthor')
+        .exec(callback);
+};

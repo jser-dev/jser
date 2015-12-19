@@ -31,6 +31,26 @@
 </div>
 
 <div class="panel panel-default">
+    <div class="panel-heading">草稿话题</div>
+    <div class="panel-body">
+       <% if(this.topicList &&　this.topicList.length>0){ %>
+        <ul class="integral-list topic-list">
+            <% $.each(this.draftList,function(i,item){ %>
+            <li>
+                <a href="/topic/<%= item.id %>/edit"><%= item.title %></a>
+                <span class="pull-right topic-info" title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
+                     <%= $.timeago(item.createAt) %>
+                </span>
+            </li>
+            <% }.bind(this)); %>
+        </ul>
+        <% }else{ %>
+        <p class="topic-empty align-left">没有最近话题</p>
+        <% } %>
+    </div>
+</div>
+
+<div class="panel panel-default">
     <div class="panel-heading">最近话题</div>
     <div class="panel-body">
        <% if(this.topicList &&　this.topicList.length>0){ %>
