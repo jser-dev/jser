@@ -68,7 +68,9 @@ Topic.get = function (id, callback) {
         Comment.getListByTopicId(id, done);
     });
     task.end(function (err, rs) {
-        if (err) {
+        if (err && err.name == "CastError") {
+            return callback();
+        } else if (err) {
             return callback(err);
         }
         var topic = rs.topic;

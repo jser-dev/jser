@@ -18,6 +18,9 @@ TopicViewController.prototype.init = function () {
 			if (err) {
 				return self.context.error(err);
 			}
+			if (!topic) {
+				return self.context.notFound();
+			}
 			self.topic = topic;
 			//阅读数 +1
 			topic.read++;
