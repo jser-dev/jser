@@ -44,7 +44,8 @@ Topic.save = function (topic, callback) {
     if (!topic.type || topic.type.length < 1) {
         return callback("请选择话题类型");
     }
-    topic.html = utils.md2html(topic.content);
+    var rs = utils.md2html(topic.content);
+    topic.html = rs.html;
     topic.createAt = topic.createAt || new Date();
     topic.updateAt = new Date();
     topic.save(callback);

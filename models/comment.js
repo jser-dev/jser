@@ -2,6 +2,7 @@ var define = require('./define');
 var status = require("./status").comment;
 var utils = require('../common/utils');
 var score = require('./score');
+var Message = require("./message");
 
 /**
  * 定义评论模型
@@ -51,7 +52,8 @@ Comment.save = function (comment, callback) {
 		return callback("评论内容不能少于 10 个字");
 	}
 	comment.status = comment.status || status.PUBLISH;
-	comment.html = utils.md2html(comment.content);
+	var rs = utils.md2html(comment.content);
+	comment.html = rs.html;
 	comment.save(function (err) {
 		if (err) {
 			return callback(err);
@@ -60,6 +62,16 @@ Comment.save = function (comment, callback) {
 		comment.topic.lastReplayAt = comment.updateAt;
 		comment.topic.save(callback);
 		score.add(comment.author._id || comment.author, "comment-add");
+	});
+	//向话题作者发消息
+	Message.send(null, comment.topic.author.name, {
+		content: comment._author.name + ' 评论了你的话题 "' + comment.topic.title + '"',
+		link: "/topic/" + comment.topic._id + "#" + comment._id
+	});
+	//向 @ 的人发送消息
+	Message.send(null, rs.users, {
+		content: comment._author.name + ' 在评论 "' + comment.topic.title + '" 时提到了你',
+		link: "/topic/" + comment.topic._id + "#" + comment._id
 	});
 };
 

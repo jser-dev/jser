@@ -66,22 +66,28 @@ self.status = status;
 
 //转换 @xxx
 var atRegExp = new RegExp("\\s*\\@\\w+\\s+", "igm");
-self.convertAt = function (str) {
-	if (!str) return str;
-	str = str.replace(atRegExp, function (item) {
+self.convertAt = function (text) {
+	if (!text) return text;
+	var users = [];
+	text = text.replace(atRegExp, function (item) {
 		item = item.trim();
 		var name = item.substr(1);
+		users.push(name);
 		return " [" + item + "](/user/" + name + ") ";
 	});
-	return str;
+	return {
+		"text": text,
+		"users": users
+	};
 };
 
 /**
  * 解析 markdown
  **/
-self.md2html = function (md) {
-	if (!md) return md;
-	md = self.convertAt(md);
+self.md2html = function (mdText) {
+	if (!mdText) return mdText;
+	var rs = self.convertAt(mdText);
 	self._mdParser = self._mdParser || new Mditor.Parser();
-	return self._mdParser.parse(md);
+	rs.html = self._mdParser.parse(rs.text);
+	return rs;
 };

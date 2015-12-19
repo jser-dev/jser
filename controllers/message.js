@@ -48,7 +48,7 @@ MessageController.prototype.markAllAsRead = function () {
         if (err) {
             return self.context.error(err);
         }
-        self.render("message", self);
+        self.context.redirect("/message");
     });
 };
 
@@ -57,11 +57,43 @@ MessageController.prototype.markAllAsRead = function () {
  **/
 MessageController.prototype.deleteAll = function () {
     var self = this;
-    Message.deleteAll(self.context.user._id, function (err) {
+    Message.deleteAllByUserId(self.context.user._id, function (err) {
         if (err) {
             return self.context.error(err);
         }
-        self.render("message", self);
+        self.context.redirect("/message");
+    });
+};
+
+/**
+ * 删除一个消息
+ **/
+MessageController.prototype.delete = function () {
+    var self = this;
+    var msgId = self.context.data("msgId");
+    Message.deleteById(msgId, function (err) {
+        if (err) {
+            return self.context.error(err);
+        }
+        self.context.redirect("/message");
+    });
+};
+
+/**
+ * 打开一个链接
+ **/
+MessageController.prototype.openLink = function () {
+    var self = this;
+    var msgId = self.context.data("msgId");
+    Message.markAsReadById(msgId, function (err, msg) {
+        if (err) {
+            return self.context.error(err);
+        }
+        if (msg && msg.link) {
+            self.context.redirect(msg.link);
+        } else {
+            self.context.redirect("/message");
+        }
     });
 };
 

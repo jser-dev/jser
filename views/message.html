@@ -29,16 +29,16 @@
     <div class="panel-body">
        <% if(this.msgList &&　this.msgList.length>0){ %>
         <ul class="integral-list topic-list">
-            <% $.each(this.topicList,function(i,item){ %>
-            <form method="post" action="/message/delete">
-                <input type="hidden" name="msgId" value="<%= item._id %>"/>
-                <a href="javascript:;" onclick="this.parentNode.submit()">删除</a>
-            </form>
+            <% $.each(this.msgList,function(i,item){ %>
             <li>
-                <%= item.content %>
-                <span class="pull-right topic-info" title="<%= $.formatDate(item.sendAt,'yyyy-MM-dd hh:mm') %>">
-                     <%= $.timeago(item.sendAt) %>
+                <a style="color:<%= item.status!=0?'#999':'#111' %>;" href="/message/openLink?msgId=<%= item._id %>"><%= item.content %></a>            
+                <span class="topic-info" title="<%= $.formatDate(item.sendAt,'yyyy-MM-dd hh:mm') %>">
+                     [<%= $.timeago(item.sendAt) %>]
                 </span>
+                <form class="inline pull-right" method="post" action="/message/delete">
+                    <input type="hidden" name="msgId" value="<%= item._id %>"/>
+                    <a href="javascript:;" onclick="this.parentNode.submit()">删除</a>
+                </form>
             </li>
             <% }.bind(this)); %>
         </ul>

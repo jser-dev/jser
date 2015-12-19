@@ -151,6 +151,7 @@ TopicViewController.prototype.addComment = function () {
 	var comment = new Comment();
 	comment.content = content;
 	comment.author = self.context.user;
+	comment._author = self.context.user;
 	comment.topic = self.topic;
 	Comment.save(comment, function (err) {
 		if (!err) {

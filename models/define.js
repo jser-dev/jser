@@ -53,7 +53,7 @@ var Comment = self.Comment = db.model('Comment', {
 var Message = self.Message = db.model("Message", {
     from: { type: String }, //发送者
     to: { type: String }, //接收者
-    title: { type: String },//标题
+    type: { type: String },//类型
     content: { type: String },//内容
     link: { type: String },//链接
     sendAt: { type: Date, default: Date.now }, //发送时间
