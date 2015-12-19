@@ -68,14 +68,21 @@ Comment.save = function (comment, callback) {
  **/
 Comment.delete = function (commentId, callback) {
 	var self = this;
-	self.findById(commentId, function (err, comment) {
-		if (err) {
-			return callback(err);
-		}
-		comment.status = status.DELETED;
-		comment.save(callback);
-		score.add(comment.author._id || comment.author, "comment-del");
-	});
+	self.findById(commentId)
+		.populate('topic')
+		.exec(function (err, comment) {
+			if (err) {
+				return callback(err);
+			}
+			//对应贴子回复数 -1
+			comment.topic.replay--;
+			comment.topic.save();
+			//逻辑删除
+			comment.status = status.DELETED;
+			comment.save(callback);
+			//计算用户得分
+			score.add(comment.author._id || comment.author, "comment-del");
+		});
 };
 
 module.exports = Comment;

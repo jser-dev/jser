@@ -20,7 +20,7 @@ TopicViewController.prototype.init = function () {
 				return self.context.error(err);
 			}
 			if (!topic ||
-				(topic.status != status.PUBLISH &&
+				(topic.status != status.topic.PUBLISH &&
 					self.context.route.action != 'delete')) {
 				return self.context.notFound();
 			}

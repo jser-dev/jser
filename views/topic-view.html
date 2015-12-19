@@ -40,7 +40,7 @@
         </div>
         <% var user = $.controller.context.user  %>
         <% if(user && user._id.toString()==this.topic.author._id.toString()){ %>
-        <form class="inline" method="get" action="/topic/<%= this.topic.id %>/edit">
+        <form class="inline" method="post" action="/topic/<%= this.topic.id %>/edit">
             <i class="fa fa-edit" title="编辑" onclick="this.parentNode.submit()"></i>
         </form>
         <form class="inline" method="post" action="/topic/<%= this.topic.id %>/delete">
