@@ -20,7 +20,10 @@ CommonDataFilter.prototype.onMvcHandle = function (context, next) {
 			return context.error(err);
 		}
 		context.topUserList = rs.topUserList;
-		context.unreadMsgCount = rs.unreadMsgList.length;
+		context.unreadMsgCount = 0;
+		if (rs.unreadMsgList) {
+			context.unreadMsgCount = rs.unreadMsgList.length;
+		}
 		next();
 	});
 };

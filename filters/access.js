@@ -7,10 +7,12 @@ AccessFilter.prototype.onMvcHandle = function (context, next) {
 	var self = this;
 	context.session.get("user", function (user) {
 		context.user = user;
-		//检查是不是超极管理员
-		context.user.isAdmin = context.configs.adminUser.some(function (item) {
-			return item == user.email;
-		});
+		if (user) {
+			//检查是不是超极管理员
+			context.user.isAdmin = context.configs.adminUser.some(function (item) {
+				return item == user.email;
+			});
+		}
 		if (!context.user && self.requiredHas(context, AccessFilter.SIGNED)) {
 			context.redirect('/signin');
 		} else {
