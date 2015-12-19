@@ -64,6 +64,17 @@ Comment.save = function (comment, callback) {
 };
 
 /**
+ * 获取一条评论
+ **/
+Comment.get = function (commentId, callback) {
+	var self = this;
+	self.findById(commentId)
+		.populate('author')
+		.populate('topic')
+		.exec(callback);
+};
+
+/**
  * 删除一个评论
  **/
 Comment.delete = function (commentId, callback) {

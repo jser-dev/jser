@@ -34,6 +34,17 @@ TopicViewController.prototype.init = function () {
 };
 
 /**
+ * 验证当前用户
+ **/
+TopicViewController.prototype.verifyCurrentUser = function (allowUserId) {
+	var self = this;
+	allowUserId = allowUserId || "";
+	return (self.context.user &&
+		(self.context.user.isAdmin ||
+			self.context.user._id.toString() == allowUserId.toString()));
+};
+
+/**
  * 默认 action
  **/
 TopicViewController.prototype.index = function () {
@@ -53,6 +64,9 @@ TopicViewController.prototype.index = function () {
  **/
 TopicViewController.prototype.delete = function () {
 	var self = this;
+	if (!self.verifyCurrentUser(self.topic.author._id.toString())) {
+		return self.context.forbidden();
+	}
 	Topic.delete(self.topicId, function (err) {
 		if (err) {
 			return self.context.error(err);
@@ -66,6 +80,9 @@ TopicViewController.prototype.delete = function () {
  **/
 TopicViewController.prototype.setGood = function () {
 	var self = this;
+	if (!self.verifyCurrentUser()) {
+		return self.context.forbidden();
+	}
 	Topic.setGood(self.topicId, function (err) {
 		if (err) {
 			return self.context.error(err);
@@ -79,6 +96,9 @@ TopicViewController.prototype.setGood = function () {
  **/
 TopicViewController.prototype.removeGood = function () {
 	var self = this;
+	if (!self.verifyCurrentUser()) {
+		return self.context.forbidden();
+	}
 	Topic.removeGood(self.topicId, function (err) {
 		if (err) {
 			return self.context.error(err);
@@ -92,6 +112,9 @@ TopicViewController.prototype.removeGood = function () {
  **/
 TopicViewController.prototype.setTop = function () {
 	var self = this;
+	if (!self.verifyCurrentUser()) {
+		return self.context.forbidden();
+	}
 	Topic.setTop(self.topicId, function (err) {
 		if (err) {
 			return self.context.error(err);
@@ -105,6 +128,9 @@ TopicViewController.prototype.setTop = function () {
  **/
 TopicViewController.prototype.removeTop = function () {
 	var self = this;
+	if (!self.verifyCurrentUser()) {
+		return self.context.forbidden();
+	}
 	Topic.removeTop(self.topicId, function (err) {
 		if (err) {
 			return self.context.error(err);
@@ -118,6 +144,9 @@ TopicViewController.prototype.removeTop = function () {
  **/
 TopicViewController.prototype.addComment = function () {
 	var self = this;
+	if (!self.context.user) {
+		return self.context.forbidden();
+	}
 	var content = self.context.data('content');
 	var comment = new Comment();
 	comment.content = content;
@@ -143,10 +172,18 @@ TopicViewController.prototype.addComment = function () {
 TopicViewController.prototype.delComment = function () {
 	var self = this;
 	var commentId = self.context.data("commentId");
-	Comment.delete(commentId, function (err) {
+	Comment.get(commentId, function (err, comment) {
 		if (err) {
 			return self.context.error(err);
 		}
-		self.context.redirect("/topic/" + self.topicId + "#comments");
+		if (!self.verifyCurrentUser(comment.author._id.toString())) {
+			return self.context.forbidden();
+		}
+		Comment.delete(commentId, function (err) {
+			if (err) {
+				return self.context.error(err);
+			}
+			self.context.redirect("/topic/" + self.topicId + "#comments");
+		});
 	});
 };
