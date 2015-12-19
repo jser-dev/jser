@@ -47,10 +47,21 @@
                     <% if(user){ %>
                     <li>
                         <a href="javascript:;" class="dropdown-toggle user-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <img class="navbar-avatar" src="<%= user.avatar %>"/><%= user.name||user.email %>
+                          <img class="navbar-avatar" src="<%= user.avatar %>"/>
+                          <%= user.name||user.email %>
+                          <% if($.context.unreadMsgCount>0){ %>
+                          <span class="badge"><%= $.context.unreadMsgCount %></span>
+                          <% } %>
                         </a>
                         <ul class="dropdown-menu user-menu-ul">
-                            <li><a href="/message">我的消息</a></li>
+                            <li>
+                                <a href="/message">
+                                    我的消息
+                                    <% if($.context.unreadMsgCount>0){ %>
+                                    <span class="badge"><%= $.context.unreadMsgCount %></span>
+                                    <% } %>
+                                </a>
+                            </li>
                             <li><a href="/user/<%= user.name %>">个人中心</a></li>
                             <!--<li><a href="/control-panel">控制面板</a></li>-->
                             <li><a href="/profile/signout">注销登录</a></li>
