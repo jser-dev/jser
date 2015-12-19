@@ -1,6 +1,8 @@
 var define = require('./define');
 var status = require("./status").comment;
 
+// 因为当前版本简化了权限管理，暂时用不到此文件
+
 /**
  * 定义权限配置模型
  **/

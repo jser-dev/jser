@@ -189,22 +189,8 @@
             "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9"
         }
     },
-    "roles": {
-        "superAdmin": {
-            "text": "超级管理员",
-            "access": []
-        },
-        "admin": {
-            "text": "普通管理员",
-            "access": []
-        },
-        "user": {
-            "text": "普通用户",
-            "access": []
-        }
-    },
     "adminUser": [
-        "admin@xhou.net2"
+        "admin@xhou.net"
     ],
     "scoreRules": {
         "topic-add": 2,
