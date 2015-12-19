@@ -6,18 +6,6 @@
     <meta name="description" content="<%= this.topic.title %> | <%= $.configs.description %>"/>
     <meta name="author" content="<%= this.topic.author.name %>">
     <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
-    <script>
-    function deleteTopic(){
-        if(confirm("确认删除当前话题")){
-            location.href="/topic/<%= this.topic.id %>/delete";
-        }
-    }
-    function deleteComment(commentId){
-        if(confirm("确认删除选择的评论")){
-            location.href="/topic/<%= this.topic.id %>/delComment?commentId="+commentId;
-        }
-    };
-    </script>
 <% $.placeEnd() >
 
 <% $.placeBegin("content") %>
@@ -52,20 +40,20 @@
         </div>
         <% var user = $.controller.context.user  %>
         <% if(user && user._id.toString()==this.topic.author._id.toString()){ %>
-        <a class="linkbtn" href="/topic/<%= this.topic.id %>/edit">
+        <a href="/topic/<%= this.topic.id %>/edit">
             <i class="fa fa-edit" title="编辑"></i>
         </a>
-        <a class="linkbtn" id="delete" href="javascript:deleteTopic();">
-            <i class="fa fa-trash-o" title="删除"></i>
-        </a>
+        <form class="inline" method="post" action="/topic/<%= this.topic.id %>/delete">
+            <i class="fa fa-trash-o" title="删除" onclick="if(confirm('确认删除当前话题'))this.parentNode.submit()"></i>
+        </form>
         <% } %>
         <% if(user){ %>
-        <a class="linkbtn" href="/topic/<%= this.topic.id %>/<%= this.topic.top>0?'removeTop':'setTop' %>">
-            <i class="fa fa-thumb-tack <%= this.topic.top>0?'active':'' %>" title="置顶"></i
-        </a>
-        <a class="linkbtn" href="/topic/<%= this.topic.id %>/<%= this.topic.good?'removeGood':'setGood' %>">
-            <i class="fa fa-certificate <%= this.topic.good?'active':'' %>" title="精华"></i>
-        </a>
+        <form class="inline" method="post" action="/topic/<%= this.topic.id %>/<%= this.topic.top>0?'removeTop':'setTop' %>">
+            <i class="fa fa-thumb-tack <%= this.topic.top>0?'active':'' %>" title="置顶" onclick="this.parentNode.submit()"></i>
+        </form>
+        <form class="inline" method="post" action="/topic/<%= this.topic.id %>/<%= this.topic.good?'removeGood':'setGood' %>">
+            <i class="fa fa-certificate <%= this.topic.good?'active':'' %>" title="精华" onclick="this.parentNode.submit()"></i>
+        </form>
         <% } %>
     </div>
 </div>
@@ -92,8 +80,11 @@
                         - <%= i+1 %>楼 -   
                         <span title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
                             <%= $.timeago(item.createAt) %>
-                        </span> 
-                        <a class="pull-right" href="javascript:deleteComment('<%= item.id %>')">删除</a>
+                        </span>
+                        <form class="pull-right inline" method="post" action="/topic/<%= this.topic.id %>/delComment">
+                            <input type="hidden" name="commentId" value="<%= item.id %>"> 
+                            <a href="javascript:;" onclick="if(confirm('确认删除当前话题'))this.parentNode.submit()">删除</a>
+                        </form>
                     </h4>
                     <span class="comment-info markdown-body">
                         <%= item.html %>

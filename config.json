@@ -37,6 +37,7 @@
         "routes": {
             "/::get": "./topic-list",
             "/topic::get": "./topic-list",
+            "/topic/{type}/p{pageIndex}": "./topic-list",
             "/topic/new": {
                 "action": "new",
                 "target": "./topic-edit",
@@ -50,12 +51,62 @@
                     "signed"
                 ]
             },
-            "/topic/{type}/p{pageIndex}": "./topic-list",
+            "/topic/{id}/edit/submit::post::submit": {
+                "target": "./topic-edit",
+                "required": [
+                    "signed"
+                ]
+            },
+            "/topic/{id}/delete::post::delete": {
+                "target": "./topic-view",
+                "required": [
+                    "signed"
+                ]
+            },
+            "/topic/{id}/setTop::post::setTop": {
+                "target": "./topic-view",
+                "required": [
+                    "signed"
+                ]
+            },
+            "/topic/{id}/setGood::post::setGood": {
+                "target": "./topic-view",
+                "required": [
+                    "signed"
+                ]
+            },
+            "/topic/{id}/removeTop::post::removeTop": {
+                "target": "./topic-view",
+                "required": [
+                    "signed"
+                ]
+            },
+            "/topic/{id}/removeGood::post::removeGood": {
+                "target": "./topic-view",
+                "required": [
+                    "signed"
+                ]
+            },
+            "/topic/{id}/addComment::post::addComment": {
+                "target": "./topic-view",
+                "required": [
+                    "signed"
+                ]
+            },
+            "/topic/{id}/delComment::post::delComment": {
+                "target": "./topic-view",
+                "required": [
+                    "signed"
+                ]
+            },
             "/topic/{id}": "./topic-view",
             "/signup": "./signup",
+            "/signup/submit::post": "./signup",
             "/verify/{verifyCode}": "./verify-mail",
             "/signin": "./signin",
+            "/signin::submit::post": "./signin",
             "/forget-password": "./forget-password",
+            "/forget-password/submit::post::submit": "./forget-password",
             "/profile": {
                 "target": "./profile",
                 "required": [
