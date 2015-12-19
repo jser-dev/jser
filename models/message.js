@@ -20,22 +20,6 @@ Message.getAllByUserId = function (userId, callback) {
 };
 
 /**
- * 全部标记为已读
- **/
-Message.markAllToReadByUserId = function (userId, callback) {
-	var self = this;
-	self.update({ status: status.UNREAD },{ $set: { status:status.READ }},callback);
-};
-
-/**
- * 全部标记为已读
- **/
-Message.deleteAllByUserId = function (userId, callback) {
-	var self = this;
-	self.update({ status: {$ne:status.DELETED} }, { $set: { status:status.DELETED }},callback);
-};
-
-/**
  * 获取所有已读消息
  **/
 Message.getReadByUserId = function (userId, callback) {
@@ -57,6 +41,23 @@ Message.getUnreadByUserId = function (userId, callback) {
 		"status": status.UNREAD})
 		.sort({ '_id': 1 })
 		.exec(callback);
+};
+
+
+/**
+ * 全部标记为已读
+ **/
+Message.markAllAsReadByUserId = function (userId, callback) {
+	var self = this;
+	self.update({ status: status.UNREAD },{ $set: { status:status.READ }},callback);
+};
+
+/**
+ * 全部标记为已读
+ **/
+Message.deleteAllByUserId = function (userId, callback) {
+	var self = this;
+	self.update({ status: {$ne:status.DELETED} }, { $set: { status:status.DELETED }},callback);
 };
 
 module.exports = Message;

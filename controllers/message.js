@@ -8,6 +8,17 @@ var Task = nokit.Task;
 var MessageController = function () { };
 
 /**
+ * 初始化 controller
+ **/
+MessageController.prototype.init = function () {
+    var self = this;
+    if (!self.context.user) {
+        return self.context.forbidden();
+    }
+    self.ready();
+};
+
+/**
  * 默认 action
  **/
 MessageController.prototype.index = function () {
@@ -24,7 +35,33 @@ MessageController.prototype.index = function () {
         });
     });
     task.end(function () {
-        self.render("message.html", self);
+        self.render("message", self);
+    });
+};
+
+/**
+ * 标记所有为已读
+ **/
+MessageController.prototype.markAllAsRead = function () {
+    var self = this;
+    Message.markAllAsReadByUserId(self.context.user._id, function (err) {
+        if (err) {
+            return self.context.error(err);
+        }
+        self.render("message", self);
+    });
+};
+
+/**
+ * 清空所有消息
+ **/
+MessageController.prototype.deleteAll = function () {
+    var self = this;
+    Message.deleteAll(self.context.user._id, function (err) {
+        if (err) {
+            return self.context.error(err);
+        }
+        self.render("message", self);
     });
 };
 

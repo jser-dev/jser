@@ -15,10 +15,14 @@
         我的消息
         <ul class="pull-right heading-nav">
             <li>
-                <a href="/message/markAllToRead">全部标记为已读</a>
+                <form method="post" action="/message/markAllAsRead">
+                    <a href="javascript:;" onclick="this.parentNode.submit()">全部标记为已读</a>
+                </form>
             </li>
             <li>
-                <a href="/message/clearMessage">清空</a>
+                <form method="post" action="/message/deleteAll">
+                    <a href="javascript:;" onclick="this.parentNode.submit()">清空</a>
+                </form>
             </li>
         </ul>
     </div>
@@ -26,9 +30,10 @@
        <% if(this.msgList &&　this.msgList.length>0){ %>
         <ul class="integral-list topic-list">
             <% $.each(this.topicList,function(i,item){ %>
-            <a href="/message/deleteMessage?msgId=<%= item._id %>">
-                删除
-            </a>
+            <form method="post" action="/message/delete">
+                <input type="hidden" name="msgId" value="<%= item._id %>"/>
+                <a href="javascript:;" onclick="this.parentNode.submit()">删除</a>
+            </form>
             <li>
                 <%= item.content %>
                 <span class="pull-right topic-info" title="<%= $.formatDate(item.sendAt,'yyyy-MM-dd hh:mm') %>">
