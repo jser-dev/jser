@@ -40,9 +40,9 @@
         </div>
         <% var user = $.controller.context.user  %>
         <% if(user && user._id.toString()==this.topic.author._id.toString()){ %>
-        <a href="/topic/<%= this.topic.id %>/edit">
-            <i class="fa fa-edit" title="编辑"></i>
-        </a>
+        <form class="inline" method="get" action="/topic/<%= this.topic.id %>/edit">
+            <i class="fa fa-edit" title="编辑" onclick="this.parentNode.submit()"></i>
+        </form>
         <form class="inline" method="post" action="/topic/<%= this.topic.id %>/delete">
             <i class="fa fa-trash-o" title="删除" onclick="if(confirm('确认删除当前话题'))this.parentNode.submit()"></i>
         </form>
