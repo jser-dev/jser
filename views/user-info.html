@@ -30,6 +30,7 @@
     </div>
 </div>
 
+<% if($.context.user && $.context.user._id==this.userId){ %>
 <div class="panel panel-default">
     <div class="panel-heading">草稿话题</div>
     <div class="panel-body">
@@ -49,6 +50,7 @@
         <% } %>
     </div>
 </div>
+<% } %>
 
 <div class="panel panel-default">
     <div class="panel-heading">最近话题</div>

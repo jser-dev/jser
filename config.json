@@ -101,10 +101,10 @@
             },
             "/topic/{id}": "./topic-view",
             "/signup": "./signup",
-            "/signup/submit::post": "./signup",
+            "/signup/submit::post::submit": "./signup",
             "/verify/{verifyCode}": "./verify-mail",
             "/signin": "./signin",
-            "/signin::submit::post": "./signin",
+            "/signin/submit::post::submit": "./signin",
             "/forget-password": "./forget-password",
             "/forget-password/submit::post::submit": "./forget-password",
             "/profile": {
