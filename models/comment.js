@@ -48,8 +48,8 @@ Comment.getLastByUserId = function (userId, callback) {
  * 保存一个评论
  **/
 Comment.save = function (comment, callback) {
-	if (!comment.content || comment.content.length < 10) {
-		return callback("评论内容不能少于 10 个字");
+	if (!comment.content || comment.content.length < 1) {
+		return callback("评论内容不能少于 1 个字");
 	}
 	comment.status = comment.status || status.PUBLISH;
 	var rs = utils.md2html(comment.content);
@@ -60,6 +60,7 @@ Comment.save = function (comment, callback) {
 		}
 		comment.topic.replay++;
 		comment.topic.lastReplayAt = comment.updateAt;
+		comment.topic.lastReplayAuthor = comment.author;
 		comment.topic.save(callback);
 		score.add(comment.author._id || comment.author, "comment-add");
 	});
