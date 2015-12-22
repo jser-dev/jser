@@ -89,6 +89,23 @@
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                        积分榜
+                        <a class="pull-right" href="/user/top">更多</a>
+                    </div>
+                    <div class="panel-body">
+                        <% var userList = $.controller.context.topUserList %>
+                        <ul class="integral-list">
+                            <% $.each(userList,function(i,item){ %>
+                            <li>
+                                <a href="/user/<%= item.name %>"><%= item.name %></a>
+                                <span class="pull-right"><%= item.score %></span>
+                            </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         推广链接
                     </div>
                     <div class="panel-body panel-ad">
@@ -107,23 +124,6 @@
                             (adsbygoogle = window.adsbygoogle || []).push({});
                             </script>
                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        积分榜
-                        <a class="pull-right" href="/user/top">更多</a>
-                    </div>
-                    <div class="panel-body">
-                        <% var userList = $.controller.context.topUserList %>
-                        <ul class="integral-list">
-                            <% $.each(userList,function(i,item){ %>
-                            <li>
-                                <a href="/user/<%= item.name %>"><%= item.name %></a>
-                                <span class="pull-right"><%= item.score %></span>
-                            </li>
-                            <% }) %>
-                        </ul>
                     </div>
                 </div>
                 <div class="panel panel-default">
