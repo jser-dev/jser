@@ -81,7 +81,9 @@ GitHubController.prototype.callback = function () {
                         return self.context.error(err);
                     }
                     self.context.session.set('user', authedUser, function () {
-                        self.context.redirect("/");
+                        self.session.get("referer", function (referer) {
+                            self.context.redirect(referer || "/");
+                        });
                     });
                 });
             });

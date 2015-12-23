@@ -7,7 +7,9 @@ SignInController.prototype.index = function () {
     var self = this;
     //记录进入登录页之前的页面
     var referer = self.request.headers["referer"];
-    if (referer && referer.indexOf("/signin") < 0) {
+    if (referer &&
+        referer.indexOf("/signin") < 0 &&
+        referer.indexOf("/oauth") < 0) {
         self.session.set("referer", referer);
     }
     self.render("signin.html");
