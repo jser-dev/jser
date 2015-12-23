@@ -5,6 +5,11 @@ var SignInController = module.exports = function () { };
 
 SignInController.prototype.index = function () {
     var self = this;
+    //记录进入登录页之前的页面
+    var referer = self.request.headers["referer"];
+    if (referer && referer.indexOf("/signin") < 0) {
+        self.session.set("referer", referer);
+    }
     self.render("signin.html");
 };
 
@@ -19,8 +24,10 @@ SignInController.prototype.submit = function () {
                 user: userInfo
             });
         } else {
-            self.context.session.set("user", user, function () {
-                self.context.redirect("/");
+            self.session.set("user", user, function () {
+                self.session.get("referer", function (referer) {
+                    self.context.redirect(referer || "/");
+                });
             });
         }
     });
