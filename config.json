@@ -35,8 +35,8 @@
     },
     "mvc": {
         "routes": {
-            "/::get": "./topic-list",
-            "/topic::get": "./topic-list",
+            "get /": "./topic-list",
+            "get /topic": "./topic-list",
             "/topic/{type}/p{pageIndex}": "./topic-list",
             "/topic/new": {
                 "action": "new",
@@ -51,62 +51,64 @@
                     "signed"
                 ]
             },
-            "/topic/{id}/edit/submit::post::submit": {
+            "post /topic/{id}/edit/submit": {
                 "target": "./topic-edit",
+                "action": "submit",
                 "required": [
                     "signed"
                 ]
             },
-            "/topic/{id}/delete::post::delete": {
+            "post /topic/{id}/delete": {
                 "target": "./topic-view",
+                "action": "delete",
                 "required": [
                     "signed"
                 ]
             },
-            "/topic/{id}/setTop::post::setTop": {
-                "target": "./topic-view",
+            "post /topic/{id}/setTop": {
+                "target": "./topic-view setTop",
                 "required": [
                     "signed"
                 ]
             },
-            "/topic/{id}/setGood::post::setGood": {
-                "target": "./topic-view",
+            "post /topic/{id}/setGood": {
+                "target": "./topic-view setGood",
                 "required": [
                     "signed"
                 ]
             },
-            "/topic/{id}/removeTop::post::removeTop": {
-                "target": "./topic-view",
+            "post /topic/{id}/removeTop": {
+                "target": "./topic-view removeTop",
                 "required": [
                     "signed"
                 ]
             },
-            "/topic/{id}/removeGood::post::removeGood": {
-                "target": "./topic-view",
+            "post /topic/{id}/removeGood": {
+                "target": "./topic-view removeGood",
                 "required": [
                     "signed"
                 ]
             },
-            "/topic/{id}/addComment::post::addComment": {
-                "target": "./topic-view",
+            "post /topic/{id}/addComment": {
+                "target": "./topic-view addComment",
                 "required": [
                     "signed"
                 ]
             },
-            "/topic/{id}/delComment::post::delComment": {
-                "target": "./topic-view",
+            "post /topic/{id}/delComment": {
+                "target": "./topic-view delComment",
                 "required": [
                     "signed"
                 ]
             },
             "/topic/{id}": "./topic-view",
             "/signup": "./signup",
-            "/signup/submit::post::submit": "./signup",
+            "post /signup/submit": "./signup submit",
             "/verify/{verifyCode}": "./verify-mail",
             "/signin": "./signin",
-            "/signin/submit::post::submit": "./signin",
+            "post /signin/submit": "./signin submit",
             "/forget-password": "./forget-password",
-            "/forget-password/submit::post::submit": "./forget-password",
+            "post /forget-password/submit": "./forget-password submit",
             "/profile": {
                 "target": "./profile",
                 "required": [
