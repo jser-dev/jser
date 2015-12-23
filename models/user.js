@@ -45,7 +45,7 @@ User.signIn = function (user, callback) {
             return callback(err, user);
         }
         if (foundUser && foundUser.verifyCode) {
-            return callback("该账号的邮箱还未验证，请完成验证或重新注册", user);
+            return callback("该账号的邮箱还未验证，请查收邮件完成验证，未验证的邮箱也可以被重新注册", user);
         } else if (foundUser) {
             return callback(null, foundUser);
         } else {
