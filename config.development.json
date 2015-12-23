@@ -2,12 +2,10 @@
     "showErrorDetail": true,
     "connStr": "mongodb://localhost/jser",
     "session": {
-        "host": "127.0.0.1",
-        "port": 6379
+        "provider": "$./providers/session-process"
     },
-    "port": 8443,
+    "port": 8080,
     "https": {
-        "enabled": true,
-        "redirectPort": 8080
+        "enabled": false
     }
 }
