@@ -9,7 +9,8 @@ SignInController.prototype.index = function () {
     var referer = self.request.headers["referer"];
     if (referer &&
         referer.indexOf("/signin") < 0 &&
-        referer.indexOf("/oauth") < 0) {
+        referer.indexOf("/oauth") < 0 &&
+        referer.indexOf("/signup") < 0) {
         self.session.set("referer", referer);
     }
     self.render("signin.html");
