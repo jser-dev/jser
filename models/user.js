@@ -189,7 +189,20 @@ User.getRandomAvatar = function () {
  **/
 User.getUser = function (id, callback) {
     var self = this;
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        return callback();
+    }
     self.findById(id, callback);
+};
+
+/**
+ * 通过名字列表获取一组数户
+ **/
+User.getUsersByNames = function (names, callback) {
+    if (names.length === 0) {
+        return callback(null, []);
+    }
+    User.find({ name: { $in: names } }, callback);
 };
 
 /**

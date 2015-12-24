@@ -12,8 +12,8 @@ var UserInfoController = function () { };
 
 UserInfoController.prototype.init = function () {
     var self = this;
-    self.uname = self.context.data("name");
-    User.getUserByName(self.uname, function (err, user) {
+    var _name = self.context.data("name");
+    User.getUserByName(_name, function (err, user) {
         if (err) {
             return self.context.error(err);
         }

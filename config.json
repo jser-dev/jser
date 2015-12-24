@@ -123,8 +123,9 @@
                     "admin"
                 ]
             },
-            "/user/top": "./user-top",
+            "/users": "./user-list",
             "/user/{name}": "./user-info",
+            "/uid/{id}": "./uid",
             "/message": {
                 "target": "./message",
                 "required": [
