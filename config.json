@@ -31,7 +31,8 @@
     "session": {
         "provider": "nokit-session-redis",
         "host": "localhost",
-        "port": 6379
+        "port": 6379,
+        "timeout": 99999999
     },
     "mvc": {
         "routes": {
@@ -187,6 +188,7 @@
             "token_url": "https://github.com/login/oauth/access_token",
             "redirect_uri": "https://jser.cc/oauth/github/callback",
             "user_url": "https://api.github.com/user",
+            "scope": "user",
             "client_id": "ceb6ca9d4988885dca39",
             "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9"
         }
