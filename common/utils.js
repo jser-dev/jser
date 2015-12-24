@@ -86,7 +86,7 @@ self.fetchUsers = function (text) {
         text = text.replace(ignore_regex, '');
     });
 
-    var results = text.match(/@[\u4E00-\u9FFF-zA-Z0-9]+/igm);
+    var results = text.match(/@[\u4E00-\u9FFFa-zA-Z0-9\-_]+/igm);
     var names = [];
     if (results) {
         for (var i = 0, l = results.length; i < l; i++) {
