@@ -100,9 +100,10 @@ Message.send=function(from,toList,msgInfo,callback){
 		toList=[toList];
 	}
 	var task = new Task();
-	toList.forEach(function(to){
-		task.add(function(done){
-			User.getUserByName(to,function(err,user){
+    User.getUsersByNames(toList,function(err,users){
+        users.forEach(function(user){
+            task.add(function(done){
+               if(err || !user)return;
 				var msg = new Message();
 				msg.to=user._id.toString();
 				msg.from = from;
@@ -111,9 +112,9 @@ Message.send=function(from,toList,msgInfo,callback){
 				msg.content = msgInfo.content;
 				msg.link = msgInfo.link;
 				msg.save(done);
-			});
-		});
-	});
+            });
+        });
+    });
 	task.end(callback);
 };
 

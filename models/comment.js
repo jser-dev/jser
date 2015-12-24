@@ -68,7 +68,8 @@ Comment._handleUserLinks = function (content, callback) {
             return callback(err);
         }
         users.forEach(function (user) {
-            content = content.replace(new RegExp('@' + user.name + '\\b(?!\\])', 'igm'),
+            //@[\u4E00-\u9FFFa-zA-Z0-9\-_]+/igm
+            content = content.replace(new RegExp('@' + user.name, 'igm'),
                 '[@' + user.name + '](/uid/' + user._id + ')');
         });
         callback(null, {

@@ -26,7 +26,7 @@ UIDController.prototype.index = function () {
         if (!user) {
             return self.context.notFound();
         }
-        self.context.redirect("/user/" + user.name);
+        self.context.redirect("/user/" + encodeURIComponent(user.name));
     });
 }
 
