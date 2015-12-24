@@ -32,6 +32,9 @@ GitHubController.prototype.index = function () {
     });
 };
 
+/**
+ * 获取 GitHub 用户的授权 token
+ **/
 GitHubController.prototype.getToken = function (callback) {
     var self = this;
     var code = self.context.data('code');
@@ -52,15 +55,17 @@ GitHubController.prototype.getToken = function (callback) {
                 "client_secret": self.configs.client_secret,
                 "code": code,
                 "state": state
-                // "redirect_uri": self.configs.redirect_uri
             }
         }, function (err, httpResponse, body) {
             var tokenResult = JSON.parse(body);
-            callback(err, tokenResult);
+            callback(err, tokenResult || {});
         });
     });
 };
 
+/**
+ * 获取 GitHub 用户的基本信息
+ **/
 GitHubController.prototype.getUserInfo = function (access_token, callback) {
     var self = this;
     var userInfoUrl = self.configs.user_url + "?access_token=" + access_token;
@@ -73,22 +78,25 @@ GitHubController.prototype.getUserInfo = function (access_token, callback) {
         }
     }, function (err, httpResponse, body) {
         var userInfo = JSON.parse(body);
-        callback(err, userInfo);
+        callback(err, userInfo || {});
     });
 };
 
+/**
+ * 获取 GitHub 用户的 email
+ **/
 GitHubController.prototype.getEmail = function (access_token, callback) {
     var self = this;
     request({
-        "url": self.configs.email_url + "?access_token=" + access_token;
+        "url": self.configs.email_url + "?access_token=" + access_token,
         "headers": {
             "User-Agent": "JSER",//Awesome-Octocat-App,
             "X-OAuth-Scopes": self.configs.scope,
             "X-Accepted-OAuth-Scopes": self.configs.scope
         }
     }, function (err, httpResponse, body) {
-        var emailInfo = JSON.parse(body);
-        callback(err, emailInfo);
+        var emailArray = JSON.parse(body);
+        callback(err, emailArray || []);
     });
 };
 
@@ -101,23 +109,51 @@ GitHubController.prototype.callback = function () {
             self.getToken(done);
         },
         "getUserInfo": function (done) {
-            self.getUserInfo(task.result["getToken"].access_token, done);
-        },
-        "getEmail": function (done) {
-            var userInfo = task.result["getUserInfo"];
-            if (userInfo.email) {
-                done(null, userInfo);
-            } else {
-                self.getEmail(task.result["getToken"].access_token, done);
-            }
+            var tokenResult = task.result["getToken"];
+            self.getUserInfo(tokenResult.access_token, done);
         }
     });
     task.seq(function (err, result) {
-        var userInfo = result["fillEmail"];
-        self.loginUser(userInfo);
+        if (err) {
+            return self.context.error(err);
+        }
+        var userInfo = task.result["getUserInfo"];
+        if (userInfo.email) {
+            self.loginUser(userInfo);
+        } else {
+            var tokenResult = task.result["getToken"];
+            self.getEmail(tokenResult.access_token, function (err, emailArray) {
+                if (err) {
+                    return self.context.error(err);
+                }
+                var emailItem = self.parseEmail(emailArray);
+                userInfo.email = emailItem.email;
+                self.loginUser(userInfo);
+            });
+        }
     });
 };
 
+/**
+ * 解析 email
+ **/
+GitHubController.prototype.parseEmail = function (emailArray) {
+    //查找主 email
+    var emailItem = emailArray.filter(function (item) {
+        return item.primary;
+    })[0];
+    if (!emailItem) {
+        //查找验证过的第一个 email
+        emailItem = emailArray.filter(function (item) {
+            return item.verified;
+        })[0];
+    }
+    return emailItem || emailArray[0] || {};;
+};
+
+/**
+ * 登录 OAuth 认证为的用户
+ **/
 GitHubController.prototype.loginUser = function (userInfo) {
     var self = this;
     var user = new User();
