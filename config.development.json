@@ -13,8 +13,8 @@
             "auth_url": "https://github.com/login/oauth/authorize",
             "token_url": "https://github.com/login/oauth/access_token",
             "redirect_uri": "http://www.jser.cc:8080/oauth/github/callback",
-            "email_url": "https://api.github.com/user/emails",
             "user_url": "https://api.github.com/user",
+            "email_url": "https://api.github.com/user/emails",
             "scope": "user,user:email",
             "client_id": "ce7ea4103b7f010113f1",
             "client_secret": "4f3d7f027ddd5e225c9dcfd8f28f731528a22569"

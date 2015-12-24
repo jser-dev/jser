@@ -188,7 +188,8 @@
             "token_url": "https://github.com/login/oauth/access_token",
             "redirect_uri": "https://jser.cc/oauth/github/callback",
             "user_url": "https://api.github.com/user",
-            "scope": "user",
+            "email_url": "https://api.github.com/user/emails",
+            "scope": "user,user:email",
             "client_id": "ceb6ca9d4988885dca39",
             "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9"
         }
