@@ -21,7 +21,8 @@
     },
     "filters": {
         "^/::access": "./filters/access",
-        "^/::data": "./filters/common-data"
+        "^/::data": "./filters/common-data",
+        "^/::ua": "./filters/ua"
     },
     "folders": {
         "public": {
