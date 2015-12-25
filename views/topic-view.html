@@ -22,7 +22,8 @@
                 </h4>
                 <span class="topic-info">
                     <a href="/user/<%= this.topic.author.name %>"><%= this.topic.author.name %></a> 
-                    发布于 <%= $.timeago(this.topic.updateAt,"yyyy-MM-dd hh:mm") %>
+                    创建于 <%= $.timeago(this.topic.createAt,"yyyy-MM-dd hh:mm") %> , 
+                    编辑于 <%= $.timeago(this.topic.updateAt,"yyyy-MM-dd hh:mm") %>
                 </span>
             </div>
             <div class="media-right">
