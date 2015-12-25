@@ -1,7 +1,7 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title>用户信息 | <%= $.configs.name %></title>
+    <title><%= this.user.name %> | <%= $.configs.name %></title>
     <meta name="keywords" content="<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= $.configs.description %>"/>
     <meta name="author" content="<%= $.configs.author %>"/>
