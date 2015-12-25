@@ -44,8 +44,7 @@ Topic.save = function (topic, callback) {
     if (!topic.type || topic.type.length < 1) {
         return callback("请选择话题类型");
     }
-    var rs = utils.md2html(topic.content);
-    topic.html = rs.html;
+    topic.html = utils.md2html(topic.content);
     topic.createAt = topic.createAt || new Date();
     topic.updateAt = new Date();
     topic.save(callback);
@@ -92,7 +91,7 @@ Topic.getList = function (options, callback) {
     options = options || {};
     options.conditions = self._handleConditions(options.conditions);
     self.find(options.conditions)
-        .sort({ 'top': -1, '_id': -1 })
+        .sort({ 'top': -1, 'lastReplayAt': -1, '_id': -1 })
         .skip(options.pageSize * (options.pageIndex - 1))
         .limit(options.pageSize)
         .populate('author')

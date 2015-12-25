@@ -41,7 +41,7 @@
                         <a href="/user/<%= item.author.name %>"><%= item.author.name %></a> 
                         发布于 
                         <span title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
-                            <%= $.timeago(item.createAt) %>
+                            <%= $.timeago(item.updateAt) %>
                         </span> , 
                         <% if(item.lastReplayAuthor){ %>
                             <a href="/user/<%= item.lastReplayAuthor.name %>">
