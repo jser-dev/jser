@@ -47,6 +47,7 @@ Topic.save = function (topic, callback) {
     topic.html = utils.md2html(topic.content);
     topic.createAt = topic.createAt || new Date();
     topic.updateAt = new Date();
+    topic.lastReplayAt = topic.lastReplayAt || new Date();
     topic.save(callback);
 };
 
