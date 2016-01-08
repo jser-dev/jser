@@ -8,7 +8,7 @@ var TopicEditController = module.exports = function () { };
 
 TopicEditController.prototype.init = function () {
     var self = this;
-    self.topicId = self.context.data('id');
+    self.topicId = self.context.params('id');
     self.ready();
 };
 
@@ -42,14 +42,14 @@ TopicEditController.prototype.submit = function () {
         if (err) {
             return self.context.error(err);
         }
-        if (self.context.data("publish")) {
+        if (self.context.params("publish")) {
             topic.status = status.PUBLISH;
         } else {
             topic.status = status.DRAFT;
         }
-        topic.title = self.context.data('title');
-        topic.content = self.context.data('content');
-        topic.type = self.context.data('type');
+        topic.title = self.context.params('title');
+        topic.content = self.context.params('content');
+        topic.type = self.context.params('type');
         Topic.save(topic, function (err) {
             if (!err && topic.status == status.PUBLISH) {
                 return self.context.redirect("/topic/" + topic.id);
