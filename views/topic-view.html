@@ -5,7 +5,6 @@
     <meta name="keywords" content="<%= this.topic.tags||this.topic.title %>,<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= this.topic.title %> | <%= $.configs.description %>"/>
     <meta name="author" content="<%= this.topic.author.name %>">
-    <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
 <% $.placeEnd() >
 
 <% $.placeBegin("content") %>
@@ -110,11 +109,9 @@
                 <textarea name="content" id="editor" class="editor" placeholder="内容..."><%= this.newComment %></textarea>
             </p>
             <p class="form-row align-right" style="margin-bottom:0px;">
-                
                 <input type="submit" value="提交评论">
             </p>
         </form>
-        <script src="/mditor/build/js/mditor.min.js"></script>
         <script>
             var mditor = new Mditor("#editor");
         </script>

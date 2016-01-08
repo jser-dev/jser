@@ -26,9 +26,9 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/mditor/build/css/mditor.min.css">
     <link rel="stylesheet" href="/client/pjax.min.css" />
     <link rel="stylesheet" href="/css/common.css" />
-    <% $.placeHolder('head') %>
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -38,6 +38,7 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    <% $.placeHolder('head') %>
 </head>
 
 <body>
@@ -103,6 +104,7 @@
     </nav>
     <div class="container container-main">
         <div class="row">
+            <script src="/mditor/build/js/mditor.min.js"></script>
             <div class="col-sm-9 col-main">
                 <% $.placeHolder("content") %>
             </div>
