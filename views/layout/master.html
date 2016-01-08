@@ -93,8 +93,8 @@
                         </ul>
                     </li>
                     <% }else{ %>
-                    <li><a href="/signup">注册</a></li>
-                    <li><a href="/signin">登录</a></li>
+                    <li><a href="/signup" data-pjax-container=".col-main">注册</a></li>
+                    <li><a href="/signin" data-pjax-container=".col-main">登录</a></li>
                     <% } %>
                 </ul>
             </div>
@@ -114,14 +114,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         积分榜
-                        <a class="pull-right" href="/users">更多</a>
+                        <a class="pull-right" href="/users" data-pjax-container=".col-main">更多</a>
                     </div>
                     <div class="panel-body">
                         <% var userList = $.controller.context.topUserList %>
                         <ul class="integral-list">
                             <% $.each(userList,function(i,item){ %>
                             <li>
-                                <a href="/user/<%= item.name %>"><%= item.name %></a>
+                                <a href="/user/<%= item.name %>" data-pjax-container=".col-main"><%= item.name %></a>
                                 <span class="pull-right"><%= item.score %></span>
                             </li>
                             <% }) %>
@@ -170,7 +170,7 @@
                <li><a href="/client">客户端</a></li>
                <li><a href="/api">API</a></li> 
                <% $.each($.configs.footbar.links,function(i,item){ %>
-               <li><a href="<%= item.url %>"><%= item.name %></a></li>
+               <li><a href="<%= item.url %>" data-pjax-container=".col-main"><%= item.name %></a></li>
                <% }) %>
            </ul>
            <p class="footbar-info">
