@@ -10,7 +10,7 @@ var VerifyMailController = function () { };
  **/
 VerifyMailController.prototype.index = function () {
     var self = this;
-    var verifyCode = self.context.data("verifyCode");
+    var verifyCode = self.context.params("verifyCode");
 
     User.verifyMail(verifyCode, function (err, user) {
         if (err) {

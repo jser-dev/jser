@@ -12,7 +12,7 @@ ProfileController.prototype.index = function () {
 
 ProfileController.prototype.saveBaseInfo = function () {
     var self = this;
-    var name = self.context.data("name");
+    var name = self.context.params("name");
     var avatar = self.context.request.files["avatar"];
     User.saveBaseInfo({
         "id": self.context.user._id,
@@ -34,8 +34,8 @@ ProfileController.prototype.saveBaseInfo = function () {
 
 ProfileController.prototype.changePassword = function () {
     var self = this;
-    var password = self.context.data("password");
-    var confirmPassword = self.context.data("confirmPassword");
+    var password = self.context.params("password");
+    var confirmPassword = self.context.params("confirmPassword");
     if (password != confirmPassword) {
         return self.render("profile.html", {
             changePasswordMessage: "两次密码不一致",

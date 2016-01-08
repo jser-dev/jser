@@ -13,7 +13,7 @@ var SearchController = function () { };
  **/
 SearchController.prototype.index = function () {
     var self = this;
-    self.keyword = self.context.data('keyword');
+    self.keyword = self.context.params('keyword');
     var task = Task.create();
     task.add(function (done) {
         User.search(self.keyword, function (err, userList) {

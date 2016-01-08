@@ -63,9 +63,9 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav">
-                    <li><a href="/topic">话题</a></li>
+                    <li><a href="/topic" data-pjax-container=".col-main">话题</a></li>
                     <!--<li><a href="/active">活动</a></li>-->
-                    <li><a href="/about">关于</a></li>
+                    <li><a href="/about" data-pjax-container=".col-main">关于</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <% var user = $.controller.context.user  %>
@@ -185,6 +185,7 @@
     </footer>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/client/pjax.js"></script>
 </body>
 
 </html>

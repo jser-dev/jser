@@ -22,8 +22,9 @@
     "mongoose": "^4.3.4",
     "nodemailer": "^1.11.0",
     "nokit-handler-less": "^1.0.1",
+    "nokit-pjax": "0.0.3",
     "nokit-session-redis": "^1.0.5",
-    "nokitjs": "^1.16.8",
+    "nokitjs": "^1.17.2",
     "qn": "^1.1.1",
     "request": "^2.66.0",
     "timeago-words": "^0.0.3"

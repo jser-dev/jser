@@ -39,7 +39,7 @@ ControlPanelController.prototype.saveAccess = function () {
     utils.each(configs.roles, function (roleName) {
         accessList.push({
             role: roleName,
-            users: self.context.data(roleName)
+            users: self.context.params(roleName)
         });
     });
     Access.save(accessList, function (err) {

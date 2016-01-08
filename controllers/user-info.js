@@ -12,7 +12,7 @@ var UserInfoController = function () { };
 
 UserInfoController.prototype.init = function () {
     var self = this;
-    var _name = self.context.data("name");
+    var _name = self.context.params("name");
     User.getUserByName(_name, function (err, user) {
         if (err) {
             return self.context.error(err);

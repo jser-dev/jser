@@ -70,7 +70,7 @@ MessageController.prototype.deleteAll = function () {
  **/
 MessageController.prototype.delete = function () {
     var self = this;
-    var msgId = self.context.data("msgId");
+    var msgId = self.context.params("msgId");
     Message.deleteById(msgId, function (err) {
         if (err) {
             return self.context.error(err);
@@ -84,7 +84,7 @@ MessageController.prototype.delete = function () {
  **/
 MessageController.prototype.openLink = function () {
     var self = this;
-    var msgId = self.context.data("msgId");
+    var msgId = self.context.params("msgId");
     Message.markAsReadById(msgId, function (err, msg) {
         if (err) {
             return self.context.error(err);

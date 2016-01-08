@@ -12,7 +12,7 @@ var TopicViewController = module.exports = function () { };
 
 TopicViewController.prototype.init = function () {
 	var self = this;
-	self.topicId = self.context.data('id');
+	self.topicId = self.context.params('id');
 	var task = new Task();
 	task.add('topic', function (done) {
 		Topic.get(self.topicId, function (err, topic) {
@@ -147,7 +147,7 @@ TopicViewController.prototype.addComment = function () {
 	if (!self.context.user) {
 		return self.context.forbidden();
 	}
-	var content = self.context.data('content');
+	var content = self.context.params('content');
 	var comment = new Comment();
 	comment.content = content;
 	comment.author = self.context.user;
@@ -172,7 +172,7 @@ TopicViewController.prototype.addComment = function () {
  **/
 TopicViewController.prototype.delComment = function () {
 	var self = this;
-	var commentId = self.context.data("commentId");
+	var commentId = self.context.params("commentId");
 	Comment.get(commentId, function (err, comment) {
 		if (err) {
 			return self.context.error(err);

@@ -22,11 +22,13 @@
     "filters": {
         "^/::access": "./filters/access",
         "^/::data": "./filters/common-data",
-        "^/::ua": "./filters/ua"
+        "^/::ua": "./filters/ua",
+        "^/::pjax": "nokit-pjax"
     },
     "folders": {
         "public": {
-            "^/mditor": "./node_modules"
+            "^/mditor": "./node_modules",
+            "client/pjax.js$": "./node_modules/nokit-pjax"
         }
     },
     "session": {
