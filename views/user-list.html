@@ -1,7 +1,7 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title>积分榜 | <%= $.configs.name %></title>
+    <title>积分榜 - <%= $.configs.name %></title>
     <meta name="keywords" content="<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= $.configs.description %>"/>
     <meta name="author" content="<%= $.configs.author %>"/>
@@ -15,7 +15,7 @@
         <ul class="integral-list user-search-list">
             <% $.each(userList,function(i,item){ %>
             <li>
-                <a href="/user/<%= item.name %>">
+                <a href="/user/<%= item.name %>" data-pjax-container=".col-main">
                 <img alt="<%= item.name %>" class="avatar" src="<%= item.avatar %>" />
                 <%= item.name %>
                 </a>

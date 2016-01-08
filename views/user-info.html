@@ -1,7 +1,7 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title><%= this.user.name %> | <%= $.configs.name %></title>
+    <title><%= this.user.name %> - <%= $.configs.name %></title>
     <meta name="keywords" content="<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= $.configs.description %>"/>
     <meta name="author" content="<%= $.configs.author %>"/>
@@ -15,7 +15,7 @@
         基本信息
         <% var loginUser = $.controller.context.user  %>
         <% if(loginUser && loginUser._id.toString()==this.user._id.toString()){ %>
-        <a class="pull-right" href="/profile">
+        <a class="pull-right" href="/profile" data-pjax-container=".col-main">
             修改
         </a>
         <% } %>
@@ -59,7 +59,7 @@
         <ul class="integral-list topic-list">
             <% $.each(this.topicList,function(i,item){ %>
             <li>
-                <a href="/topic/<%= item.id %>"><%= item.title %></a>
+                <a href="/topic/<%= item.id %>" data-pjax-container=".col-main"><%= item.title %></a>
                 <span class="pull-right topic-info" title="<%= $.formatDate(item.createAt,'yyyy-MM-dd hh:mm') %>">
                      <%= $.timeago(item.createAt) %>
                 </span>

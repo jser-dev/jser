@@ -1,7 +1,7 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title>注册 | <%= $.configs.name %></title>
+    <title>注册 - <%= $.configs.name %></title>
     <meta name="keywords" content="<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= $.configs.description %>"/>
     <meta name="author" content="<%= $.configs.author %>"/>
@@ -40,7 +40,7 @@
                 <p class="form-row">
                     <label class="hidden-xs"></label>
                     <input type="submit" value="现在注册"/>
-                    <a href="/signin">已有账号登录</a>
+                    <a href="/signin" data-pjax-container=".col-main">已有账号登录</a>
                 </p>
                 <p class="form-row">
                     <label></label>

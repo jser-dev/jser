@@ -48,7 +48,7 @@
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="/" data-pjax-container=".col-main">
                 </a>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
                     <span class="icon-bar"></span>
@@ -80,14 +80,14 @@
                         </a>
                         <ul class="dropdown-menu user-menu-ul">
                             <li>
-                                <a href="/message">
+                                <a href="/message" data-pjax-container=".col-main">
                                     我的消息
                                     <% if($.context.unreadMsgCount>0){ %>
                                     <span class="badge"><%= $.context.unreadMsgCount %></span>
                                     <% } %>
                                 </a>
                             </li>
-                            <li><a href="/user/<%= user.name %>">个人中心</a></li>
+                            <li><a href="/user/<%= user.name %>"  data-pjax-container=".col-main">个人中心</a></li>
                             <!--<li><a href="/control-panel">控制面板</a></li>-->
                             <li><a href="/profile/signout">注销登录</a></li>
                         </ul>
@@ -167,16 +167,16 @@
     <footer class="footbar">
         <div class="container">
            <ul class="footbar-nav">
-               <li><a href="/client">客户端</a></li>
-               <li><a href="/api">API</a></li> 
+               <li><a href="/client" data-pjax-container=".col-main">客户端</a></li>
+               <li><a href="/api" data-pjax-container=".col-main">API</a></li> 
                <% $.each($.configs.footbar.links,function(i,item){ %>
-               <li><a href="<%= item.url %>" data-pjax-container=".col-main"><%= item.name %></a></li>
+               <li><a href="<%= item.url %>" target="_blank"><%= item.name %></a></li>
                <% }) %>
            </ul>
            <p class="footbar-info">
                <%= $.configs.footbar.info %> , 
                <%= $.configs.buildYear %>-<%= (new Date()).getFullYear() %> , 
-               <a href="/"><%= $.configs.domain.toUpperCase() %></a>
+               <a href="/" data-pjax-container=".col-main"><%= $.configs.domain.toUpperCase() %></a>
            </p> 
            <!--<a href="" target="blank">
                <img src="http://assets.qiniu.com/qiniu-122x65.png"/>

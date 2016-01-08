@@ -1,7 +1,7 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title><%= this.topic.title %> | <%= $.configs.name %></title>
+    <title><%= this.topic.title %> - <%= $.configs.name %></title>
     <meta name="keywords" content="<%= this.topic.tags||this.topic.title %>,<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= this.topic.title %> | <%= $.configs.description %>"/>
     <meta name="author" content="<%= this.topic.author.name %>">
@@ -21,7 +21,7 @@
                     <%= this.topic.title %>
                 </h4>
                 <span class="topic-info">
-                    <a href="/user/<%= this.topic.author.name %>"><%= this.topic.author.name %></a> 
+                    <a href="/user/<%= this.topic.author.name %>" data-pjax-container=".col-main"><%= this.topic.author.name %></a> 
                     创建于 <%= $.timeago(this.topic.createAt,"yyyy-MM-dd hh:mm") %> , 
                     编辑于 <%= $.timeago(this.topic.updateAt,"yyyy-MM-dd hh:mm") %>
                 </span>
@@ -70,7 +70,7 @@
             <% $.each(this.topic.comments,function(i,item){ %>
             <li class="media">
                 <a id="<%= item.id %>" class="anchor"></a>
-                <a class="media-left" href="/user/<%= item.author.name %>">
+                <a class="media-left" href="/user/<%= item.author.name %>" data-pjax-container=".col-main">
                     <img class="media-object avatar" src="<%= item.author.avatar %>" alt="<%= item.author.name %>">
                 </a>
                 <div class="media-body">
@@ -120,7 +120,7 @@
         </script>
     <% }else{ %>
         <div class="panel-footer">
-            <a href="/signin">登录</a>后可以回复
+            <a href="/signin" data-pjax-container=".col-main">登录</a>后可以回复
         </div>
     <% } %>
 </div>

@@ -1,7 +1,7 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title>登录 | <%= $.configs.name %></title>
+    <title>登录 - <%= $.configs.name %></title>
     <meta name="keywords" content="<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= $.configs.description %>"/>
     <meta name="author" content="<%= $.configs.author %>"/>
@@ -30,7 +30,7 @@
             <p class="form-row">
                 <label class="hidden-xs"></label>
                 <input type="submit" value="立即登录"/> 
-                <a href="/forget-password">找回密码</a> 
+                <a href="/forget-password" data-pjax-container=".col-main">找回密码</a> 
                 <span style="color:#ccc;"> | </span> 
                 <a href="/oauth/github">GitHub 登录</a>
             </p>

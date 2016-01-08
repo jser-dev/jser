@@ -1,7 +1,8 @@
 <% $.master("./layout/master.html") %> 
     
 <% $.placeBegin("head") %>
-    <title>话题 | <%= $.configs.name %></title>
+    <% var currentList = $.configs.topicTypes[this.currentType] %>
+    <title><%= currentList?currentList.text:'所有话题' %> - <%= $.configs.name %></title>
     <meta name="keywords" content="<%= $.configs.keywords %>"/>
     <meta name="description" content="<%= $.configs.description %>"/>
     <meta name="author" content="<%= $.configs.author %>"/>
@@ -23,7 +24,7 @@
         <ul class="media-list topic-list">
             <% $.each(this.list,function(i,item){ %>
             <li class="media">
-                <a class="media-left" href="/user/<%= item.author.name %>">
+                <a class="media-left" href="/user/<%= item.author.name %>"  data-pjax-container=".col-main">
                     <img class="media-object avatar" src="<%= item.author.avatar %>" alt="<%= item.author.name %>">
                 </a>
                 <div class="media-body">
@@ -57,7 +58,7 @@
                     </span>
                 </div>
                 <div class="media-right">
-                    <a href="/topic/<%= item.id %>#comments" data-pjax-container=".col-main">
+                    <a href="/topic/<%= item.id %>#comments">
                         <span class="badge"><%= item.replay %>/<%= item.read %></span>
                     </a>
                 </div>
@@ -71,7 +72,7 @@
     <div class="panel-footer">
         <ul class="pagination">
             <li>
-            <a href="/topic/<%= this.currentType %>/p1" aria-label="Previous">
+            <a href="/topic/<%= this.currentType %>/p1" aria-label="Previous" data-pjax-container=".col-main">
                 <span aria-hidden="true">&laquo;</span>
             </a>
             </li>
@@ -81,7 +82,7 @@
             </li>
             <% } %>
             <li>
-            <a href="/topic/<%= this.currentType %>/p<%= this.pageCount||1 %>" aria-label="Next">
+            <a href="/topic/<%= this.currentType %>/p<%= this.pageCount||1 %>" aria-label="Next" data-pjax-container=".col-main">
                 <span aria-hidden="true">&raquo;</span>
             </a>
             </li>
