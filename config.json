@@ -28,7 +28,8 @@
     "folders": {
         "public": {
             "^/mditor": "./node_modules",
-            "client/pjax.js$": "./node_modules/nokit-pjax"
+            "^/client/pjax.min.js$": "./node_modules/nokit-pjax",
+            "^/client/pjax.min.css$": "./node_modules/nokit-pjax"
         }
     },
     "session": {
