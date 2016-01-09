@@ -25,7 +25,7 @@ Global.prototype.onError = function (context, done) {
     done();
 };
 
-Global.prototype.onRequestBegin = function (context, done) {
+Global.prototype.onRequest = function (context, done) {
     done();
 };
 
@@ -34,9 +34,5 @@ Global.prototype.onReceived = function (context, done) {
 };
 
 Global.prototype.onResponse = function (context, done) {
-    done();
-};
-
-Global.prototype.onRequestEnd = function (context, done) {
     done();
 };
