@@ -17,7 +17,7 @@ ProfileController.prototype.saveBaseInfo = function () {
     User.saveBaseInfo({
         "id": self.context.user._id,
         "name": name,
-        "avatar": avatar.size > 0 ? avatar.path : null,
+        "avatar": avatar && avatar.size > 0 ? avatar.path : null,
         "oldAvatar": self.context.user.avatar
     }, function (err, info) {
         if (!err && info) {

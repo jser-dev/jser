@@ -314,12 +314,12 @@ User.saveBaseInfo = function (baseInfo, callback) {
     if (!baseInfo.name || baseInfo.name.length < 2) {
         return callback("名字最少需要两个字符");
     }
-    self._initQiQiu();
     self.existsByField("name", baseInfo.name, function (err, existsUser) {
         if (err) {
             return callback(err);
         }
-        if (existsUser && existsUser._id != baseInfo.id) {
+        if (existsUser &&
+            existsUser._id.toString() != baseInfo.id.toString()) {
             return callback('名字 "' + baseInfo.name + '" 已经被使用');
         }
         if (!baseInfo.avatar) {
