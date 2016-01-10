@@ -3,6 +3,7 @@
  **/
 var utils = require('./common/utils');
 var db = require("./common/db");
+var qn = require("./common/qn");
 
 /**
  * 全局应用程序类
@@ -14,6 +15,8 @@ Global.prototype.onStart = function (server, done) {
     utils.init(server);
     //建立数据链接
     db.connect(server);
+    //初始化七牛
+    qn.init(server);
     done();
 };
 

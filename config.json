@@ -127,6 +127,12 @@
                     "admin"
                 ]
             },
+            "/upload": {
+                "target": "./upload",
+                "required": [
+                    "signed"
+                ]
+            },
             "/users": "./user-list",
             "/user/{name}": "./user-info",
             "/uid/{id}": "./uid",

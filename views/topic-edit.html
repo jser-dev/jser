@@ -46,9 +46,9 @@
             <input type="submit" value="保存">
         </p>
     </form> 
-    <div id='uploadImage' class="modal fade" role="dialog">
+    <div id='dlgUpload' class="modal fade" role="dialog" style="z-index: 9999999;">
         <div class="modal-dialog">
-            <form class="modal-content">
+            <form class="modal-content" id="formUpload">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">上传并插入图片</h4>
@@ -60,15 +60,51 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="submit" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-primary" id="btnUpload">确定</button>
                 </div>
             </form><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div>
 <script>
+    //创建编辑器
     var mditor = new Mditor("#editor",{
         height:240,
         fixedHeight:true
+    });
+    //处理图片上传
+    var btnUpload=$('#btnUpload');
+    var formUpload = $('#formUpload');
+    var dlgUpload = $('#dlgUpload');
+    var fileImage = $('#image');
+    mditor.cmd.image=function(){
+        dlgUpload.modal('show');
+    };
+    btnUpload.on('click',function(event){
+        //用form 表单直接 构造formData 对象; 就不需要下面的append 方法来为表单进行赋值了。
+        var formData = new FormData(formUpload[0]);    
+        $.ajax({  
+            url : "/upload",  
+            type : 'POST',  
+            data : formData,  
+            /**   
+             * 必须false才会避开jQuery对 formdata 的默认处理   
+             * XMLHttpRequest会对 formdata 进行正确的处理   
+             **/  
+            processData : false,  
+            /**   
+             * 必须false才会自动加上正确的Content-Type   
+             **/  
+            contentType : false,  
+            success : function(response) {  
+                 mditor.editor.insertBeforeText('![图片描述]('+response.url+')');
+                 mditor.focus();
+                 dlgUpload.modal('hide');
+                 fileImage.val('');
+            },  
+            error : function(response) {  
+                document.write(response.responseText);
+            }  
+        });
     });
 </script>

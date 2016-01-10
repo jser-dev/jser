@@ -1,7 +1,7 @@
 var utils = require("../common/utils");
 var mail = require("./mail");
 var define = require("./define");
-var qn = require("qn");
+var qn = require("../common/qn");
 var fs = require("fs");
 
 /**
@@ -267,22 +267,6 @@ User.setPassword = function (opts, callback) {
 };
 
 /**
- * 初始化 QiQiu Client
- **/
-User._initQiQiu = function () {
-    var self = this;
-    if (!self.quClient) {
-        var qnConfigs = utils.configs.qiniu;
-        self.quClient = qn.create({
-            accessKey: qnConfigs.accessKey,
-            secretKey: qnConfigs.secretKey,
-            bucket: qnConfigs.bucket,
-            origin: qnConfigs.origin
-        });
-    }
-};
-
-/**
  * 根据 URL 获取头像文件名
  **/
 User._getAvatarFileName = function (avatarUrl) {
@@ -296,13 +280,11 @@ User._getAvatarFileName = function (avatarUrl) {
 User._uploadAvatar = function (baseInfo, callback) {
     var self = this;
     var newFileKey = "avatar-" + baseInfo.id + "-" + Date.now();
-    self.quClient.upload(fs.createReadStream(baseInfo.avatar), {
-        key: newFileKey
-    }, function (err, result) {
+    qn.client.uploadImage(baseInfo.avatar, newFileKey, function (err, result) {
         if (err) {
             return callback(err);
         }
-        baseInfo.avatar = self.quClient.imageView(newFileKey, {
+        baseInfo.avatar = qn.client.imageView(newFileKey, {
             mode: 1,
             width: 160,
             height: 160,
@@ -310,7 +292,7 @@ User._uploadAvatar = function (baseInfo, callback) {
             format: 'png'
         });
         var oldFileKey = self._getAvatarFileName(baseInfo.oldAvatar);
-        self.quClient.delete(oldFileKey, function (err) {
+        qn.client.delete(oldFileKey, function (err) {
             callback(null, baseInfo);
         });
     });
