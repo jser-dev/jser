@@ -13,7 +13,7 @@
         "key": "./_certs/jser.cc.key",
         "redirectPort": 80
     },
-    "connStr": "mongodb://localhost/jser",
+    "connStr": "<数据库链接字符串>",
     "handlers": {
         "^/": "$./handlers/mvc",
         ".css$": "nokit-handler-less",
@@ -163,12 +163,12 @@
     },
     "mail": {
         "conn": {
-            "host": "smtp.exmail.qq.com",
+            "host": "<smtp服务器>",
             "port": 465,
             "secure": true,
             "auth": {
-                "user": "service@jser.cc",
-                "pass": "Pass01!"
+                "user": "<邮箱用户名>",
+                "pass": "<邮箱密码>"
             }
         },
         "from": "JSER社区 <service@jser.cc>",
@@ -182,21 +182,21 @@
         }
     },
     "qiniu": {
-        "accessKey": "lcYIZbinrE49oaGQwNBULIwz3eTgPM7-tliV50_V",
-        "secretKey": "5MHsJyKNB-H8x7Ct9CY6adEavUtZ4s1BsxKf3iYz",
-        "bucket": "jser",
-        "origin": "https://dn-jser.qbox.me"
+        "accessKey": "<七牛 accessKey>",
+        "secretKey": "<七牛 secretKey>",
+        "bucket": "<七牛 bucket>",
+        "origin": "<七牛 origin>"
     },
     "oauth": {
         "github": {
-            "auth_url": "https://github.com/login/oauth/authorize",
-            "token_url": "https://github.com/login/oauth/access_token",
-            "redirect_uri": "https://jser.cc/oauth/github/callback",
-            "user_url": "https://api.github.com/user",
-            "email_url": "https://api.github.com/user/emails",
+            "auth_url": "<auth_url>",
+            "token_url": "<token_url>",
+            "redirect_uri": "<redirect_uri>",
+            "user_url": "<user api url>",
+            "email_url": "<email api url>",
             "scope": "user,user:email",
-            "client_id": "ceb6ca9d4988885dca39",
-            "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9"
+            "client_id": "<client_id>",
+            "client_secret": "<client_secret>"
         }
     },
     "adminUser": [

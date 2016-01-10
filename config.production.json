@@ -1,4 +1,6 @@
 {
+    "showErrorDetail": false,
+    "connStr": "mongodb://localhost/jser",
     "mail": {
         "conn": {
             "host": "smtp.exmail.qq.com",
