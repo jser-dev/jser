@@ -5,3 +5,6 @@
 _*
 node_modules
 bdunion.txt
+config.development.*
+config.production.*
+config.jser.*
