@@ -1,0 +1,40 @@
+{
+    "mail": {
+        "conn": {
+            "host": "smtp.exmail.qq.com",
+            "port": 465,
+            "secure": true,
+            "auth": {
+                "user": "service@jser.cc",
+                "pass": "Pass01!"
+            }
+        },
+        "from": "JSER社区 <service@jser.cc>",
+        "reg_tmpl": {
+            "subject": "确认注册",
+            "body": "./tmpls/verify-mail.html"
+        },
+        "pwd_tmpl": {
+            "subject": "找回密码",
+            "body": "./tmpls/reset-password.html"
+        }
+    },
+    "qiniu": {
+        "accessKey": "lcYIZbinrE49oaGQwNBULIwz3eTgPM7-tliV50_V",
+        "secretKey": "5MHsJyKNB-H8x7Ct9CY6adEavUtZ4s1BsxKf3iYz",
+        "bucket": "jser",
+        "origin": "https://dn-jser.qbox.me"
+    },
+    "oauth": {
+        "github": {
+            "auth_url": "https://github.com/login/oauth/authorize",
+            "token_url": "https://github.com/login/oauth/access_token",
+            "redirect_uri": "https://jser.cc/oauth/github/callback",
+            "user_url": "https://api.github.com/user",
+            "email_url": "https://api.github.com/user/emails",
+            "scope": "user,user:email",
+            "client_id": "ceb6ca9d4988885dca39",
+            "client_secret": "4c71041a71cb13e8a645000da3989909e5f618d9"
+        }
+    }
+}
