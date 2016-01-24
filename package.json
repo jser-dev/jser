@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "mditor": "^0.1.4",
-    "mongoose": "^4.3.6",
+    "mongoose": "^4.3.7",
     "nodemailer": "^1.11.0",
     "nokit-handler-less": "^1.0.1",
     "nokit-pjax": "^0.1.0",
