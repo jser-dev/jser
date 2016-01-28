@@ -24,7 +24,7 @@
     "nokit-handler-less": "^1.0.1",
     "nokit-pjax": "^0.1.0",
     "nokit-session-redis": "^1.0.5",
-    "nokitjs": "^1.18.3",
+    "nokitjs": "^1.18.4",
     "qn": "^1.1.1",
     "request": "^2.69.0",
     "timeago-words": "^0.0.3"
