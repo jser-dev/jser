@@ -24,9 +24,9 @@ var Topic = self.Topic = db.model('Topic', {
     author: { type: db.types.ObjectId, ref: User.schema.name, required: true }, //作者
     lastReplayAuthor: { type: db.types.ObjectId, ref: User.schema.name }, //回复数量
     tags: [{ type: String, default: '', trim: true }], //标签,
-    createAt: { type: Date, default: Date.now }, //创建时间
-    updateAt: { type: Date, default: Date.now }, //更新时间
-    lastReplayAt: { type: Date, default: Date.now }, //最后回复时间
+    createAt: { type: Date, default: Date.now() }, //创建时间
+    updateAt: { type: Date, default: Date.now() }, //更新时间
+    lastReplayAt: { type: Date, default: Date.now() }, //最后回复时间
     like: { type: Number, default: 0 }, //“赞” 的数量 
     dislike: { type: Number, default: 0 }, //"踩" 的数量
     top: { type: Number, default: 0 }, //置顶, 0: 不置顶，>0: 置顶（值为置顶权重）
@@ -42,8 +42,8 @@ var Comment = self.Comment = db.model('Comment', {
     content: { type: String, default: '', required: true }, //内容
     html: { type: String, default: '' }, //html内容
     author: { type: db.types.ObjectId, ref: User.schema.name, required: true }, //作者
-    createAt: { type: Date, default: Date.now }, //创建时间
-    updateAt: { type: Date, default: Date.now }, //更新时间
+    createAt: { type: Date, default: Date.now() }, //创建时间
+    updateAt: { type: Date, default: Date.now() }, //更新时间
     like: { type: Number, default: 0 }, //“赞” 的数量 
     dislike: { type: Number, default: 0 }, //"踩" 的数量
     status: { type: Number, default: status.comment.PUBLISH }// 状态,
@@ -56,7 +56,7 @@ var Message = self.Message = db.model("Message", {
     type: { type: String },//类型
     content: { type: String },//内容
     link: { type: String },//链接
-    sendAt: { type: Date, default: Date.now }, //发送时间
+    sendAt: { type: Date, default: Date.now() }, //发送时间
     status: { type: Number, default: status.message.UNREAD }// 状态,
 });
 
