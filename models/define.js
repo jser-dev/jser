@@ -9,7 +9,7 @@ var User = self.User = db.model('User', {
     name: { type: String, unique: true, required: true, trim: true }, //名字
     avatar: { type: String, default: '', required: true, trim: true }, //头像 
     score: { type: Number, default: 0 }, //积分,
-    signUpAt: { type: Date, default: Date.now },//注册时间
+    signUpAt: { type: Date, default: Date.now() },//注册时间
     role: [{ type: String, default: '' }],
     verifyCode: { type: String, default: '' }, //邮箱验证码
     status: { type: Number, default: status.user.NORMAL }// 状态
