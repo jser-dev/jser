@@ -13,6 +13,9 @@
         "key": "./_certs/jser.cc.key",
         "redirectPort": 80
     },
+    "browseFolder": {
+        "^/": false
+    },
     "connStr": "<数据库链接字符串>",
     "handlers": {
         "^/": "$./handlers/mvc",
