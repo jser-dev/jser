@@ -12,8 +12,8 @@ var TopicListController = module.exports = function () { };
 TopicListController.prototype.init = function () {
     var self = this;
 
-    self.currentType = self.context.params('type') || 'all';
-    self.pageIndex = self.context.params('pageIndex') || 1;
+    self.currentType = self.context.param('type') || 'all';
+    self.pageIndex = self.context.param('pageIndex') || 1;
     //处理查询选项
     self.options = {
         pageSize: PAGE_SIZE,

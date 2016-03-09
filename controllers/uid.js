@@ -18,7 +18,7 @@ UIDController.prototype.init = function () {
  **/
 UIDController.prototype.index = function () {
     var self = this;
-    var userId = self.context.params("id");
+    var userId = self.context.param("id");
     User.getUser(userId, function (err, user) {
         if (err) {
             return self.context.error(err);

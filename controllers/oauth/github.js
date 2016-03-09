@@ -37,8 +37,8 @@ GitHubController.prototype.index = function () {
  **/
 GitHubController.prototype.getToken = function (callback) {
     var self = this;
-    var code = self.context.params('code');
-    var state = self.context.params('state');
+    var code = self.context.param('code');
+    var state = self.context.param('state');
     self.context.session.get(OAUTH_STATE_SESSION_KEY, function (_state) {
         if (_state != state) {
             return self.context.error("OAuth 认证在验证 state 时,发现不匹配。");
