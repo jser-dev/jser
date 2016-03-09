@@ -19,12 +19,12 @@
   },
   "dependencies": {
     "mditor": "^0.1.4",
-    "mongoose": "^4.4.5",
+    "mongoose": "^4.4.6",
     "nodemailer": "^1.11.0",
     "nokit-handler-less": "^1.0.1",
-    "nokit-pjax": "^0.1.0",
+    "nokit-pjax": "^0.1.1",
     "nokit-session-redis": "^1.0.6",
-    "nokitjs": "^1.21.0-alpha.1",
+    "nokitjs": "^1.21.0-alpha.2",
     "qn": "^1.1.1",
     "request": "^2.69.0",
     "timeago-words": "^0.0.3"
