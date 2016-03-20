@@ -1,263 +1,263 @@
 {
-    "showErrorDetail": false,
-    "name": "JSER社区",
-    "domain": "jser.cc",
-    "author": "JSER Team",
-    "keywords": "jser社区,js社区,jser,js,javascript,nodejs,node.js,前端,前端社区,社区",
-    "description": "JSER 是一个 “纯粹、简单、自由” 的 “JS程序猿” 社区",
-    "buildYear": "2015",
-    "port": 443,
-    "https": {
-        "enabled": true,
-        "cert": "./_certs/jser.cc.crt",
-        "key": "./_certs/jser.cc.key",
-        "redirectPort": 80
-    },
-    "browseFolder": {
-        "^/": false
-    },
-    "connStr": "<数据库链接字符串>",
-    "handlers": {
-        "^/": "$./handlers/mvc",
-        ".css$": "nokit-handler-less",
-        ".less$": "nokit-handler-less"
-    },
-    "filters": {
-        "^/::access": "./filters/access",
-        "^/::data": "./filters/common-data",
-        "^/::ua": "./filters/ua",
-        "^/::pjax": "nokit-pjax"
-    },
-    "folders": {
-        "public": {
-            "^/mditor": "./node_modules",
-            "^/client/pjax.min.js$": "./node_modules/nokit-pjax",
-            "^/client/pjax.min.css$": "./node_modules/nokit-pjax"
-        }
-    },
-    "session": {
-        "provider": "nokit-session-redis",
-        "host": "localhost",
-        "port": 6379,
-        "timeout": 99999999
-    },
-    "mvc": {
-        "routes": {
-            "get /": "./topic-list",
-            "get /topic": "./topic-list",
-            "/topic/{type}/p{pageIndex}": "./topic-list",
-            "/topic/new": {
-                "action": "new",
-                "target": "./topic-edit",
-                "required": [
-                    "signed"
-                ]
-            },
-            "/topic/{id}/edit": {
-                "target": "./topic-edit",
-                "required": [
-                    "signed"
-                ]
-            },
-            "post /topic/{id}/edit/submit": {
-                "target": "./topic-edit",
-                "action": "submit",
-                "required": [
-                    "signed"
-                ]
-            },
-            "post /topic/{id}/delete": {
-                "target": "./topic-view",
-                "action": "delete",
-                "required": [
-                    "signed"
-                ]
-            },
-            "post /topic/{id}/setTop": {
-                "target": "./topic-view setTop",
-                "required": [
-                    "signed"
-                ]
-            },
-            "post /topic/{id}/setGood": {
-                "target": "./topic-view setGood",
-                "required": [
-                    "signed"
-                ]
-            },
-            "post /topic/{id}/removeTop": {
-                "target": "./topic-view removeTop",
-                "required": [
-                    "signed"
-                ]
-            },
-            "post /topic/{id}/removeGood": {
-                "target": "./topic-view removeGood",
-                "required": [
-                    "signed"
-                ]
-            },
-            "post /topic/{id}/addComment": {
-                "target": "./topic-view addComment",
-                "required": [
-                    "signed"
-                ]
-            },
-            "post /topic/{id}/delComment": {
-                "target": "./topic-view delComment",
-                "required": [
-                    "signed"
-                ]
-            },
-            "/topic/{id}": "./topic-view",
-            "/signup": "./signup",
-            "post /signup/submit": "./signup submit",
-            "/verify/{verifyCode}": "./verify-mail",
-            "/signin": "./signin",
-            "post /signin/submit": "./signin submit",
-            "/forget-password": "./forget-password",
-            "post /forget-password/submit": "./forget-password submit",
-            "/profile": {
-                "target": "./profile",
-                "required": [
-                    "signed"
-                ]
-            },
-            "/control-panel": {
-                "target": "./control-panel",
-                "required": [
-                    "signed",
-                    "admin"
-                ]
-            },
-            "/upload": {
-                "target": "./upload",
-                "required": [
-                    "signed"
-                ]
-            },
-            "/users": "./user-list",
-            "/user/{name}": "./user-info",
-            "/uid/{id}": "./uid",
-            "/message": {
-                "target": "./message",
-                "required": [
-                    "signed"
-                ]
-            },
-            "/about": "./about",
-            "/api": "./api",
-            "/client": "./client",
-            "/oauth/github": "./oauth/github",
-            "/search": "./search"
-        }
-    },
-    "topicTypes": {
-        "good": {
-            "text": "精华",
-            "admin": true
-        },
-        "ask": {
-            "text": "问答"
-        },
-        "share": {
-            "text": "分享"
-        },
-        "event": {
-            "text": "活动"
-        },
-        "job": {
-            "text": "招聘"
-        }
-    },
-    "mail": {
-        "conn": {
-            "host": "<smtp服务器>",
-            "port": 465,
-            "secure": true,
-            "auth": {
-                "user": "<邮箱用户名>",
-                "pass": "<邮箱密码>"
-            }
-        },
-        "from": "JSER社区 <service@jser.cc>",
-        "reg_tmpl": {
-            "subject": "确认注册",
-            "body": "./tmpls/verify-mail.html"
-        },
-        "pwd_tmpl": {
-            "subject": "找回密码",
-            "body": "./tmpls/reset-password.html"
-        }
-    },
-    "qiniu": {
-        "accessKey": "<七牛 accessKey>",
-        "secretKey": "<七牛 secretKey>",
-        "bucket": "<七牛 bucket>",
-        "origin": "<七牛 origin>"
-    },
-    "oauth": {
-        "github": {
-            "auth_url": "<auth_url>",
-            "token_url": "<token_url>",
-            "redirect_uri": "<redirect_uri>",
-            "user_url": "<user api url>",
-            "email_url": "<email api url>",
-            "scope": "user,user:email",
-            "client_id": "<client_id>",
-            "client_secret": "<client_secret>"
-        }
-    },
-    "adminUser": [
-        "admin@xhou.net"
-    ],
-    "scoreRules": {
-        "topic-add": 2,
-        "topic-del": -2,
-        "comment-add": 2,
-        "comment-del": -2,
-        "good-add": 5,
-        "good-del": -5,
-        "top-add": 5,
-        "top-del": -5,
-        "like-add": 1,
-        "link-del": -1,
-        "dislink-add": 0,
-        "dislink-del": 0
-    },
-    "links": [
-        {
-            "name": "CNodeJs",
-            "url": "http://www.cnodejs.org"
-        },
-        {
-            "name": "SegmentFault",
-            "url": "http://segmentfault.com/"
-        },
-        {
-            "name": "Ruby China",
-            "url": "https://ruby-china.org/"
-        }
-    ],
-    "footbar": {
-        "links": [
-            {
-                "name": "GitHub",
-                "url": "https://github.com/jser-dev"
-            },
-            {
-                "name": "微博",
-                "url": "http://weibo.com/jser-dev"
-            },
-            {
-                "name": "Twitter",
-                "url": "http://twitter.com/jser-dev"
-            }
-        ],
-        "info": "一个 “纯粹、简单、自由” 的 “JS程序猿” 社区，<a href=\"http://www.miitbeian.gov.cn/\">豫ICP备15033500</a>"
-    },
-    "guardian": {
-        "name": "@jser-dev",
-        "url": "https://github.com/jser-dev"
+  "showErrorDetail": false,
+  "name": "JSER社区",
+  "domain": "jser.cc",
+  "author": "JSER Team",
+  "keywords": "jser社区,js社区,jser,js,javascript,nodejs,node.js,前端,前端社区,社区",
+  "description": "JSER 是一个 “纯粹、简单、自由” 的 “JS程序猿” 社区",
+  "buildYear": "2015",
+  "port": 443,
+  "https": {
+    "enabled": true,
+    "cert": "./_certs/jser.cc.crt",
+    "key": "./_certs/jser.cc.key",
+    "redirectPort": 80
+  },
+  "browseFolder": {
+    "^/": false
+  },
+  "connStr": "<数据库链接字符串>",
+  "handlers": {
+    "^/": "$./handlers/mvc",
+    ".css$": "nokit-handler-less",
+    ".less$": "nokit-handler-less"
+  },
+  "filters": {
+    "^/:access": "./filters/access",
+    "^/:data": "./filters/common-data",
+    "^/:ua": "./filters/ua",
+    "^/:pjax": "nokit-pjax"
+  },
+  "folders": {
+    "public": {
+      "^/mditor": "./node_modules",
+      "^/client/pjax.min.js$": "./node_modules/nokit-pjax",
+      "^/client/pjax.min.css$": "./node_modules/nokit-pjax"
     }
+  },
+  "session": {
+    "provider": "nokit-session-redis",
+    "host": "localhost",
+    "port": 6379,
+    "timeout": 99999999
+  },
+  "mvc": {
+    "routes": {
+      "get /": "./topic-list",
+      "get /topic": "./topic-list",
+      "/topic/{type}/p{pageIndex}": "./topic-list",
+      "/topic/new": {
+        "action": "new",
+        "target": "./topic-edit",
+        "required": [
+          "signed"
+        ]
+      },
+      "/topic/{id}/edit": {
+        "target": "./topic-edit",
+        "required": [
+          "signed"
+        ]
+      },
+      "post /topic/{id}/edit/submit": {
+        "target": "./topic-edit",
+        "action": "submit",
+        "required": [
+          "signed"
+        ]
+      },
+      "post /topic/{id}/delete": {
+        "target": "./topic-view",
+        "action": "delete",
+        "required": [
+          "signed"
+        ]
+      },
+      "post /topic/{id}/setTop": {
+        "target": "./topic-view setTop",
+        "required": [
+          "signed"
+        ]
+      },
+      "post /topic/{id}/setGood": {
+        "target": "./topic-view setGood",
+        "required": [
+          "signed"
+        ]
+      },
+      "post /topic/{id}/removeTop": {
+        "target": "./topic-view removeTop",
+        "required": [
+          "signed"
+        ]
+      },
+      "post /topic/{id}/removeGood": {
+        "target": "./topic-view removeGood",
+        "required": [
+          "signed"
+        ]
+      },
+      "post /topic/{id}/addComment": {
+        "target": "./topic-view addComment",
+        "required": [
+          "signed"
+        ]
+      },
+      "post /topic/{id}/delComment": {
+        "target": "./topic-view delComment",
+        "required": [
+          "signed"
+        ]
+      },
+      "/topic/{id}": "./topic-view",
+      "/signup": "./signup",
+      "post /signup/submit": "./signup submit",
+      "/verify/{verifyCode}": "./verify-mail",
+      "/signin": "./signin",
+      "post /signin/submit": "./signin submit",
+      "/forget-password": "./forget-password",
+      "post /forget-password/submit": "./forget-password submit",
+      "/profile": {
+        "target": "./profile",
+        "required": [
+          "signed"
+        ]
+      },
+      "/control-panel": {
+        "target": "./control-panel",
+        "required": [
+          "signed",
+          "admin"
+        ]
+      },
+      "/upload": {
+        "target": "./upload",
+        "required": [
+          "signed"
+        ]
+      },
+      "/users": "./user-list",
+      "/user/{name}": "./user-info",
+      "/uid/{id}": "./uid",
+      "/message": {
+        "target": "./message",
+        "required": [
+          "signed"
+        ]
+      },
+      "/about": "./about",
+      "/api": "./api",
+      "/client": "./client",
+      "/oauth/github": "./oauth/github",
+      "/search": "./search"
+    }
+  },
+  "topicTypes": {
+    "good": {
+      "text": "精华",
+      "admin": true
+    },
+    "ask": {
+      "text": "问答"
+    },
+    "share": {
+      "text": "分享"
+    },
+    "event": {
+      "text": "活动"
+    },
+    "job": {
+      "text": "招聘"
+    }
+  },
+  "mail": {
+    "conn": {
+      "host": "<smtp服务器>",
+      "port": 465,
+      "secure": true,
+      "auth": {
+        "user": "<邮箱用户名>",
+        "pass": "<邮箱密码>"
+      }
+    },
+    "from": "JSER社区 <service@jser.cc>",
+    "reg_tmpl": {
+      "subject": "确认注册",
+      "body": "./tmpls/verify-mail.html"
+    },
+    "pwd_tmpl": {
+      "subject": "找回密码",
+      "body": "./tmpls/reset-password.html"
+    }
+  },
+  "qiniu": {
+    "accessKey": "<七牛 accessKey>",
+    "secretKey": "<七牛 secretKey>",
+    "bucket": "<七牛 bucket>",
+    "origin": "<七牛 origin>"
+  },
+  "oauth": {
+    "github": {
+      "auth_url": "<auth_url>",
+      "token_url": "<token_url>",
+      "redirect_uri": "<redirect_uri>",
+      "user_url": "<user api url>",
+      "email_url": "<email api url>",
+      "scope": "user,user:email",
+      "client_id": "<client_id>",
+      "client_secret": "<client_secret>"
+    }
+  },
+  "adminUser": [
+    "admin@xhou.net"
+  ],
+  "scoreRules": {
+    "topic-add": 2,
+    "topic-del": -2,
+    "comment-add": 2,
+    "comment-del": -2,
+    "good-add": 5,
+    "good-del": -5,
+    "top-add": 5,
+    "top-del": -5,
+    "like-add": 1,
+    "link-del": -1,
+    "dislink-add": 0,
+    "dislink-del": 0
+  },
+  "links": [
+    {
+      "name": "CNodeJs",
+      "url": "http://www.cnodejs.org"
+    },
+    {
+      "name": "SegmentFault",
+      "url": "http://segmentfault.com/"
+    },
+    {
+      "name": "Ruby China",
+      "url": "https://ruby-china.org/"
+    }
+  ],
+  "footbar": {
+    "links": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/jser-dev"
+      },
+      {
+        "name": "微博",
+        "url": "http://weibo.com/jser-dev"
+      },
+      {
+        "name": "Twitter",
+        "url": "http://twitter.com/jser-dev"
+      }
+    ],
+    "info": "一个 “纯粹、简单、自由” 的 “JS程序猿” 社区，<a href=\"http://www.miitbeian.gov.cn/\">豫ICP备15033500</a>"
+  },
+  "guardian": {
+    "name": "@jser-dev",
+    "url": "https://github.com/jser-dev"
+  }
 }
